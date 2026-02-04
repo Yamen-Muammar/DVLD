@@ -49,6 +49,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.Button();
             this.gbPersonInformation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.SuspendLayout();
@@ -75,9 +76,9 @@
             this.gbPersonInformation.Controls.Add(this.label3);
             this.gbPersonInformation.Controls.Add(this.label2);
             this.gbPersonInformation.Controls.Add(this.label1);
-            this.gbPersonInformation.Location = new System.Drawing.Point(0, 0);
+            this.gbPersonInformation.Location = new System.Drawing.Point(3, 0);
             this.gbPersonInformation.Name = "gbPersonInformation";
-            this.gbPersonInformation.Size = new System.Drawing.Size(968, 391);
+            this.gbPersonInformation.Size = new System.Drawing.Size(947, 383);
             this.gbPersonInformation.TabIndex = 0;
             this.gbPersonInformation.TabStop = false;
             this.gbPersonInformation.Text = "Person Information";
@@ -285,13 +286,24 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Person ID :";
             // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(808, 389);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(142, 45);
+            this.btnClose.TabIndex = 3;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // ctrlPersonInformation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.gbPersonInformation);
             this.Name = "ctrlPersonInformation";
-            this.Size = new System.Drawing.Size(968, 391);
+            this.Size = new System.Drawing.Size(968, 453);
             this.gbPersonInformation.ResumeLayout(false);
             this.gbPersonInformation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
@@ -322,5 +334,6 @@
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.Label lblGender;
+        private System.Windows.Forms.Button btnClose;
     }
 }

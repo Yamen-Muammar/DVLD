@@ -12,7 +12,15 @@ namespace DVLD__Presentation_Tier
 {
     public partial class ctrlPersonInformation : UserControl
     {
-
+        public event Action OnClose_Clicked;
+        protected virtual void CloseEvent()
+        {
+            Action handler = OnClose_Clicked;
+            if (handler != null)
+            {
+                handler.Invoke();
+            }
+        }
         public ctrlPersonInformation()
         {
             InitializeComponent();
@@ -26,6 +34,11 @@ namespace DVLD__Presentation_Tier
         private void btnEditePersonInfo_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            CloseEvent();
         }
     }
 }
