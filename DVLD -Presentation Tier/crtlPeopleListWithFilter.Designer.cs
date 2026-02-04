@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbFilterOn = new System.Windows.Forms.ComboBox();
             this.tbFilterInput = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvPeopleList = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.lblRecordsCount = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.btnAddPerson = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPeopleList)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -47,14 +48,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Filter By :";
             // 
-            // comboBox1
+            // cbFilterOn
             // 
-            this.comboBox1.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(111, 69);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(246, 28);
-            this.comboBox1.TabIndex = 1;
+            this.cbFilterOn.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.cbFilterOn.FormattingEnabled = true;
+            this.cbFilterOn.Location = new System.Drawing.Point(111, 69);
+            this.cbFilterOn.Name = "cbFilterOn";
+            this.cbFilterOn.Size = new System.Drawing.Size(246, 28);
+            this.cbFilterOn.TabIndex = 1;
             // 
             // tbFilterInput
             // 
@@ -63,15 +64,19 @@
             this.tbFilterInput.Size = new System.Drawing.Size(264, 26);
             this.tbFilterInput.TabIndex = 2;
             // 
-            // dataGridView1
+            // dgvPeopleList
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 113);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(1318, 515);
-            this.dataGridView1.TabIndex = 3;
+            this.dgvPeopleList.AllowUserToAddRows = false;
+            this.dgvPeopleList.AllowUserToDeleteRows = false;
+            this.dgvPeopleList.AllowUserToOrderColumns = true;
+            this.dgvPeopleList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPeopleList.Location = new System.Drawing.Point(3, 113);
+            this.dgvPeopleList.Name = "dgvPeopleList";
+            this.dgvPeopleList.ReadOnly = true;
+            this.dgvPeopleList.RowHeadersWidth = 62;
+            this.dgvPeopleList.RowTemplate.Height = 28;
+            this.dgvPeopleList.Size = new System.Drawing.Size(1318, 515);
+            this.dgvPeopleList.TabIndex = 3;
             // 
             // label2
             // 
@@ -93,19 +98,29 @@
             this.lblRecordsCount.TabIndex = 0;
             this.lblRecordsCount.Text = "10";
             // 
+            // btnAddPerson
+            // 
+            this.btnAddPerson.Location = new System.Drawing.Point(1244, 51);
+            this.btnAddPerson.Name = "btnAddPerson";
+            this.btnAddPerson.Size = new System.Drawing.Size(77, 56);
+            this.btnAddPerson.TabIndex = 4;
+            this.btnAddPerson.Text = "AddPerson";
+            this.btnAddPerson.UseVisualStyleBackColor = true;
+            // 
             // crtlPeopleListWithFilter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.btnAddPerson);
+            this.Controls.Add(this.dgvPeopleList);
             this.Controls.Add(this.tbFilterInput);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbFilterOn);
             this.Controls.Add(this.lblRecordsCount);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "crtlPeopleListWithFilter";
             this.Size = new System.Drawing.Size(1324, 699);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPeopleList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -114,10 +129,11 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbFilterOn;
         private System.Windows.Forms.TextBox tbFilterInput;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvPeopleList;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblRecordsCount;
+        private System.Windows.Forms.Button btnAddPerson;
     }
 }
