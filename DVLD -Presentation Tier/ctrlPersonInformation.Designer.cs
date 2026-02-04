@@ -89,9 +89,9 @@
             this.lblFullName.ForeColor = System.Drawing.Color.Red;
             this.lblFullName.Location = new System.Drawing.Point(177, 112);
             this.lblFullName.Name = "lblFullName";
-            this.lblFullName.Size = new System.Drawing.Size(264, 23);
+            this.lblFullName.Size = new System.Drawing.Size(56, 23);
             this.lblFullName.TabIndex = 2;
-            this.lblFullName.Text = "Yamen wesam abdai mumamr";
+            this.lblFullName.Text = "[????]";
             // 
             // lblCountry
             // 
@@ -99,9 +99,9 @@
             this.lblCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCountry.Location = new System.Drawing.Point(589, 256);
             this.lblCountry.Name = "lblCountry";
-            this.lblCountry.Size = new System.Drawing.Size(73, 20);
+            this.lblCountry.Size = new System.Drawing.Size(59, 20);
             this.lblCountry.TabIndex = 2;
-            this.lblCountry.Text = "Belgium";
+            this.lblCountry.Text = "[????]";
             // 
             // label10
             // 
@@ -109,9 +109,9 @@
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(589, 157);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(99, 20);
+            this.label10.Size = new System.Drawing.Size(59, 20);
             this.label10.TabIndex = 2;
-            this.label10.Text = "18/04/2005";
+            this.label10.Text = "[????]";
             // 
             // lblPhoneNumber
             // 
@@ -119,9 +119,9 @@
             this.lblPhoneNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPhoneNumber.Location = new System.Drawing.Point(589, 204);
             this.lblPhoneNumber.Name = "lblPhoneNumber";
-            this.lblPhoneNumber.Size = new System.Drawing.Size(99, 20);
+            this.lblPhoneNumber.Size = new System.Drawing.Size(59, 20);
             this.lblPhoneNumber.TabIndex = 2;
-            this.lblPhoneNumber.Text = "324999932";
+            this.lblPhoneNumber.Text = "[????]";
             // 
             // lblAddress
             // 
@@ -129,9 +129,9 @@
             this.lblAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAddress.Location = new System.Drawing.Point(177, 299);
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(174, 20);
+            this.lblAddress.Size = new System.Drawing.Size(59, 20);
             this.lblAddress.TabIndex = 2;
-            this.lblAddress.Text = "belgium,9800,deinze";
+            this.lblAddress.Text = "[????]";
             // 
             // lblEmail
             // 
@@ -139,9 +139,9 @@
             this.lblEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmail.Location = new System.Drawing.Point(177, 253);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(226, 20);
+            this.lblEmail.Size = new System.Drawing.Size(59, 20);
             this.lblEmail.TabIndex = 2;
-            this.lblEmail.Text = "yamenmummar@gmail.com";
+            this.lblEmail.Text = "[????]";
             // 
             // lblGender
             // 
@@ -149,9 +149,9 @@
             this.lblGender.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGender.Location = new System.Drawing.Point(177, 207);
             this.lblGender.Name = "lblGender";
-            this.lblGender.Size = new System.Drawing.Size(47, 20);
+            this.lblGender.Size = new System.Drawing.Size(59, 20);
             this.lblGender.TabIndex = 2;
-            this.lblGender.Text = "Male";
+            this.lblGender.Text = "[????]";
             // 
             // lblNationalNo
             // 
@@ -159,9 +159,9 @@
             this.lblNationalNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNationalNo.Location = new System.Drawing.Point(177, 157);
             this.lblNationalNo.Name = "lblNationalNo";
-            this.lblNationalNo.Size = new System.Drawing.Size(29, 20);
+            this.lblNationalNo.Size = new System.Drawing.Size(59, 20);
             this.lblNationalNo.TabIndex = 2;
-            this.lblNationalNo.Text = "n4";
+            this.lblNationalNo.Text = "[????]";
             // 
             // lblPersonID
             // 
@@ -169,16 +169,16 @@
             this.lblPersonID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPersonID.Location = new System.Drawing.Point(177, 66);
             this.lblPersonID.Name = "lblPersonID";
-            this.lblPersonID.Size = new System.Drawing.Size(49, 20);
+            this.lblPersonID.Size = new System.Drawing.Size(59, 20);
             this.lblPersonID.TabIndex = 2;
-            this.lblPersonID.Text = "1005";
+            this.lblPersonID.Text = "[????]";
             // 
             // btnEditePersonInfo
             // 
             this.btnEditePersonInfo.BackColor = System.Drawing.Color.White;
             this.btnEditePersonInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditePersonInfo.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnEditePersonInfo.Location = new System.Drawing.Point(751, 60);
+            this.btnEditePersonInfo.Location = new System.Drawing.Point(753, 66);
             this.btnEditePersonInfo.Name = "btnEditePersonInfo";
             this.btnEditePersonInfo.Size = new System.Drawing.Size(153, 28);
             this.btnEditePersonInfo.TabIndex = 1;
