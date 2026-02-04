@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(crtlPeopleListWithFilter));
             this.label1 = new System.Windows.Forms.Label();
             this.cbFilterOn = new System.Windows.Forms.ComboBox();
             this.tbFilterInput = new System.Windows.Forms.TextBox();
@@ -94,17 +95,17 @@
             this.lblRecordsCount.Font = new System.Drawing.Font("Nirmala Text", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRecordsCount.Location = new System.Drawing.Point(106, 646);
             this.lblRecordsCount.Name = "lblRecordsCount";
-            this.lblRecordsCount.Size = new System.Drawing.Size(36, 28);
+            this.lblRecordsCount.Size = new System.Drawing.Size(24, 28);
             this.lblRecordsCount.TabIndex = 0;
-            this.lblRecordsCount.Text = "10";
+            this.lblRecordsCount.Text = "0";
             // 
             // btnAddPerson
             // 
+            this.btnAddPerson.Image = ((System.Drawing.Image)(resources.GetObject("btnAddPerson.Image")));
             this.btnAddPerson.Location = new System.Drawing.Point(1244, 51);
             this.btnAddPerson.Name = "btnAddPerson";
             this.btnAddPerson.Size = new System.Drawing.Size(77, 56);
             this.btnAddPerson.TabIndex = 4;
-            this.btnAddPerson.Text = "AddPerson";
             this.btnAddPerson.UseVisualStyleBackColor = true;
             // 
             // crtlPeopleListWithFilter
