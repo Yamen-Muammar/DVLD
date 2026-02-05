@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DVLD__Presentation_Tier.Forms;
 
 namespace DVLD__Presentation_Tier
 {
@@ -29,6 +30,12 @@ namespace DVLD__Presentation_Tier
         private void btnClose_Click(object sender, EventArgs e)
         {
             RaiseCloseClickedEvent();
+        }
+
+        private void btnAddPerson_Click(object sender, EventArgs e)
+        {
+            frmAddOrUpdatePersonInfo frmAddOrUpdatePersonInfo = new frmAddOrUpdatePersonInfo();
+            frmAddOrUpdatePersonInfo.ShowDialog();
         }
     }
 }
