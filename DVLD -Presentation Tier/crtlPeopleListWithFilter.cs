@@ -12,9 +12,23 @@ namespace DVLD__Presentation_Tier
 {
     public partial class crtlPeopleListWithFilter : UserControl
     {
+        public event Action OnCloseButtonClicked;
+        protected virtual void RaiseCloseClickedEvent()
+        {
+            Action handler = OnCloseButtonClicked;
+            if (handler != null)
+            {
+                handler.Invoke();
+            }            
+        }
         public crtlPeopleListWithFilter()
         {
             InitializeComponent();
-        } 
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            RaiseCloseClickedEvent();
+        }
     }
 }
