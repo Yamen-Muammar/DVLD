@@ -49,8 +49,11 @@ namespace DVLD__Presentation_Tier
 
         private void ctrlAddOrUpdatePerson_Load(object sender, EventArgs e)
         {
+            // UI Load Logic.
+            dateTimePicker.MaxDate = DateTime.Now.AddYears(-18);
+
             if (Mode == enMode.eUpdate)
-            {
+            {               
                 lblTitle.Text = "Update Person";
                 return;
             }
@@ -81,6 +84,17 @@ namespace DVLD__Presentation_Tier
             //TODO: Check if the national number is valid and if it already exists in the database
         }
 
-       
+        private void rbGenderMale_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbGenderFemale.Checked)
+            {
+                //pbPersonImage.Image = Image.FromFile(@"F:\yamen - 2024\C#\Course\projects\C20 -DVLD\DVLD -Presentation Tier\Image\Icons\Female 512.png");
+                pbPersonImage.Image = Properties.Resources.Female;
+            }
+            else
+            {
+                pbPersonImage.Image = Properties.Resources.Male512;
+            }            
+        }
     }
 }
