@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.IO;
+using Ookii.Dialogs.WinForms;
 namespace DVLD__Presentation_Tier
 {
     public partial class ctrlAddOrUpdatePerson : UserControl
@@ -72,11 +73,53 @@ namespace DVLD__Presentation_Tier
         private void btnSetImage_Click(object sender, EventArgs e)
         {
             // TODO: Set the person Image
+            string imagePath = GetImagePath();
+            string copiedFileName = CopyImage(imagePath);
+            if (copiedFileName != string.Empty)
+            {
+                MessageBox.Show("Image set successfully." + copiedFileName, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
+        private string GetImagePath()
+        {
+            string selectedFilePath = "";
+            Ookii.Dialogs.WinForms.VistaOpenFileDialog openFileDialog = new Ookii.Dialogs.WinForms.VistaOpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                selectedFilePath = openFileDialog.FileName;                
+            }
+            return selectedFilePath;
+        }
+
+        private string CopyImage(string sourcePath)
+        {
+            if (string.IsNullOrEmpty(sourcePath))
+            {
+                MessageBox.Show("No image selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return string.Empty;
+            }
+
+            string fileExtension = Path.GetExtension(sourcePath);
+            string sourceFileName = Guid.NewGuid().ToString()+fileExtension;
+            string destinationPath = Path.Combine(@"F:\yamen - 2024\C#\Course\projects\PersonPic", sourceFileName);
+
+            try
+            {
+                File.Copy(sourcePath, destinationPath, true);
+                return sourceFileName;
+            }
+            catch (Exception ex)
+            {
+
+                return string.Empty;
+            }
+        }
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            //TODO: Remove the person Image            
+            //TODO: Remove the person Image
+            rbGenderMale_CheckedChanged(sender,e);
         }
 
         private void tbNationalNo_TextChanged(object sender, EventArgs e)
@@ -85,11 +128,10 @@ namespace DVLD__Presentation_Tier
         }
 
         private void rbGenderMale_CheckedChanged(object sender, EventArgs e)
-        {
+        {           
             if (rbGenderFemale.Checked)
-            {
-                //pbPersonImage.Image = Image.FromFile(@"F:\yamen - 2024\C#\Course\projects\C20 -DVLD\DVLD -Presentation Tier\Image\Icons\Female 512.png");
-                pbPersonImage.Image = Properties.Resources.Female;
+            {                
+                pbPersonImage.Image = Properties.Resources.Female;                
             }
             else
             {
