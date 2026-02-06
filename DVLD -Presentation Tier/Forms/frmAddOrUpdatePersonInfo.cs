@@ -14,7 +14,7 @@ namespace DVLD__Presentation_Tier.Forms
     {
         public frmAddOrUpdatePersonInfo()
         {
-            InitializeComponent();
+            InitializeComponent(12);
         }
 
         private void ctrlAddOrUpdatePerson1_OnClose_Clicked()

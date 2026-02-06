@@ -32,17 +32,36 @@
             this.lblPersonID = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnRemove = new System.Windows.Forms.Button();
+            this.btnSetImage = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.rbGenderMale = new System.Windows.Forms.RadioButton();
+            this.rbGenderFemale = new System.Windows.Forms.RadioButton();
+            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.pbImage = new System.Windows.Forms.PictureBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tbLastName = new System.Windows.Forms.TextBox();
+            this.tbPhone = new System.Windows.Forms.TextBox();
             this.tbThirdName = new System.Windows.Forms.TextBox();
             this.tbSecondName = new System.Windows.Forms.TextBox();
+            this.tbAddress = new System.Windows.Forms.TextBox();
+            this.tbEmail = new System.Windows.Forms.TextBox();
+            this.tbNationalNo = new System.Windows.Forms.TextBox();
             this.tbFirstName = new System.Windows.Forms.TextBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -51,37 +70,18 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.tbNationalNo = new System.Windows.Forms.TextBox();
-            this.tbEmail = new System.Windows.Forms.TextBox();
-            this.tbPhone = new System.Windows.Forms.TextBox();
-            this.tbAddress = new System.Windows.Forms.TextBox();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.rbGenderFemale = new System.Windows.Forms.RadioButton();
-            this.rbGenderMale = new System.Windows.Forms.RadioButton();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnSetImage = new System.Windows.Forms.Button();
-            this.btnRemove = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblPersonID
@@ -151,6 +151,164 @@
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             // 
+            // btnClose
+            // 
+            this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
+            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClose.Location = new System.Drawing.Point(521, 376);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(129, 39);
+            this.btnClose.TabIndex = 15;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.BackColor = System.Drawing.SystemColors.Window;
+            this.btnRemove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnRemove.FlatAppearance.BorderSize = 0;
+            this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemove.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnRemove.Location = new System.Drawing.Point(833, 353);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(129, 39);
+            this.btnRemove.TabIndex = 14;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.UseVisualStyleBackColor = false;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            // 
+            // btnSetImage
+            // 
+            this.btnSetImage.BackColor = System.Drawing.SystemColors.Menu;
+            this.btnSetImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSetImage.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.btnSetImage.Location = new System.Drawing.Point(833, 308);
+            this.btnSetImage.Name = "btnSetImage";
+            this.btnSetImage.Size = new System.Drawing.Size(129, 39);
+            this.btnSetImage.TabIndex = 13;
+            this.btnSetImage.Text = "Set Image";
+            this.btnSetImage.UseVisualStyleBackColor = false;
+            this.btnSetImage.Click += new System.EventHandler(this.btnSetImage_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSave.Location = new System.Drawing.Point(656, 376);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(129, 39);
+            this.btnSave.TabIndex = 16;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // rbGenderMale
+            // 
+            this.rbGenderMale.AutoSize = true;
+            this.rbGenderMale.Checked = true;
+            this.rbGenderMale.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbGenderMale.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.rbGenderMale.Location = new System.Drawing.Point(239, 182);
+            this.rbGenderMale.Name = "rbGenderMale";
+            this.rbGenderMale.Size = new System.Drawing.Size(72, 24);
+            this.rbGenderMale.TabIndex = 6;
+            this.rbGenderMale.TabStop = true;
+            this.rbGenderMale.Text = "Male";
+            this.rbGenderMale.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.rbGenderMale.UseVisualStyleBackColor = true;
+            // 
+            // rbGenderFemale
+            // 
+            this.rbGenderFemale.AutoSize = true;
+            this.rbGenderFemale.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbGenderFemale.Location = new System.Drawing.Point(354, 182);
+            this.rbGenderFemale.Name = "rbGenderFemale";
+            this.rbGenderFemale.Size = new System.Drawing.Size(93, 24);
+            this.rbGenderFemale.TabIndex = 7;
+            this.rbGenderFemale.Text = "Female";
+            this.rbGenderFemale.UseVisualStyleBackColor = true;
+            // 
+            // dateTimePicker
+            // 
+            this.dateTimePicker.CustomFormat = "dd/mm/yyyy";
+            this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dateTimePicker.Location = new System.Drawing.Point(621, 123);
+            this.dateTimePicker.MaxDate = new System.DateTime(2026, 2, 5, 0, 0, 0, 0);
+            this.dateTimePicker.Name = "dateTimePicker";
+            this.dateTimePicker.Size = new System.Drawing.Size(164, 26);
+            this.dateTimePicker.TabIndex = 10;
+            this.dateTimePicker.Value = new System.DateTime(2026, 2, 5, 0, 0, 0, 0);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(621, 224);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(164, 28);
+            this.comboBox1.TabIndex = 12;
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
+            this.pictureBox8.Location = new System.Drawing.Point(568, 224);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(33, 31);
+            this.pictureBox8.TabIndex = 31;
+            this.pictureBox8.TabStop = false;
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
+            this.pictureBox7.Location = new System.Drawing.Point(568, 171);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(33, 31);
+            this.pictureBox7.TabIndex = 32;
+            this.pictureBox7.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
+            this.pictureBox6.Location = new System.Drawing.Point(568, 120);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(33, 31);
+            this.pictureBox6.TabIndex = 33;
+            this.pictureBox6.TabStop = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(470, 220);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(92, 30);
+            this.label11.TabIndex = 28;
+            this.label11.Text = "Country :";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(483, 168);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(79, 30);
+            this.label12.TabIndex = 29;
+            this.label12.Text = "Phone :";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(425, 121);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(137, 30);
+            this.label13.TabIndex = 30;
+            this.label13.Text = "Date Of Birth :";
+            // 
             // pbImage
             // 
             this.pbImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -205,6 +363,13 @@
             this.tbLastName.Size = new System.Drawing.Size(164, 26);
             this.tbLastName.TabIndex = 4;
             // 
+            // tbPhone
+            // 
+            this.tbPhone.Location = new System.Drawing.Point(621, 171);
+            this.tbPhone.Name = "tbPhone";
+            this.tbPhone.Size = new System.Drawing.Size(164, 26);
+            this.tbPhone.TabIndex = 11;
+            // 
             // tbThirdName
             // 
             this.tbThirdName.Location = new System.Drawing.Point(607, 78);
@@ -218,6 +383,29 @@
             this.tbSecondName.Name = "tbSecondName";
             this.tbSecondName.Size = new System.Drawing.Size(164, 26);
             this.tbSecondName.TabIndex = 2;
+            // 
+            // tbAddress
+            // 
+            this.tbAddress.Location = new System.Drawing.Point(197, 266);
+            this.tbAddress.Multiline = true;
+            this.tbAddress.Name = "tbAddress";
+            this.tbAddress.Size = new System.Drawing.Size(588, 104);
+            this.tbAddress.TabIndex = 9;
+            // 
+            // tbEmail
+            // 
+            this.tbEmail.Location = new System.Drawing.Point(197, 220);
+            this.tbEmail.Name = "tbEmail";
+            this.tbEmail.Size = new System.Drawing.Size(250, 26);
+            this.tbEmail.TabIndex = 8;
+            // 
+            // tbNationalNo
+            // 
+            this.tbNationalNo.Location = new System.Drawing.Point(197, 130);
+            this.tbNationalNo.Name = "tbNationalNo";
+            this.tbNationalNo.Size = new System.Drawing.Size(164, 26);
+            this.tbNationalNo.TabIndex = 5;
+            this.tbNationalNo.TextChanged += new System.EventHandler(this.tbNationalNo_TextChanged);
             // 
             // tbFirstName
             // 
@@ -245,6 +433,16 @@
             this.pictureBox4.Size = new System.Drawing.Size(33, 31);
             this.pictureBox4.TabIndex = 21;
             this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
+            this.pictureBox9.Location = new System.Drawing.Point(313, 175);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(33, 31);
+            this.pictureBox9.TabIndex = 22;
+            this.pictureBox9.TabStop = false;
             // 
             // pictureBox3
             // 
@@ -326,204 +524,6 @@
             this.label2.TabIndex = 19;
             this.label2.Text = "Name :";
             // 
-            // tbNationalNo
-            // 
-            this.tbNationalNo.Location = new System.Drawing.Point(197, 130);
-            this.tbNationalNo.Name = "tbNationalNo";
-            this.tbNationalNo.Size = new System.Drawing.Size(164, 26);
-            this.tbNationalNo.TabIndex = 5;
-            this.tbNationalNo.TextChanged += new System.EventHandler(this.tbNationalNo_TextChanged);
-            // 
-            // tbEmail
-            // 
-            this.tbEmail.Location = new System.Drawing.Point(197, 220);
-            this.tbEmail.Name = "tbEmail";
-            this.tbEmail.Size = new System.Drawing.Size(250, 26);
-            this.tbEmail.TabIndex = 8;
-            // 
-            // tbPhone
-            // 
-            this.tbPhone.Location = new System.Drawing.Point(621, 171);
-            this.tbPhone.Name = "tbPhone";
-            this.tbPhone.Size = new System.Drawing.Size(164, 26);
-            this.tbPhone.TabIndex = 11;
-            // 
-            // tbAddress
-            // 
-            this.tbAddress.Location = new System.Drawing.Point(197, 266);
-            this.tbAddress.Multiline = true;
-            this.tbAddress.Name = "tbAddress";
-            this.tbAddress.Size = new System.Drawing.Size(588, 104);
-            this.tbAddress.TabIndex = 9;
-            // 
-            // pictureBox8
-            // 
-            this.pictureBox8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
-            this.pictureBox8.Location = new System.Drawing.Point(568, 224);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(33, 31);
-            this.pictureBox8.TabIndex = 31;
-            this.pictureBox8.TabStop = false;
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
-            this.pictureBox7.Location = new System.Drawing.Point(568, 171);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(33, 31);
-            this.pictureBox7.TabIndex = 32;
-            this.pictureBox7.TabStop = false;
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
-            this.pictureBox6.Location = new System.Drawing.Point(568, 120);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(33, 31);
-            this.pictureBox6.TabIndex = 33;
-            this.pictureBox6.TabStop = false;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(470, 220);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(92, 30);
-            this.label11.TabIndex = 28;
-            this.label11.Text = "Country :";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(483, 168);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(79, 30);
-            this.label12.TabIndex = 29;
-            this.label12.Text = "Phone :";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(425, 121);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(137, 30);
-            this.label13.TabIndex = 30;
-            this.label13.Text = "Date Of Birth :";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(621, 224);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(164, 28);
-            this.comboBox1.TabIndex = 12;
-            // 
-            // dateTimePicker
-            // 
-            this.dateTimePicker.CustomFormat = "dd/mm/yyyy";
-            this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dateTimePicker.Location = new System.Drawing.Point(621, 123);
-            this.dateTimePicker.MaxDate = new System.DateTime(2026, 2, 5, 0, 0, 0, 0);
-            this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(164, 26);
-            this.dateTimePicker.TabIndex = 10;
-            this.dateTimePicker.Value = new System.DateTime(2026, 2, 5, 0, 0, 0, 0);
-            // 
-            // rbGenderFemale
-            // 
-            this.rbGenderFemale.AutoSize = true;
-            this.rbGenderFemale.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbGenderFemale.Location = new System.Drawing.Point(354, 182);
-            this.rbGenderFemale.Name = "rbGenderFemale";
-            this.rbGenderFemale.Size = new System.Drawing.Size(93, 24);
-            this.rbGenderFemale.TabIndex = 7;
-            this.rbGenderFemale.Text = "Female";
-            this.rbGenderFemale.UseVisualStyleBackColor = true;
-            // 
-            // rbGenderMale
-            // 
-            this.rbGenderMale.AutoSize = true;
-            this.rbGenderMale.Checked = true;
-            this.rbGenderMale.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbGenderMale.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.rbGenderMale.Location = new System.Drawing.Point(239, 182);
-            this.rbGenderMale.Name = "rbGenderMale";
-            this.rbGenderMale.Size = new System.Drawing.Size(72, 24);
-            this.rbGenderMale.TabIndex = 6;
-            this.rbGenderMale.TabStop = true;
-            this.rbGenderMale.Text = "Male";
-            this.rbGenderMale.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rbGenderMale.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox9
-            // 
-            this.pictureBox9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
-            this.pictureBox9.Location = new System.Drawing.Point(313, 175);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(33, 31);
-            this.pictureBox9.TabIndex = 22;
-            this.pictureBox9.TabStop = false;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(656, 376);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(129, 39);
-            this.btnSave.TabIndex = 16;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnClose
-            // 
-            this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
-            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(521, 376);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(129, 39);
-            this.btnClose.TabIndex = 15;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // btnSetImage
-            // 
-            this.btnSetImage.BackColor = System.Drawing.SystemColors.Menu;
-            this.btnSetImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSetImage.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnSetImage.Location = new System.Drawing.Point(833, 308);
-            this.btnSetImage.Name = "btnSetImage";
-            this.btnSetImage.Size = new System.Drawing.Size(129, 39);
-            this.btnSetImage.TabIndex = 13;
-            this.btnSetImage.Text = "Set Image";
-            this.btnSetImage.UseVisualStyleBackColor = false;
-            this.btnSetImage.Click += new System.EventHandler(this.btnSetImage_Click);
-            // 
-            // btnRemove
-            // 
-            this.btnRemove.BackColor = System.Drawing.SystemColors.Window;
-            this.btnRemove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnRemove.FlatAppearance.BorderSize = 0;
-            this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemove.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnRemove.Location = new System.Drawing.Point(833, 353);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(129, 39);
-            this.btnRemove.TabIndex = 14;
-            this.btnRemove.Text = "Remove";
-            this.btnRemove.UseVisualStyleBackColor = false;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
-            // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
@@ -545,18 +545,19 @@
             this.Controls.Add(this.label1);
             this.Name = "ctrlAddOrUpdatePerson";
             this.Size = new System.Drawing.Size(1014, 609);
+            this.Load += new System.EventHandler(this.ctrlAddOrUpdatePerson_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

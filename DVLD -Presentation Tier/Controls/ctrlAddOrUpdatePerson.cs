@@ -47,6 +47,15 @@ namespace DVLD__Presentation_Tier
             Mode = (PersonId == -1)?enMode.eAdd : enMode.eUpdate;
         }
 
+        private void ctrlAddOrUpdatePerson_Load(object sender, EventArgs e)
+        {
+            if (Mode == enMode.eUpdate)
+            {
+                lblTitle.Text = "Update Person";
+                return;
+            }
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             //TODO: Save the person information to the database, if PersonId is -1 then add a new person, otherwise update the existing person
@@ -71,5 +80,7 @@ namespace DVLD__Presentation_Tier
         {
             //TODO: Check if the national number is valid and if it already exists in the database
         }
+
+       
     }
 }
