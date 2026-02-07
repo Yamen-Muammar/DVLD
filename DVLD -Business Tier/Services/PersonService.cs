@@ -14,8 +14,8 @@ namespace DVLD__Business_Tier.Services
         
         public static bool AddPerson(Person person)
         {
-                person.ImagePath = SetImageProcess(person);
-                if (string.IsNullOrEmpty(person.ImagePath))
+                person.ImageName = SetImageProcess(person);
+                if (string.IsNullOrEmpty(person.ImageName))
                 {
                     return false;
                 }
@@ -35,12 +35,12 @@ namespace DVLD__Business_Tier.Services
             // # when we want to update the image we will delete the old one and save the new one with the same name
             // # when we want to add a new person we will save the image with a new name and return it to be saved in the database
 
-            if (string.IsNullOrEmpty(person.ImagePath))
+            if (string.IsNullOrEmpty(person.ImageName))
             {
                 return string.Empty;
             }
 
-            string fileExtension = Path.GetExtension(person.ImagePath);
+            string fileExtension = Path.GetExtension(person.ImageName);
             string NewImageName = Guid.NewGuid().ToString() + fileExtension;
 
             string destinationPath = Path.Combine(@"F:\yamen - 2024\C#\Course\projects\PersonPic", NewImageName);
@@ -48,7 +48,7 @@ namespace DVLD__Business_Tier.Services
             {
                 if (DeleteImage(person.PersonID))
                 {
-                    File.Copy(person.ImagePath, destinationPath, true);
+                    File.Copy(person.ImageName, destinationPath, true);
                     return NewImageName;
                 }
             }
@@ -70,7 +70,7 @@ namespace DVLD__Business_Tier.Services
             {
                 return false;
             }
-            string oldImageName = person.ImagePath;
+            string oldImageName = person.ImageName;
 
             string destinationPath = Path.Combine(@"F:\yamen - 2024\C#\Course\projects\PersonPic", oldImageName);
             try

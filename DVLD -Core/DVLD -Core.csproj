@@ -41,8 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Application.cs" />
+    <Compile Include="Models\ApplicationType.cs" />
     <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\DetainedLicense.cs" />
+    <Compile Include="Models\Driver.cs" />
+    <Compile Include="Models\License.cs" />
+    <Compile Include="Models\LicenseClass.cs" />
+    <Compile Include="Models\LocalDrivingLicenseApplication.cs" />
     <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\Test.cs" />
+    <Compile Include="Models\TestAppointment.cs" />
+    <Compile Include="Models\TestType.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
