@@ -19,7 +19,8 @@ namespace DVLD__Core.Models
         public string Phone { get; set; }
         public int Country_ID { get; set; }
         public string Address { get; set; }
-        public string ImagePath { get; set; }
-    
+        public string ImageName { get; set; }
+        public DateTime DateOfBirth { get; set; }
+
     }
 }
