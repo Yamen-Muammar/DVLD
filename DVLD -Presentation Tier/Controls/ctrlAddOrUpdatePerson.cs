@@ -31,6 +31,7 @@ namespace DVLD__Presentation_Tier
 
         private int PersonId { get; set; }
 
+        private string ImageName { get; set; }
         public ctrlAddOrUpdatePerson()
         {
             InitializeComponent();
@@ -72,7 +73,12 @@ namespace DVLD__Presentation_Tier
 
         private void btnSetImage_Click(object sender, EventArgs e)
         {
-            // TODO: Set the person Image
+            // TODO: Set the person Image to person Object
+            if (ImageName != string.Empty)
+            {
+
+            }
+
             string imagePath = GetImagePath();
             string copiedFileName = CopyImage(imagePath);
             if (copiedFileName != string.Empty)
@@ -92,7 +98,6 @@ namespace DVLD__Presentation_Tier
             }
             return selectedFilePath;
         }
-
         private string CopyImage(string sourcePath)
         {
             if (string.IsNullOrEmpty(sourcePath))

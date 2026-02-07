@@ -150,5 +150,15 @@
   <ItemGroup>
     <Folder Include="Image\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DVLD -Business Tier\DVLD -Business Tier.csproj">
+      <Project>{3afe0537-b24f-4618-ac90-8520f74a12a0}</Project>
+      <Name>DVLD -Business Tier</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DVLD -Core\DVLD -Core.csproj">
+      <Project>{64d6c33b-0e23-4a1f-a08f-ffadf3d73d96}</Project>
+      <Name>DVLD -Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
