@@ -178,9 +178,10 @@ namespace DVLD__Data_Tier.Repositories
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = @"UPDATE People 
+                string query = @"UPDATE Persons 
                             SET FirstName = @FirstName,
-                                MiddelName = @MiddelName,
+                                SecondName = @SecondName,
+                                ThirdName = @ThirdName,
                                 LastName = @LastName,
                                 NationalNO = @NationalNO,
                                 Gender = @Gender,
@@ -188,14 +189,16 @@ namespace DVLD__Data_Tier.Repositories
                                 Phone = @Phone,
                                 Country_ID = @Country_ID,
                                 Address = @Address,
-                                ImagePath = @ImagePath
+                                ImageName = @ImagePath,
+                                DateOfBirth = @dateOfBirth
                             WHERE PersonID = @PersonID";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@PersonID", person.PersonID);
                     cmd.Parameters.AddWithValue("@FirstName", person.FirstName);
-                    cmd.Parameters.AddWithValue("@MiddelName", person.MiddelName);
+                    cmd.Parameters.AddWithValue("@@SecondName", person.MiddelName);
+                    cmd.Parameters.AddWithValue("@ThirdName", person.ThirdName);
                     cmd.Parameters.AddWithValue("@LastName", person.LastName);
                     cmd.Parameters.AddWithValue("@NationalNO", person.NationalNO);
                     cmd.Parameters.AddWithValue("@Gender", person.Gender);
@@ -204,6 +207,7 @@ namespace DVLD__Data_Tier.Repositories
                     cmd.Parameters.AddWithValue("@Country_ID", person.Country_ID);
                     cmd.Parameters.AddWithValue("@Address", person.Address);
                     cmd.Parameters.AddWithValue("@ImagePath",person.ImageName);
+                    cmd.Parameters.AddWithValue("@dateOfBirth", person.DateOfBirth);
 
                     try
                     {
@@ -229,7 +233,7 @@ namespace DVLD__Data_Tier.Repositories
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "DELETE FROM People WHERE PersonID = @PersonID";
+                string query = "DELETE FROM Persons WHERE PersonID = @PersonID";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {

@@ -59,6 +59,22 @@ namespace DVLD__Business_Tier.Services
             return false;
         }
 
+        public static bool Update(Person person)
+        {
+            if (!IsPersonInfoValid(person))
+            {
+                return false;
+            }
+            // Image Handling
+            person.ImageName = SetImageProcess(person);
+            if (string.IsNullOrEmpty(person.ImageName))
+            {
+                return false;
+            }
+
+            return PersonRepository.UpdatePerson(person);
+        }
+
         //Handeling Image Saving and Deletion
         private static string SetImageProcess(Person person)
         {
