@@ -9,6 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVLD -Core", "..\DVLD -Core
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVLD -Business Tier", "..\DVLD -Business Tier\DVLD -Business Tier.csproj", "{3AFE0537-B24F-4618-AC90-8520F74A12A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVLD -Data Tier", "..\DVLD -Data Tier\DVLD -Data Tier.csproj", "{1CF9B99C-5359-4358-A0B4-BE7CE6C7C181}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +34,10 @@ Global
 		{3AFE0537-B24F-4618-AC90-8520F74A12A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AFE0537-B24F-4618-AC90-8520F74A12A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AFE0537-B24F-4618-AC90-8520F74A12A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CF9B99C-5359-4358-A0B4-BE7CE6C7C181}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CF9B99C-5359-4358-A0B4-BE7CE6C7C181}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CF9B99C-5359-4358-A0B4-BE7CE6C7C181}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CF9B99C-5359-4358-A0B4-BE7CE6C7C181}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,11 +14,11 @@ namespace DVLD__Business_Tier.Services
         
         public static bool AddPerson(Person person)
         {
-                person.ImageName = SetImageProcess(person);
-                if (string.IsNullOrEmpty(person.ImageName))
-                {
-                    return false;
-                }
+            person.ImageName = SetImageProcess(person);
+            if (string.IsNullOrEmpty(person.ImageName))
+            {
+                return false;
+            }
             // # Save the person to the database here and return true if successful
             return false;
         }
