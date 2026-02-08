@@ -107,7 +107,7 @@ namespace DVLD__Presentation_Tier
         {
             //TODO: Remove the person Image
             rbGenderMale_CheckedChanged(sender, e);
-            PersonInfo.ImagePath = string.Empty;
+            PersonInfo.ImageName = null;
         }
 
         private void tbNationalNo_TextChanged(object sender, EventArgs e)
