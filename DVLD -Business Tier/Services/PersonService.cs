@@ -6,26 +6,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DVLD__Core.Models;
+using DVLD__Data_Tier.Repositories;
 
 namespace DVLD__Business_Tier.Services
 {
     public class PersonService
     {
         
-        public static bool AddPerson(Person person)
+        public static int AddPerson(Person person)
         {
+            int NewPersonID = -1;
+
+            if (PersonRepository.IsPersonExist(person.NationalNO))
+            {
+                return NewPersonID;
+            }
+
+            if (!IsPersonInfoValid(person))
+            {
+                return NewPersonID;
+            }
+
+            // Image Handling
             person.ImageName = SetImageProcess(person);
             if (string.IsNullOrEmpty(person.ImageName))
             {
-                return false;
+                return NewPersonID;
             }
+
             // # Save the person to the database here and return true if successful
-            return false;
+            
+            NewPersonID = PersonRepository.AddNewPerson(person);
+            return NewPersonID;
         }
 
         public static Person Find(int id)
         {
-            return null;
+            return PersonRepository.GetPersonByID(id);
+        }
+
+        public static List<Person> GetAll()
+        {
+            return PersonRepository.GetAllPeople();
         }
 
         //Handeling Image Saving and Deletion
@@ -83,6 +105,27 @@ namespace DVLD__Business_Tier.Services
                 Debug.WriteLine("*** Error deleting image: " + ex.Message + "***");
                 return false;
             }
+        }
+
+        private static bool IsPersonInfoValid(Person person)
+        {
+         
+            if (string.IsNullOrEmpty(person.FirstName) || string.IsNullOrEmpty(person.MiddelName)
+                || string.IsNullOrEmpty(person.ThirdName)|| string.IsNullOrEmpty(person.LastName)
+                ||string.IsNullOrEmpty(person.NationalNO)||string.IsNullOrEmpty(person.Email)||
+                string.IsNullOrEmpty(person.Address) || string.IsNullOrEmpty(person.ImageName))
+            {
+                return false;
+            }
+
+            bool isAgeValid = DateTime.Now.Year - person.DateOfBirth.Year >= 18;
+            if (!isAgeValid)
+            {
+                return false;
+            }
+
+
+            return true;
         }
     }
 }

@@ -277,5 +277,35 @@ namespace DVLD__Data_Tier.Repositories
             }
             return isFound;
         }
+
+        public static bool IsPersonExist(string NationalNo)
+        {
+            bool isFound = false;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT Found=1 FROM People WHERE NationalNO = @nationalNO";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@nationalNO", NationalNo);
+
+                    try
+                    {
+                        conn.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            isFound = reader.HasRows;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine("** Error IN IsPersonExist :" + ex.ToString() + " ***");
+                        isFound = false;
+                    }
+                }
+            }
+            return isFound;
+        }
     }
 }
