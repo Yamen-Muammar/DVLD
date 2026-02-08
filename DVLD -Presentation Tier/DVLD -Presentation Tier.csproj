@@ -97,6 +97,12 @@
     <Compile Include="Forms\frmPeopleListWithFilter.Designer.cs">
       <DependentUpon>frmPeopleListWithFilter.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmPersonInformation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPersonInformation.Designer.cs">
+      <DependentUpon>frmPersonInformation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPeopleListWithFilter.resx">
       <DependentUpon>frmPeopleListWithFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPersonInformation.resx">
+      <DependentUpon>frmPersonInformation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

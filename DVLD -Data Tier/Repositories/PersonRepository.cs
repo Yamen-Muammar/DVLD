@@ -23,16 +23,17 @@ namespace DVLD__Data_Tier.Repositories
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = @"INSERT INTO People 
-                            (FirstName, MiddelName, LastName, NationalNO, Gender, Email, Phone, Country_ID, Address, ImagePath)
+                string query = @"INSERT INTO Persons 
+                            (FirstName, SecondName,ThirdName, LastName, NationalNO, Gender, Email, Phone, Country_ID, Address, ImageName,DateOfBirth)
                             VALUES 
-                            (@FirstName, @MiddelName, @LastName, @NationalNO, @Gender, @Email, @Phone, @Country_ID, @Address, @ImagePath);
+                            (@FirstName, @SecondName,@thirdName, @LastName, @NationalNO, @Gender, @Email, @Phone, @Country_ID, @Address, @ImageName,@dateOfBirth);
                             SELECT SCOPE_IDENTITY();";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@FirstName", person.FirstName);
-                    cmd.Parameters.AddWithValue("@MiddelName", person.MiddelName); 
+                    cmd.Parameters.AddWithValue("@SecondName", person.MiddelName);
+                    cmd.Parameters.AddWithValue("@thirdName", person.ThirdName);
                     cmd.Parameters.AddWithValue("@LastName", person.LastName);
                     cmd.Parameters.AddWithValue("@NationalNO", person.NationalNO);
                     cmd.Parameters.AddWithValue("@Gender", person.Gender);
@@ -40,14 +41,14 @@ namespace DVLD__Data_Tier.Repositories
                     cmd.Parameters.AddWithValue("@Phone", person.Phone);
                     cmd.Parameters.AddWithValue("@Country_ID", person.Country_ID);
                     cmd.Parameters.AddWithValue("@Address", person.Address);
-
+                    cmd.Parameters.AddWithValue("@dateOfBirth", person.DateOfBirth);
                     if (person.ImageName == string.Empty || person.ImageName == "")
                     {
-                        cmd.Parameters.AddWithValue("@ImagePath", "");
+                        cmd.Parameters.AddWithValue("@ImageName", "");
                     }
                     else
                     {
-                        cmd.Parameters.AddWithValue("@ImagePath", person.ImageName);
+                        cmd.Parameters.AddWithValue("@ImageName", person.ImageName);
                     }
                         
 
@@ -79,7 +80,7 @@ namespace DVLD__Data_Tier.Repositories
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "SELECT * FROM People WHERE PersonID = @PersonID";
+                string query = "SELECT * FROM Persons WHERE PersonID = @PersonID";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -96,7 +97,8 @@ namespace DVLD__Data_Tier.Repositories
                                 {
                                     PersonID = (int)reader["PersonID"],
                                     FirstName = (string)reader["FirstName"],
-                                    MiddelName = (reader["MiddelName"] != DBNull.Value) ? (string)reader["MiddelName"] : "",
+                                    MiddelName = (reader["SecondName"] != DBNull.Value) ? (string)reader["SecondName"] : "",
+                                    ThirdName = (reader["ThirdName"] != DBNull.Value) ? (string)reader["ThirdName"] : "",
                                     LastName = (string)reader["LastName"],
                                     NationalNO = (string)reader["NationalNO"],
                                     Gender = (string)reader["Gender"],
@@ -104,7 +106,8 @@ namespace DVLD__Data_Tier.Repositories
                                     Phone = (string)reader["Phone"],
                                     Country_ID = (int)reader["Country_ID"],
                                     Address = (string)reader["Address"],
-                                    ImageName = (reader["ImagePath"] != DBNull.Value) ? (string)reader["ImagePath"] : ""
+                                    ImageName = (reader["ImageName"] != DBNull.Value) ? (string)reader["ImageName"] : "",
+                                    DateOfBirth = (reader["DateOfBirth"] != DBNull.Value) ? (DateTime)reader["DateOfBirth"] : DateTime.MinValue
                                 };
                             }
                         }
@@ -127,7 +130,7 @@ namespace DVLD__Data_Tier.Repositories
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "SELECT * FROM People";
+                string query = "SELECT * FROM Persons";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -138,11 +141,12 @@ namespace DVLD__Data_Tier.Repositories
                         {
                             while (reader.Read())
                             {
-                                Person person = new Person
+                                people.Add(new Person
                                 {
                                     PersonID = (int)reader["PersonID"],
                                     FirstName = (string)reader["FirstName"],
-                                    MiddelName = (reader["MiddelName"] != DBNull.Value) ? (string)reader["MiddelName"] : "",
+                                    MiddelName = (reader["SecondName"] != DBNull.Value) ? (string)reader["SecondName"] : "",
+                                    ThirdName = (reader["ThirdName"] != DBNull.Value) ? (string)reader["ThirdName"] : "",
                                     LastName = (string)reader["LastName"],
                                     NationalNO = (string)reader["NationalNO"],
                                     Gender = (string)reader["Gender"],
@@ -150,9 +154,9 @@ namespace DVLD__Data_Tier.Repositories
                                     Phone = (string)reader["Phone"],
                                     Country_ID = (int)reader["Country_ID"],
                                     Address = (string)reader["Address"],
-                                    ImageName = (reader["ImagePath"] != DBNull.Value) ? (string)reader["ImagePath"] : ""
-
-                                };
+                                    ImageName = (reader["ImageName"] != DBNull.Value) ? (string)reader["ImageName"] : "",
+                                    DateOfBirth = (reader["DateOfBirth"] != DBNull.Value) ? (DateTime)reader["DateOfBirth"] : DateTime.MinValue
+                                });
                             }
                         }
                     }
@@ -254,7 +258,7 @@ namespace DVLD__Data_Tier.Repositories
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "SELECT Found=1 FROM People WHERE PersonID = @PersonID";
+                string query = "SELECT Found=1 FROM Persons WHERE PersonID = @PersonID";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -284,7 +288,7 @@ namespace DVLD__Data_Tier.Repositories
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "SELECT Found=1 FROM People WHERE NationalNO = @nationalNO";
+                string query = "SELECT Found=1 FROM Persons WHERE NationalNO = @nationalNO";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {

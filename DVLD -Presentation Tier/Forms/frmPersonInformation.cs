@@ -10,18 +10,18 @@ using System.Windows.Forms;
 
 namespace DVLD__Presentation_Tier.Forms
 {
-    public partial class frmAddOrUpdatePersonInfo : Form
+    public partial class frmPersonInformation : Form
     {
-        public frmAddOrUpdatePersonInfo()
+        public frmPersonInformation()
         {
             InitializeComponent();
         }
-        public frmAddOrUpdatePersonInfo(int id)
+        public frmPersonInformation(int PersonId)
         {
-            InitializeComponent(id);
+            InitializeComponent(PersonId);
         }
 
-        private void ctrlAddOrUpdatePerson1_OnClose_Clicked()
+        private void ctrlPersonInformation1_OnClose_Clicked()
         {
             this.Close();
         }

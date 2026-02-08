@@ -56,6 +56,7 @@ namespace DVLD__Presentation_Tier
         {
             // UI Load Logic.
             dateTimePicker.MaxDate = DateTime.Now.AddYears(-18);
+            cbCountry.DataSource = CountryService.GetAllCountries();
 
             if (Mode == enMode.eUpdate)
             {
@@ -72,10 +73,21 @@ namespace DVLD__Presentation_Tier
         private void btnSave_Click(object sender, EventArgs e)
         {
             //TODO: Save the person information to the database, if PersonId is -1 then add a new person, otherwise update the existing person
-            if (Mode == enMode.eAdd)
+            if (!LoadDataInPersonInfo())
             {
-                PersonService.AddPerson(PersonInfo);
+                MessageBox.Show("Please fill all the required fields and set an image", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
+
+            int InsertedPersonId = PersonService.AddPerson(PersonInfo);
+            if (InsertedPersonId == -1)
+            {
+                MessageBox.Show("Failed to save person information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            PersonInfo = null;
+            PersonInfo = PersonService.Find(InsertedPersonId);
+            LoadDataInForm();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -131,7 +143,7 @@ namespace DVLD__Presentation_Tier
         {
             lblPersonID.Text = PersonInfo.PersonID.ToString();
             tbFirstName.Text = PersonInfo.FirstName;
-            tbSecondName.Text = PersonInfo.SecondName;
+            tbSecondName.Text = PersonInfo.MiddelName;
             tbThirdName.Text = PersonInfo.ThirdName;
             tbLastName.Text = PersonInfo.LastName;
             tbNationalNo.Text = PersonInfo.NationalNO;
@@ -147,7 +159,8 @@ namespace DVLD__Presentation_Tier
                 rbGenderFemale.Checked = true;
             }
             //TODO:Get the country name from the database using the Country_ID and set it to the combo box
-            cbCountry.SelectedIndex = cbCountry.FindString("CountryName");
+            cbCountry.SelectedIndex = 2;
+
             if (!string.IsNullOrEmpty(PersonInfo.ImageName))
             {
                 string imagePath = Path.Combine(@"F:\yamen - 2024\C#\Course\projects\PersonPic", PersonInfo.ImageName);
@@ -157,12 +170,49 @@ namespace DVLD__Presentation_Tier
         }
         private bool LoadDataInPersonInfo()
         {
-            return false;
+            if (!ValidateUIPersonInfo())
+            {
+                return false;
+            }
+            
+            PersonInfo.FirstName = tbFirstName.Text;
+            PersonInfo.MiddelName = tbSecondName.Text;
+            PersonInfo.ThirdName = tbThirdName.Text;
+            PersonInfo.LastName = tbLastName.Text;
+            PersonInfo.NationalNO = tbNationalNo.Text;
+            PersonInfo.DateOfBirth = dateTimePicker.Value;
+            PersonInfo.Email = tbEmail.Text;
+            PersonInfo.Phone = tbPhone.Text;
+            PersonInfo.Address = tbAddress.Text;
+            PersonInfo.Gender = (rbGenderMale.Checked) ? "Male" : "Female";
+            PersonInfo.Country_ID = 1;
+            return true;
+
         }
-        private bool ValidatePersonInfo()
+        private bool ValidateUIPersonInfo()
         {
 
-            return false;
+            if (string.IsNullOrEmpty(tbFirstName.Text) || string.IsNullOrEmpty(tbSecondName.Text)
+                || string.IsNullOrEmpty(tbThirdName.Text) || string.IsNullOrEmpty(tbLastName.Text)
+                || string.IsNullOrEmpty(tbNationalNo.Text) || string.IsNullOrEmpty(tbEmail.Text) ||
+                string.IsNullOrEmpty(tbAddress.Text))
+            {
+                return false;
+            }
+
+            if (pbPersonImage.Image == null)
+            {
+                return false;
+            }
+
+            //bool isAgeValid = DateTime.Now.Year - person.DateOfBirth.Year >= 18;
+            //if (!isAgeValid)
+            //{
+            //    return false;
+            //}
+
+
+            return true;
         }
     }
 }

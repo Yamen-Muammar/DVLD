@@ -50,6 +50,15 @@ namespace DVLD__Business_Tier.Services
             return PersonRepository.GetAllPeople();
         }
 
+        public static bool Delete(int id)
+        {
+            if (DeleteImage(id))
+            {
+                return PersonRepository.DeletePerson(id);
+            }
+            return false;
+        }
+
         //Handeling Image Saving and Deletion
         private static string SetImageProcess(Person person)
         {
@@ -82,7 +91,7 @@ namespace DVLD__Business_Tier.Services
         }
         private static bool DeleteImage(int PersonId)
         {
-            if (PersonId == -1)
+            if (PersonId == -1 || PersonId == 0)
             {
                 return true;
             }            
@@ -92,6 +101,7 @@ namespace DVLD__Business_Tier.Services
             {
                 return false;
             }
+
             string oldImageName = person.ImageName;
 
             string destinationPath = Path.Combine(@"F:\yamen - 2024\C#\Course\projects\PersonPic", oldImageName);
