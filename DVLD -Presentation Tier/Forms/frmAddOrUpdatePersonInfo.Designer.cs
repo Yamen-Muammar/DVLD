@@ -85,6 +85,6 @@
 
         #endregion
 
-        private ctrlAddOrUpdatePerson ctrlAddOrUpdatePerson1;
+        public ctrlAddOrUpdatePerson ctrlAddOrUpdatePerson1;
     }
 }

@@ -26,6 +26,13 @@ namespace DVLD__Presentation_Tier
             }
         }
 
+        public delegate void ReturnPersonObject(Person person);
+        public event ReturnPersonObject ReturnPersonObject_OnClose;
+        private void TriggerReturnPersonEvent(Person person)
+        {
+            ReturnPersonObject_OnClose?.Invoke(person);
+        }
+
         private enum enMode
         {
             eAdd = 1, eUpdate = 2
@@ -114,6 +121,7 @@ namespace DVLD__Presentation_Tier
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            TriggerReturnPersonEvent(PersonInfo);
             CloseEvent();
         }
 
