@@ -89,7 +89,8 @@ namespace DVLD__Presentation_Tier
         private string GetCountryName()
         {
             //TODO:Get Country Name From Data Base >> Based on Country_ID;
-            return string.Empty;
+            string countryName = CountryService.GetCountry(PersonInfo.Country_ID).CountryName;
+            return countryName;
         }
 
         public void OnRetrundDataEvent(Person person)
