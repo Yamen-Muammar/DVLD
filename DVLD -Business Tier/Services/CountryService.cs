@@ -15,5 +15,15 @@ namespace DVLD__Business_Tier.Services
             return CountryRepository.GetCountries();
         }
 
+        public static Country GetCountry(int id)
+        {
+            return CountryRepository.GetCountryByID(id);
+        }
+
+        public static Country GetCountry(string countryName)
+        {
+            return CountryRepository.GetCountryByName(countryName);        
+        }
+
     }
 }

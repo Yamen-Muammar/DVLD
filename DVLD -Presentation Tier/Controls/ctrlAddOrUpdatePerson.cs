@@ -50,6 +50,7 @@ namespace DVLD__Presentation_Tier
 
             Mode = enMode.eAdd;
             PersonInfo = new Person();
+            PersonInfo.PersonID = -1; 
         }
 
         public ctrlAddOrUpdatePerson(int id)
@@ -62,20 +63,18 @@ namespace DVLD__Presentation_Tier
 
         private void ctrlAddOrUpdatePerson_Load(object sender, EventArgs e)
         {
-            // UI Load Logic.
-            dateTimePicker.MaxDate = DateTime.Now.AddYears(-18);
-            _loadCountriesCB();
-
             if (Mode == enMode.eUpdate)
             {
                 lblTitle.Text = "Update Person";
 
                 PersonInfo = PersonService.Find(FormPersonId);
                 if (PersonInfo == null) { MessageBox.Show("Person Not Found", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information); return; }
-                _loadDataInForm();
-
-                return;
+                _loadDataInForm();               
             }
+
+            // UI Load Logic.
+            dateTimePicker.MaxDate = DateTime.Now.AddYears(-18);
+            _loadCountriesCB();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -192,8 +191,8 @@ namespace DVLD__Presentation_Tier
                 {
                     rbGenderFemale.Checked = true;
                 }
-                //TODO:Get the country name from the database using the Country_ID and set it to the combo box
-                cbCountry.SelectedIndex = 2;
+                
+                // combo box Data load Sepirated in Private Function.
 
                 if (!string.IsNullOrEmpty(PersonInfo.ImageName))
                 {
@@ -225,7 +224,10 @@ namespace DVLD__Presentation_Tier
             PersonInfo.Phone = tbPhone.Text;
             PersonInfo.Address = tbAddress.Text;
             PersonInfo.Gender = (rbGenderMale.Checked) ? "Male" : "Female";
-            PersonInfo.Country_ID = 1;            
+
+            int countryID = CountryService.GetCountry(cbCountry.SelectedItem.ToString()).CountryID;            
+            PersonInfo.Country_ID = countryID;            
+
             return true;
 
         }
@@ -254,7 +256,6 @@ namespace DVLD__Presentation_Tier
 
             return true;
         }
-
         private void _loadCountriesCB()
         {
             List<Country> countriesList = CountryService.GetAllCountries();
@@ -263,7 +264,17 @@ namespace DVLD__Presentation_Tier
             {
                 cbCountry.Items.Add(country.CountryName);                
             }
-            cbCountry.SelectedIndex = cbCountry.FindString("Palestine State");   
+
+            if (PersonInfo.PersonID == -1)
+            {
+                cbCountry.SelectedIndex = cbCountry.FindString("Palestine State");
+            }
+            else
+            {
+                string countryName = CountryService.GetCountry(PersonInfo.Country_ID).CountryName;
+                cbCountry.SelectedIndex = cbCountry.FindString(countryName);
+            }
+
             
         }
     }

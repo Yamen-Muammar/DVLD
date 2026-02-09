@@ -18,7 +18,7 @@ namespace DVLD__Data_Tier.Repositories
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "SELECT * FROM Countries WHERE CountryID = @countryID";
+                string query = "SELECT * FROM Countries WHERE CountryID = @countryID;";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -52,7 +52,7 @@ namespace DVLD__Data_Tier.Repositories
             List<Country> countries = new List<Country>();
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "SELECT * FROM Countries";
+                string query = "SELECT * FROM Countries;";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -78,6 +78,42 @@ namespace DVLD__Data_Tier.Repositories
                 }
             }
             return countries;
+        }
+
+        public static Country GetCountryByName(string countryName)
+        {
+            Country foundCountry = null;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM Countries WHERE CountryName = @countryName;";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@countryName", countryName);
+
+                    try
+                    {
+                        conn.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                foundCountry = new Country
+                                {
+                                    CountryID = Convert.ToInt32(reader["CountryID"]),
+                                    CountryName = reader["CountryName"].ToString()
+                                };
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine("** Error IN GetCountryByID :" + ex.ToString() + " ***");
+                    }
+                }
+            }
+            return foundCountry;
         }
     }
 }
