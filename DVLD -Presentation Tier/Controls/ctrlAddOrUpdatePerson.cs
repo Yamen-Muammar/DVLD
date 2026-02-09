@@ -64,7 +64,7 @@ namespace DVLD__Presentation_Tier
         {
             // UI Load Logic.
             dateTimePicker.MaxDate = DateTime.Now.AddYears(-18);
-            cbCountry.DataSource = CountryService.GetAllCountries();
+            _loadCountriesCB();
 
             if (Mode == enMode.eUpdate)
             {
@@ -72,7 +72,7 @@ namespace DVLD__Presentation_Tier
 
                 PersonInfo = PersonService.Find(FormPersonId);
                 if (PersonInfo == null) { MessageBox.Show("Person Not Found", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information); return; }
-                LoadDataInForm();
+                _loadDataInForm();
 
                 return;
             }
@@ -81,7 +81,7 @@ namespace DVLD__Presentation_Tier
         private void btnSave_Click(object sender, EventArgs e)
         {
             //TODO: Save the person information to the database, if PersonId is -1 then add a new person, otherwise update the existing person
-            if (!LoadDataInPersonInfo())
+            if (!_loadDataInPersonInfo())
             {
                 MessageBox.Show("Please fill all the required fields and set an image", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -100,7 +100,7 @@ namespace DVLD__Presentation_Tier
                     MessageBox.Show("Person information saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     PersonInfo = null;
                     PersonInfo = PersonService.Find(InsertedPersonId);
-                    LoadDataInForm();
+                    _loadDataInForm();
                 }
                 return;
             }
@@ -172,7 +172,7 @@ namespace DVLD__Presentation_Tier
             }
         }
 
-        private void LoadDataInForm()
+        private void _loadDataInForm()
         {
             try
             {
@@ -208,9 +208,9 @@ namespace DVLD__Presentation_Tier
                 Debug.WriteLine("** Error in LoadDataInForm : " + ex +" **" );                
             }
         }
-        private bool LoadDataInPersonInfo()
+        private bool _loadDataInPersonInfo()
         {
-            if (!ValidateUIPersonInfo())
+            if (!_validateUIPersonInfo())
             {
                 return false;
             }
@@ -229,7 +229,7 @@ namespace DVLD__Presentation_Tier
             return true;
 
         }
-        private bool ValidateUIPersonInfo()
+        private bool _validateUIPersonInfo()
         {
 
             if (string.IsNullOrEmpty(tbFirstName.Text) || string.IsNullOrEmpty(tbSecondName.Text)
@@ -253,6 +253,18 @@ namespace DVLD__Presentation_Tier
 
 
             return true;
+        }
+
+        private void _loadCountriesCB()
+        {
+            List<Country> countriesList = CountryService.GetAllCountries();
+
+            foreach (Country country in countriesList)
+            {
+                cbCountry.Items.Add(country.CountryName);                
+            }
+            cbCountry.SelectedIndex = cbCountry.FindString("Palestine State");   
+            
         }
     }
 }
