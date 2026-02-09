@@ -25,11 +25,12 @@ namespace DVLD__Presentation_Tier
         }
         public crtlPeopleListWithFilter()
         {
-            InitializeComponent();
-            List<Person> people  = PersonService.GetAll();
-            dgvPeopleList.DataSource = people;
+            InitializeComponent();           
         }
-
+        private void crtlPeopleListWithFilter_Load(object sender, EventArgs e)
+        {
+            _RefreshData();
+        }
         private void btnClose_Click(object sender, EventArgs e)
         {
             RaiseCloseClickedEvent();
@@ -59,6 +60,7 @@ namespace DVLD__Presentation_Tier
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int CellPersonId = (int)dgvPeopleList.CurrentRow.Cells[0].Value;
+
             if (!PersonService.Delete(CellPersonId))
             {
                 MessageBox.Show("An error occurred while deleting the person.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -82,6 +84,9 @@ namespace DVLD__Presentation_Tier
         {
             List<Person> people = PersonService.GetAll();
             dgvPeopleList.DataSource = people;
+            lblRecordsCount.Text = people.Count.ToString();
         }
+
+       
     }
 }

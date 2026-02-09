@@ -11,6 +11,7 @@ using System.IO;
 using Ookii.Dialogs.WinForms;
 using DVLD__Core.Models;
 using DVLD__Business_Tier.Services;
+using System.Diagnostics;
 namespace DVLD__Presentation_Tier
 {
     public partial class ctrlAddOrUpdatePerson : UserControl
@@ -88,26 +89,26 @@ namespace DVLD__Presentation_Tier
                 }
                 else
                 {
+                    Mode = enMode.eUpdate;
                     MessageBox.Show("Person information saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     PersonInfo = null;
                     PersonInfo = PersonService.Find(InsertedPersonId);
                     LoadDataInForm();
                 }
+                return;
             }
 
             if (Mode == enMode.eUpdate)
-            {
+            {               
                 if (PersonService.Update(PersonInfo))
                 {
-                    MessageBox.Show("Person information updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //PersonInfo = null;
-                    //PersonInfo = PersonService.Find(FormPersonId);
-                    //LoadDataInForm();
+                    MessageBox.Show("Person information updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);                    
                 }
                 else
                 {
                     MessageBox.Show("Failed to update person information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                return;
             }
         }
 
@@ -121,8 +122,11 @@ namespace DVLD__Presentation_Tier
             // TODO: Set the person Image to person Object            
             string imagePath = GetImagePath();
             PersonInfo.ImageName = imagePath;
-            pbPersonImage.Image = Image.FromFile(imagePath);
 
+            if (imagePath!=string.Empty)
+            {
+                pbPersonImage.Image = Image.FromFile(imagePath);
+            }            
         }
 
         private string GetImagePath()
@@ -162,32 +166,39 @@ namespace DVLD__Presentation_Tier
 
         private void LoadDataInForm()
         {
-            lblPersonID.Text = PersonInfo.PersonID.ToString();
-            tbFirstName.Text = PersonInfo.FirstName;
-            tbSecondName.Text = PersonInfo.MiddelName;
-            tbThirdName.Text = PersonInfo.ThirdName;
-            tbLastName.Text = PersonInfo.LastName;
-            tbNationalNo.Text = PersonInfo.NationalNO;
-            dateTimePicker.Value = PersonInfo.DateOfBirth;
-            tbEmail.Text = PersonInfo.Email;
-            tbPhone.Text = PersonInfo.Phone;
-            if (PersonInfo.Gender == "Male")
+            try
             {
-                rbGenderMale.Checked = true;
-            }
-            else
-            {
-                rbGenderFemale.Checked = true;
-            }
-            //TODO:Get the country name from the database using the Country_ID and set it to the combo box
-            cbCountry.SelectedIndex = 2;
+                lblPersonID.Text = PersonInfo.PersonID.ToString();
+                tbFirstName.Text = PersonInfo.FirstName;
+                tbSecondName.Text = PersonInfo.MiddelName;
+                tbThirdName.Text = PersonInfo.ThirdName;
+                tbLastName.Text = PersonInfo.LastName;
+                tbNationalNo.Text = PersonInfo.NationalNO;               
+                tbEmail.Text = PersonInfo.Email;
+                tbPhone.Text = PersonInfo.Phone;
+                if (PersonInfo.Gender == "Male")
+                {
+                    rbGenderMale.Checked = true;
+                }
+                else
+                {
+                    rbGenderFemale.Checked = true;
+                }
+                //TODO:Get the country name from the database using the Country_ID and set it to the combo box
+                cbCountry.SelectedIndex = 2;
 
-            if (!string.IsNullOrEmpty(PersonInfo.ImageName))
-            {
-                string imagePath = Path.Combine(@"F:\yamen - 2024\C#\Course\projects\PersonPic", PersonInfo.ImageName);
-                pbPersonImage.Image = Image.FromFile(imagePath);
+                if (!string.IsNullOrEmpty(PersonInfo.ImageName))
+                {
+                    string imagePath = Path.Combine(@"F:\yamen - 2024\C#\Course\projects\PersonPic", PersonInfo.ImageName);
+                    pbPersonImage.Image = Image.FromFile(imagePath);
+                }
+                tbAddress.Text = PersonInfo.Address;
+                dateTimePicker.Value = PersonInfo.DateOfBirth;
             }
-            tbAddress.Text = PersonInfo.Address;
+            catch (Exception ex)
+            {
+                Debug.WriteLine("** Error in LoadDataInForm : " + ex +" **" );                
+            }
         }
         private bool LoadDataInPersonInfo()
         {
@@ -206,7 +217,7 @@ namespace DVLD__Presentation_Tier
             PersonInfo.Phone = tbPhone.Text;
             PersonInfo.Address = tbAddress.Text;
             PersonInfo.Gender = (rbGenderMale.Checked) ? "Male" : "Female";
-            PersonInfo.Country_ID = 1;
+            PersonInfo.Country_ID = 1;            
             return true;
 
         }

@@ -66,22 +66,23 @@ namespace DVLD__Business_Tier.Services
                 return false;
             }
             // Image Handling
-            person.ImageName = SetImageProcess(person);
-            if (string.IsNullOrEmpty(person.ImageName))
+            
+            bool isPersonNOTUpdateImage = person.ImageName.Length == 40;
+            if (!isPersonNOTUpdateImage)
             {
-                return false;
+                person.ImageName = SetImageProcess(person);
+                if (string.IsNullOrEmpty(person.ImageName))
+                {
+                    return false;
+                }
             }
-
             return PersonRepository.UpdatePerson(person);
         }
 
         //Handeling Image Saving and Deletion
         private static string SetImageProcess(Person person)
         {
-            // # person will have the name of the pic /
-            // # when we want to update the image we will delete the old one and save the new one with the same name
-            // # when we want to add a new person we will save the image with a new name and return it to be saved in the database
-
+            
             if (string.IsNullOrEmpty(person.ImageName))
             {
                 return string.Empty;
@@ -90,12 +91,12 @@ namespace DVLD__Business_Tier.Services
             string fileExtension = Path.GetExtension(person.ImageName);
             string NewImageName = Guid.NewGuid().ToString() + fileExtension;
 
-            string destinationPath = Path.Combine(@"F:\yamen - 2024\C#\Course\projects\PersonPic", NewImageName);
+            string NewImageDestinationPath = Path.Combine(@"F:\yamen - 2024\C#\Course\projects\PersonPic", NewImageName);
             try
             {
                 if (DeleteImage(person.PersonID))
                 {
-                    File.Copy(person.ImageName, destinationPath, true);
+                    File.Copy(person.ImageName, NewImageDestinationPath, true);
                     return NewImageName;
                 }
             }
@@ -119,11 +120,11 @@ namespace DVLD__Business_Tier.Services
             }
 
             string oldImageName = person.ImageName;
-
-            string destinationPath = Path.Combine(@"F:\yamen - 2024\C#\Course\projects\PersonPic", oldImageName);
+            //TODO:We have a problem with access the file.(we can update the photo for Update Users.)
+            string DeleteDestinationPath = Path.Combine(@"F:\yamen - 2024\C#\Course\projects\PersonPic", oldImageName);
             try
             {
-                File.Delete(destinationPath);
+                File.Delete($@"{DeleteDestinationPath}");
                 return true;
             }
             catch (Exception ex)

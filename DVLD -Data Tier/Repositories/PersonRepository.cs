@@ -179,34 +179,34 @@ namespace DVLD__Data_Tier.Repositories
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 string query = @"UPDATE Persons 
-                            SET FirstName = @FirstName,
-                                SecondName = @SecondName,
-                                ThirdName = @ThirdName,
-                                LastName = @LastName,
-                                NationalNO = @NationalNO,
-                                Gender = @Gender,
-                                Email = @Email,
-                                Phone = @Phone,
-                                Country_ID = @Country_ID,
-                                Address = @Address,
-                                ImageName = @ImagePath,
+                            SET FirstName = @firstName,
+                                SecondName = @secondName,
+                                ThirdName = @thirdName,
+                                LastName = @lastName,
+                                NationalNO = @nationalNO,
+                                Gender = @gender,
+                                Email = @email,
+                                Phone = @phone,
+                                Country_ID = @country_ID,
+                                Address = @address,
+                                ImageName = @imageName,
                                 DateOfBirth = @dateOfBirth
-                            WHERE PersonID = @PersonID";
+                            WHERE PersonID = @personID";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@PersonID", person.PersonID);
-                    cmd.Parameters.AddWithValue("@FirstName", person.FirstName);
-                    cmd.Parameters.AddWithValue("@@SecondName", person.MiddelName);
-                    cmd.Parameters.AddWithValue("@ThirdName", person.ThirdName);
-                    cmd.Parameters.AddWithValue("@LastName", person.LastName);
-                    cmd.Parameters.AddWithValue("@NationalNO", person.NationalNO);
-                    cmd.Parameters.AddWithValue("@Gender", person.Gender);
-                    cmd.Parameters.AddWithValue("@Email", person.Email);
-                    cmd.Parameters.AddWithValue("@Phone", person.Phone);
-                    cmd.Parameters.AddWithValue("@Country_ID", person.Country_ID);
-                    cmd.Parameters.AddWithValue("@Address", person.Address);
-                    cmd.Parameters.AddWithValue("@ImagePath",person.ImageName);
+                    cmd.Parameters.AddWithValue("@personID", person.PersonID);
+                    cmd.Parameters.AddWithValue("@firstName", person.FirstName);
+                    cmd.Parameters.AddWithValue("@secondName", person.MiddelName);
+                    cmd.Parameters.AddWithValue("@thirdName", person.ThirdName);
+                    cmd.Parameters.AddWithValue("@lastName", person.LastName);
+                    cmd.Parameters.AddWithValue("@nationalNO", person.NationalNO);
+                    cmd.Parameters.AddWithValue("@gender", person.Gender);
+                    cmd.Parameters.AddWithValue("@email", person.Email);
+                    cmd.Parameters.AddWithValue("@phone", person.Phone);
+                    cmd.Parameters.AddWithValue("@country_ID", person.Country_ID);
+                    cmd.Parameters.AddWithValue("@address", person.Address);
+                    cmd.Parameters.AddWithValue("@imageName", person.ImageName);
                     cmd.Parameters.AddWithValue("@dateOfBirth", person.DateOfBirth);
 
                     try
