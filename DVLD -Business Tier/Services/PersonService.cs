@@ -65,6 +65,10 @@ namespace DVLD__Business_Tier.Services
             return false;
         }
 
+        public static bool IsPersonExist(string nationalNO)
+        {
+            return PersonRepository.IsPersonExist(nationalNO);
+        }
         public static bool Update(Person person)
         {
             if (!IsPersonInfoValid(person))
@@ -108,7 +112,8 @@ namespace DVLD__Business_Tier.Services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("*** Error copying image: " + ex.Message + "***");                
+                Debug.WriteLine("*** Error copying image: " + ex.Message + "***");
+                throw new Exception("Error While Copying Image");
             }
             return string.Empty;
         }
@@ -152,6 +157,7 @@ namespace DVLD__Business_Tier.Services
                 catch (Exception ex)
                 {
                     Debug.WriteLine("*** Error deleting image: " + ex.Message + "***");
+                    throw new Exception("Error While Deleting Image");
                 }
             }
             
@@ -159,23 +165,20 @@ namespace DVLD__Business_Tier.Services
         }
 
         private static bool IsPersonInfoValid(Person person)
-        {
-         
+        {            
             if (string.IsNullOrEmpty(person.FirstName) || string.IsNullOrEmpty(person.MiddelName)
                 || string.IsNullOrEmpty(person.ThirdName)|| string.IsNullOrEmpty(person.LastName)
                 ||string.IsNullOrEmpty(person.NationalNO)||string.IsNullOrEmpty(person.Email)||
                 string.IsNullOrEmpty(person.Address) || string.IsNullOrEmpty(person.ImageName))
             {
-                return false;
+                throw new Exception("Fill All the Feilds");
             }
 
             bool isAgeValid = DateTime.Now.Year - person.DateOfBirth.Year >= 18;
             if (!isAgeValid)
             {
-                return false;
+                throw new Exception("Age Is inValid");
             }
-
-
             return true;
         }
     }

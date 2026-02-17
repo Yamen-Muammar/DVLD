@@ -85,44 +85,50 @@ namespace DVLD__Presentation_Tier
                 MessageBox.Show("Please fill all the required fields and set an image", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            if (Mode == enMode.eAdd)
+            try
             {
-                try
+                if (Mode == enMode.eAdd)
                 {
-                    int InsertedPersonId = PersonService.AddPerson(PersonInfo);
-                    if (InsertedPersonId == -1)
+                    try
                     {
-                        MessageBox.Show("Failed to save person information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        int InsertedPersonId = PersonService.AddPerson(PersonInfo);
+                        if (InsertedPersonId == -1)
+                        {
+                            MessageBox.Show("Failed to save person information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            Mode = enMode.eUpdate;
+                            MessageBox.Show("Person information saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            PersonInfo = null;
+                            PersonInfo = PersonService.Find(InsertedPersonId);
+                            _loadDataInForm();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    return;
+                }
+
+                if (Mode == enMode.eUpdate)
+                {
+                    if (PersonService.Update(PersonInfo))
+                    {
+                        MessageBox.Show("Person information updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        Mode = enMode.eUpdate;
-                        MessageBox.Show("Person information saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        PersonInfo = null;
-                        PersonInfo = PersonService.Find(InsertedPersonId);
-                        _loadDataInForm();
+                        MessageBox.Show("Failed to update person information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                    return;
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                
-                return;
             }
-
-            if (Mode == enMode.eUpdate)
-            {                        
-                if (PersonService.Update(PersonInfo))
-                {
-                    MessageBox.Show("Person information updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);                    
-                }
-                else
-                {
-                    MessageBox.Show("Failed to update person information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -204,6 +210,8 @@ namespace DVLD__Presentation_Tier
                 tbNationalNo.Text = PersonInfo.NationalNO;               
                 tbEmail.Text = PersonInfo.Email;
                 tbPhone.Text = PersonInfo.Phone;
+                tbAddress.Text = PersonInfo.Address;
+                dateTimePicker.Value = PersonInfo.DateOfBirth;
                 if (PersonInfo.Gender == "Male")
                 {
                     rbGenderMale.Checked = true;
@@ -220,8 +228,7 @@ namespace DVLD__Presentation_Tier
                     string imagePath = Path.Combine(@"F:\yamen - 2024\C#\Course\projects\PersonPic", PersonInfo.ImageName);
                     pbPersonImage.Image = Image.FromFile(imagePath);
                 }
-                tbAddress.Text = PersonInfo.Address;
-                dateTimePicker.Value = PersonInfo.DateOfBirth;
+                
             }
             catch (Exception ex)
             {
@@ -303,6 +310,23 @@ namespace DVLD__Presentation_Tier
         {
             pbPersonImage.Image?.Dispose();
             pbPersonImage.Image = null;
+        }
+
+        private void tbNationalNo_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(tbNationalNo.Text))
+            {
+                return;
+            }
+
+            if (Mode == enMode.eAdd)
+            {
+                if (PersonService.IsPersonExist(tbNationalNo.Text))
+                {
+                    tbNationalNo.Focus();
+                }
+            }
+            
         }
     }
 }
