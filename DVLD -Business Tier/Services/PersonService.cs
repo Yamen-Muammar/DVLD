@@ -19,22 +19,20 @@ namespace DVLD__Business_Tier.Services
 
             if (PersonRepository.IsPersonExist(person.NationalNO))
             {
-                return NewPersonID;
+                throw new Exception("Person is already exist");
             }
 
             if (!IsPersonInfoValid(person))
-            {
-                return NewPersonID;
+            {                
+                throw new Exception("inValid person Information");
             }
 
             // Image Handling
             person.ImageName = SetImageProcess(person);
             if (string.IsNullOrEmpty(person.ImageName))
-            {
-                return NewPersonID;
-            }
-
-            // # Save the person to the database here and return true if successful
+            {             
+                throw new Exception("Error While Update Image");
+            }            
             
             NewPersonID = PersonRepository.AddNewPerson(person);
             return NewPersonID;
@@ -108,6 +106,7 @@ namespace DVLD__Business_Tier.Services
         }
         private static bool DeleteImage(int PersonId)
         {
+            bool isDeleteImage = false;
             if (PersonId == -1 || PersonId == 0)
             {
                 return true;
@@ -122,16 +121,33 @@ namespace DVLD__Business_Tier.Services
             string oldImageName = person.ImageName;
             //TODO:We have a problem with access the file.(we can update the photo for Update Users.)
             string DeleteDestinationPath = Path.Combine(@"F:\yamen - 2024\C#\Course\projects\PersonPic", oldImageName);
-            try
+
+            for (int attempts = 0; attempts < 3; attempts++)
             {
-                File.Delete($@"{DeleteDestinationPath}");
-                return true;
+                try
+                {
+                    File.Delete($@"{DeleteDestinationPath}");
+                    isDeleteImage = true;
+                    break;
+                }
+                catch (IOException)
+                {
+                    // The file is locked. Let's fix it.
+
+                    // Force the system to clean up the "Zombie" image handles
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+
+                    // Wait 0.5 seconds to let the OS release the lock
+                    System.Threading.Thread.Sleep(500);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("*** Error deleting image: " + ex.Message + "***");
+                }
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("*** Error deleting image: " + ex.Message + "***");
-                return false;
-            }
+            
+            return isDeleteImage;
         }
 
         private static bool IsPersonInfoValid(Person person)

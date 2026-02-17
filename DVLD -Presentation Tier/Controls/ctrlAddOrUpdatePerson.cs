@@ -88,24 +88,32 @@ namespace DVLD__Presentation_Tier
 
             if (Mode == enMode.eAdd)
             {
-                int InsertedPersonId = PersonService.AddPerson(PersonInfo);
-                if (InsertedPersonId == -1)
+                try
                 {
-                    MessageBox.Show("Failed to save person information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    int InsertedPersonId = PersonService.AddPerson(PersonInfo);
+                    if (InsertedPersonId == -1)
+                    {
+                        MessageBox.Show("Failed to save person information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        Mode = enMode.eUpdate;
+                        MessageBox.Show("Person information saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        PersonInfo = null;
+                        PersonInfo = PersonService.Find(InsertedPersonId);
+                        _loadDataInForm();
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    Mode = enMode.eUpdate;
-                    MessageBox.Show("Person information saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    PersonInfo = null;
-                    PersonInfo = PersonService.Find(InsertedPersonId);
-                    _loadDataInForm();
+                    MessageBox.Show("An error occurred while saving person information: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                
                 return;
             }
 
             if (Mode == enMode.eUpdate)
-            {                
+            {                        
                 if (PersonService.Update(PersonInfo))
                 {
                     MessageBox.Show("Person information updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);                    
@@ -162,6 +170,7 @@ namespace DVLD__Presentation_Tier
         private void btnRemove_Click(object sender, EventArgs e)
         {
             //TODO: Remove the person Image
+            _clearPictureBox();
             rbGenderMale_CheckedChanged(sender, e);
             PersonInfo.ImageName = null;
         }

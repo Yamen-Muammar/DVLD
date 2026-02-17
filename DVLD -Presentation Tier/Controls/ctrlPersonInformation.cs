@@ -81,7 +81,11 @@ namespace DVLD__Presentation_Tier
             if (PersonInfo.ImageName != "")
             {
                 string imagePath = Path.Combine(@"F:\yamen - 2024\C#\Course\projects\PersonPic", PersonInfo.ImageName);
-                pbImage.Image = Image.FromFile(imagePath);
+                if (File.Exists(imagePath))
+                {
+                    pbImage.Image = Image.FromFile(imagePath);
+                }
+                
             }
            
         }
