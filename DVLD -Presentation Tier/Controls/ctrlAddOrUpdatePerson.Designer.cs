@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctrlAddOrUpdatePerson));
             this.lblPersonID = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -71,6 +72,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.EPNationalNO = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -82,6 +84,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EPNationalNO)).BeginInit();
             this.SuspendLayout();
             // 
             // lblPersonID
@@ -539,6 +542,10 @@
             this.lblTitle.TabIndex = 16;
             this.lblTitle.Text = "Add Person";
             // 
+            // EPNationalNO
+            // 
+            this.EPNationalNO.ContainerControl = this;
+            // 
             // ctrlAddOrUpdatePerson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -562,6 +569,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EPNationalNO)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -611,5 +619,6 @@
         private System.Windows.Forms.Button btnSetImage;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.ErrorProvider EPNationalNO;
     }
 }

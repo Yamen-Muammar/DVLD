@@ -323,7 +323,12 @@ namespace DVLD__Presentation_Tier
             {
                 if (PersonService.IsPersonExist(tbNationalNo.Text))
                 {
+                    EPNationalNO.SetError(tbNationalNo, "This National Number already exists");
                     tbNationalNo.Focus();
+                }
+                else
+                {
+                    EPNationalNO.SetError(tbNationalNo, string.Empty);
                 }
             }
             
