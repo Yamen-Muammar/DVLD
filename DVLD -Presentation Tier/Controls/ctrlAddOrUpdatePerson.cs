@@ -105,7 +105,7 @@ namespace DVLD__Presentation_Tier
             }
 
             if (Mode == enMode.eUpdate)
-            {               
+            {                
                 if (PersonService.Update(PersonInfo))
                 {
                     MessageBox.Show("Person information updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);                    
@@ -120,6 +120,7 @@ namespace DVLD__Presentation_Tier
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            _clearPictureBox();
             TriggerReturnPersonEvent(PersonInfo);
             CloseEvent();
         }
@@ -128,12 +129,23 @@ namespace DVLD__Presentation_Tier
         {
             // TODO: Set the person Image to person Object            
             string imagePath = GetImagePath();
-            PersonInfo.ImageName = imagePath;
-
+           
             if (imagePath!=string.Empty)
             {
-                pbPersonImage.Image = Image.FromFile(imagePath);
+                PersonInfo.ImageName = imagePath;
+                pbPersonImage.Image = LoadImageWithoutLock(imagePath);
             }            
+        }       
+        public Image LoadImageWithoutLock(string path)
+        {
+            // 1. Read all bytes from the file. 
+            // This opens the file, reads it, and CLOSES it immediately.
+            byte[] imageBytes = File.ReadAllBytes(path);
+
+            // 2. Create a stream from the bytes in memory
+            MemoryStream ms = new MemoryStream(imageBytes);
+            // 3. Create the image from that memory stream
+            return Image.FromStream(ms);
         }
 
         private string GetImagePath()
@@ -276,6 +288,12 @@ namespace DVLD__Presentation_Tier
             }
 
             
+        }
+
+        private void _clearPictureBox()
+        {
+            pbPersonImage.Image?.Dispose();
+            pbPersonImage.Image = null;
         }
     }
 }

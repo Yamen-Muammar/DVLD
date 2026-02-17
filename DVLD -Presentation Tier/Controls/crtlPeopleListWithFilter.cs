@@ -58,10 +58,15 @@ namespace DVLD__Presentation_Tier
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            int CellPersonId = (int)dgvPeopleList.CurrentRow.Cells[0].Value;
+        {            
+            if (MessageBox.Show("Are You Sure ?","Confirmation",MessageBoxButtons.YesNo,MessageBoxIcon.Question) != DialogResult.Yes)
+            {
+                return;
+            }
 
-            if (!PersonService.Delete(CellPersonId))
+            int PersonId = (int)dgvPeopleList.CurrentRow.Cells[0].Value;
+
+            if (!PersonService.Delete(PersonId))
             {
                 MessageBox.Show("An error occurred while deleting the person.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -75,7 +80,8 @@ namespace DVLD__Presentation_Tier
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            frmPersonInformation frmPersonInformation = new frmPersonInformation((int)dgvPeopleList.CurrentRow.Cells[0].Value);
+            int PersonId = (int)dgvPeopleList.CurrentRow.Cells[0].Value;
+            frmPersonInformation frmPersonInformation = new frmPersonInformation(PersonId);
             frmPersonInformation.ShowDialog();
             _RefreshData();
         }
