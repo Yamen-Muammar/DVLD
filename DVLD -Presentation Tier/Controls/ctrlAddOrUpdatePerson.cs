@@ -106,7 +106,7 @@ namespace DVLD__Presentation_Tier
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("An error occurred while saving person information: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 
                 return;

@@ -32,10 +32,18 @@ namespace DVLD__Business_Tier.Services
             if (string.IsNullOrEmpty(person.ImageName))
             {             
                 throw new Exception("Error While Update Image");
-            }            
-            
-            NewPersonID = PersonRepository.AddNewPerson(person);
-            return NewPersonID;
+            }
+
+            try
+            {
+                NewPersonID = PersonRepository.AddNewPerson(person);
+                return NewPersonID;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.ToString());
+            }
         }
 
         public static Person Find(int id)

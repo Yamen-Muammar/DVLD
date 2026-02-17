@@ -64,7 +64,8 @@ namespace DVLD__Data_Tier.Repositories
                     }
                     catch (Exception ex)
                     {
-                        Debug.WriteLine("** Error IN ADD Person :"+ex.ToString()+" ***");
+                        Debug.WriteLine("** Error IN AddNewPerson :" + ex.ToString() + " ***");
+                        throw new Exception("Error in Database while inserting new Person");
                     }
                 }
             }
