@@ -14,7 +14,8 @@ namespace DVLD__Presentation_Tier
 {
     public partial class crtlPeopleListWithFilter : UserControl
     {
-        private List<Person> people { get; set; }
+        //private List<Person> people { get; set; }
+        private DataTable people { get; set; }
         public crtlPeopleListWithFilter()
         {
             InitializeComponent();           
@@ -121,39 +122,64 @@ namespace DVLD__Presentation_Tier
         private void tbFilterInput_TextChanged(object sender, EventArgs e)
         {
             string filterValue = tbFilterInput.Text;
-            List<Person> filteredPeopleList = new List<Person>();
+
+            //List<Person> filteredPeopleList = new List<Person>();         
+            DataTable filteredPeopleList = new DataTable();
+            filteredPeopleList = people.Copy();
 
             if (string.IsNullOrEmpty(filterValue) || cbFilterOn.SelectedItem.ToString() == "None")
             {
-                filteredPeopleList.Clear();
+                //filteredPeopleList.Clear();
                 dgvPeopleList.DataSource = people;
                 return;
             }
+            /*
+            //switch (cbFilterOn.SelectedItem.ToString())
+            //{
+            //    case "PersonID":
+            //        if (int.TryParse(filterValue, out int personId))
+            //        {
+            //            filteredPeopleList = people.Where(p => p.PersonID == personId).ToList();
+            //        }
+            //        break;
+            //        case "Country Name":
+            //            filteredPeopleList = people.Where(p => p.Country_ID.ToString().Contains(filterValue)).ToList();
+            //        break;
+            //        case "First Name":
+            //            filteredPeopleList = people.Where(p => p.FirstName.Contains(filterValue)).ToList();
+            //        break;
+            //        case "NationalNo.":
+            //            filteredPeopleList = people.Where(p => p.NationalNO.Contains(filterValue)).ToList();
+            //        break;
 
+            //    default:
+            //        break;
+            //}
+            */
             switch (cbFilterOn.SelectedItem.ToString())
             {
                 case "PersonID":
                     if (int.TryParse(filterValue, out int personId))
                     {
-                        filteredPeopleList = people.Where(p => p.PersonID == personId).ToList();
+                        filteredPeopleList.DefaultView.RowFilter= $"PersonID = {personId}";
                     }
                     break;
-                    case "Country Name":
-                        filteredPeopleList = people.Where(p => p.Country_ID.ToString().Contains(filterValue)).ToList();
+                case "Country Name":
+                    filteredPeopleList.Select($"CountryName = '{filterValue}'");
                     break;
-                    case "First Name":
-                        filteredPeopleList = people.Where(p => p.FirstName.Contains(filterValue)).ToList();
+                case "First Name":
+                    filteredPeopleList.Select($"FirstName = '{filterValue}'");
                     break;
-                    case "NationalNo.":
-                        filteredPeopleList = people.Where(p => p.NationalNO.Contains(filterValue)).ToList();
+                case "NationalNo.":
+                    filteredPeopleList.Select($"NationalNo = '{filterValue}'");
                     break;
 
                 default:
                     break;
-            }
-            
+            }                        
+
             dgvPeopleList.DataSource = null;
-            dgvPeopleList.DataSource = filteredPeopleList;
+            dgvPeopleList.DataSource = filteredPeopleList;            
         }
 
         // Helper Methods
@@ -161,7 +187,7 @@ namespace DVLD__Presentation_Tier
         {
             people = PersonService.GetAll();
             dgvPeopleList.DataSource = people;
-            lblRecordsCount.Text = people.Count.ToString();
+            //lblRecordsCount.Text = people.Count.ToString();
         }
 
         private void _loadFilterComboBoxItems()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -56,7 +57,7 @@ namespace DVLD__Business_Tier.Services
             return person;
         }
 
-        public static List<Person> GetAll()
+        public static DataTable GetAll()
         {
             return PersonRepository.GetAllPeople();
         }
