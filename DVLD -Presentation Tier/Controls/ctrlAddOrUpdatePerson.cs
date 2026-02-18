@@ -39,6 +39,7 @@ namespace DVLD__Presentation_Tier
         }
         private enMode Mode { get; set; }
 
+        private string _imagePath { get; set; }
         private int FormPersonId { get; set; }
         private Person PersonInfo { get; set; }        
 
@@ -80,11 +81,12 @@ namespace DVLD__Presentation_Tier
         private void btnSave_Click(object sender, EventArgs e)
         {
             //TODO: Save the person information to the database, if PersonId is -1 then add a new person, otherwise update the existing person
-            if (!_loadDataInPersonInfo())
+            if (!_loadDataInPersonInfoObject())
             {
                 MessageBox.Show("Please fill all the required fields and set an image", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
             try
             {
                 if (Mode == enMode.eAdd)
@@ -146,7 +148,7 @@ namespace DVLD__Presentation_Tier
            
             if (imagePath!=string.Empty)
             {
-                PersonInfo.ImageName = imagePath;
+                _imagePath = imagePath;
                 pbPersonImage.Image = LoadImageWithoutLock(imagePath);
             }            
         }       
@@ -235,7 +237,7 @@ namespace DVLD__Presentation_Tier
                 Debug.WriteLine("** Error in LoadDataInForm : " + ex +" **" );                
             }
         }
-        private bool _loadDataInPersonInfo()
+        private bool _loadDataInPersonInfoObject()
         {
             if (!_validateUIPersonInfo())
             {
@@ -255,7 +257,7 @@ namespace DVLD__Presentation_Tier
 
             int countryID = CountryService.GetCountry(cbCountry.SelectedItem.ToString()).CountryID;            
             PersonInfo.Country_ID = countryID;            
-
+            PersonInfo.ImageName = _imagePath;
             return true;
 
         }

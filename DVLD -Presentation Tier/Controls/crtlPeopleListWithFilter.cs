@@ -22,7 +22,7 @@ namespace DVLD__Presentation_Tier
             {
                 handler.Invoke();
             }            
-        }
+        }        
         public crtlPeopleListWithFilter()
         {
             InitializeComponent();           

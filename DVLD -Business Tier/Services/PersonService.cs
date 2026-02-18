@@ -41,14 +41,19 @@ namespace DVLD__Business_Tier.Services
             }
             catch (Exception ex)
             {
-
-                throw new Exception(ex.ToString());
+                Debug.WriteLine("*** Error adding new person: " + ex.Message + "***");
+                throw new Exception("Error While Add New Person");
             }
         }
 
         public static Person Find(int id)
         {
-            return PersonRepository.GetPersonByID(id);
+            Person person = PersonRepository.GetPersonByID(id);
+            if (person == null)
+            {
+                throw new Exception("Person Not Found,Try Again");
+            }
+            return person;
         }
 
         public static List<Person> GetAll()
@@ -58,35 +63,56 @@ namespace DVLD__Business_Tier.Services
 
         public static bool Delete(int id)
         {
-            if (DeleteImage(id))
+            if (!DeleteImage(id))
             {
-                return PersonRepository.DeletePerson(id);
+                throw new Exception("Error While Delete Image");
             }
-            return false;
+
+            if (!PersonRepository.DeletePerson(id))
+            {
+                throw new Exception("Error While Delete Person");
+            }
+
+            return true;
         }
 
         public static bool IsPersonExist(string nationalNO)
         {
             return PersonRepository.IsPersonExist(nationalNO);
         }
+
         public static bool Update(Person person)
         {
+            bool isPersonUpdated = false;
+
             if (!IsPersonInfoValid(person))
             {
-                return false;
+                throw new Exception("Person Information not valid");
             }
-            // Image Handling
-            
+
+            // Image Handling            
             bool isPersonNOTUpdateImage = person.ImageName.Length == 40;
             if (!isPersonNOTUpdateImage)
             {
                 person.ImageName = SetImageProcess(person);
                 if (string.IsNullOrEmpty(person.ImageName))
                 {
-                    return false;
+                    throw new Exception("Error While Update Image");
                 }
             }
-            return PersonRepository.UpdatePerson(person);
+
+            try
+            {
+                PersonRepository.UpdatePerson(person);
+                isPersonUpdated = true;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("*** Error updating person: " + ex.Message + "***");
+                throw new Exception("Error While Update Person");
+            }
+
+            return isPersonUpdated;
         }
 
         //Handeling Image Saving and Deletion
@@ -128,11 +154,15 @@ namespace DVLD__Business_Tier.Services
             Person person = Find(PersonId);
             if (person == null)
             {
-                return false;
+                return false;                
             }
 
             string oldImageName = person.ImageName;
-            //TODO:We have a problem with access the file.(we can update the photo for Update Users.)
+            if (string.IsNullOrEmpty(oldImageName))
+            {
+                return false;
+            }
+
             string DeleteDestinationPath = Path.Combine(@"F:\yamen - 2024\C#\Course\projects\PersonPic", oldImageName);
 
             for (int attempts = 0; attempts < 3; attempts++)
@@ -145,19 +175,17 @@ namespace DVLD__Business_Tier.Services
                 }
                 catch (IOException)
                 {
-                    // The file is locked. Let's fix it.
-
-                    // Force the system to clean up the "Zombie" image handles
+                   
                     GC.Collect();
                     GC.WaitForPendingFinalizers();
 
-                    // Wait 0.5 seconds to let the OS release the lock
-                    System.Threading.Thread.Sleep(500);
+                    
+                    System.Threading.Thread.Sleep(750);
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine("*** Error deleting image: " + ex.Message + "***");
-                    throw new Exception("Error While Deleting Image");
+                    return false;
                 }
             }
             
@@ -177,8 +205,9 @@ namespace DVLD__Business_Tier.Services
             bool isAgeValid = DateTime.Now.Year - person.DateOfBirth.Year >= 18;
             if (!isAgeValid)
             {
-                throw new Exception("Age Is inValid");
+                throw new Exception("Age Is Not inValid");
             }
+
             return true;
         }
     }

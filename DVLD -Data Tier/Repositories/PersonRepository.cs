@@ -136,7 +136,7 @@ namespace DVLD__Data_Tier.Repositories
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     try
-                    {
+                    {                        
                         conn.Open();
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
@@ -218,7 +218,7 @@ namespace DVLD__Data_Tier.Repositories
                     catch (Exception ex)
                     {
                         Debug.WriteLine("** Error IN UpdatePerson :" + ex.ToString() + " ***");   
-                        return false;
+                        throw new Exception("Error in Database while updating Person");                        
                     }
                 }
             }
