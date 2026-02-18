@@ -12,7 +12,7 @@ namespace DVLD__Business_Tier.Services
 {
     public class PersonService
     {
-        
+        // CRUD Operations
         public static int AddPerson(Person person)
         {
             int NewPersonID = -1;
@@ -192,6 +192,7 @@ namespace DVLD__Business_Tier.Services
             return isDeleteImage;
         }
 
+        // Information Validation
         private static bool IsPersonInfoValid(Person person)
         {            
             if (string.IsNullOrEmpty(person.FirstName) || string.IsNullOrEmpty(person.MiddelName)

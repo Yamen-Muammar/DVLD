@@ -87,51 +87,47 @@ namespace DVLD__Presentation_Tier
                 return;
             }
 
-            try
+            
+            if (Mode == enMode.eAdd)
             {
-                if (Mode == enMode.eAdd)
+                try
                 {
-                    try
+                    int InsertedPersonId = PersonService.AddPerson(PersonInfo);
+                    if (InsertedPersonId == -1)
                     {
-                        int InsertedPersonId = PersonService.AddPerson(PersonInfo);
-                        if (InsertedPersonId == -1)
-                        {
-                            MessageBox.Show("Failed to save person information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        else
-                        {
-                            Mode = enMode.eUpdate;
-                            MessageBox.Show("Person information saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            PersonInfo = null;
-                            PersonInfo = PersonService.Find(InsertedPersonId);
-                            _loadDataInForm();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
-                    return;
-                }
-
-                if (Mode == enMode.eUpdate)
-                {
-                    if (PersonService.Update(PersonInfo))
-                    {
-                        MessageBox.Show("Person information updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Failed in Save Person Information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
                     {
-                        MessageBox.Show("Failed to update person information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Mode = enMode.eUpdate;
+                        MessageBox.Show("Person information saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        PersonInfo = null;
+                        PersonInfo = PersonService.Find(InsertedPersonId);
+                        _loadDataInForm();
                     }
-                    return;
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                return;
             }
-            catch (Exception ex)
+
+            if (Mode == enMode.eUpdate)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                try
+                {
+                    PersonService.Update(PersonInfo);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
+                return;
             }
+                       
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -180,14 +176,9 @@ namespace DVLD__Presentation_Tier
             //TODO: Remove the person Image
             _clearPictureBox();
             rbGenderMale_CheckedChanged(sender, e);
-            PersonInfo.ImageName = null;
+            _imagePath= string.Empty;
         }
-
-        private void tbNationalNo_TextChanged(object sender, EventArgs e)
-        {
-            //TODO: Check if the national number is valid and if it already exists in the database
-        }
-
+        
         private void rbGenderMale_CheckedChanged(object sender, EventArgs e)
         {
             if (rbGenderFemale.Checked)
@@ -228,7 +219,7 @@ namespace DVLD__Presentation_Tier
                 if (!string.IsNullOrEmpty(PersonInfo.ImageName))
                 {
                     string imagePath = Path.Combine(@"F:\yamen - 2024\C#\Course\projects\PersonPic", PersonInfo.ImageName);
-                    pbPersonImage.Image = Image.FromFile(imagePath);
+                    pbPersonImage.Image = LoadImageWithoutLock(imagePath);
                 }
                 
             }
@@ -255,7 +246,8 @@ namespace DVLD__Presentation_Tier
             PersonInfo.Address = tbAddress.Text;
             PersonInfo.Gender = (rbGenderMale.Checked) ? "Male" : "Female";
 
-            int countryID = CountryService.GetCountry(cbCountry.SelectedItem.ToString()).CountryID;            
+            string selectedCountryName = cbCountry.SelectedItem.ToString();
+            int countryID = CountryService.GetCountry(selectedCountryName).CountryID;            
             PersonInfo.Country_ID = countryID;            
             PersonInfo.ImageName = _imagePath;
             return true;
@@ -267,22 +259,15 @@ namespace DVLD__Presentation_Tier
             if (string.IsNullOrEmpty(tbFirstName.Text) || string.IsNullOrEmpty(tbSecondName.Text)
                 || string.IsNullOrEmpty(tbThirdName.Text) || string.IsNullOrEmpty(tbLastName.Text)
                 || string.IsNullOrEmpty(tbNationalNo.Text) || string.IsNullOrEmpty(tbEmail.Text) ||
-                string.IsNullOrEmpty(tbAddress.Text))
+                string.IsNullOrEmpty(tbAddress.Text) || string.IsNullOrEmpty(_imagePath))
+            {
+                return false;
+            }                       
+
+            if (Mode == enMode.eAdd && PersonService.IsPersonExist(tbNationalNo.Text))
             {
                 return false;
             }
-
-            if (pbPersonImage.Image == null)
-            {
-                return false;
-            }
-
-            //bool isAgeValid = DateTime.Now.Year - person.DateOfBirth.Year >= 18;
-            //if (!isAgeValid)
-            //{
-            //    return false;
-            //}
-
 
             return true;
         }

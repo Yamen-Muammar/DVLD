@@ -410,8 +410,7 @@
             this.tbNationalNo.MaxLength = 20;
             this.tbNationalNo.Name = "tbNationalNo";
             this.tbNationalNo.Size = new System.Drawing.Size(164, 26);
-            this.tbNationalNo.TabIndex = 5;
-            this.tbNationalNo.TextChanged += new System.EventHandler(this.tbNationalNo_TextChanged);
+            this.tbNationalNo.TabIndex = 5;            
             this.tbNationalNo.Leave += new System.EventHandler(this.tbNationalNo_Leave);
             // 
             // tbFirstName
