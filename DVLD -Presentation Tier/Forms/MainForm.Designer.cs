@@ -56,7 +56,7 @@
             // 
             // applicationsToolStripMenuItem
             // 
-            this.applicationsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("applicationsToolStripMenuItem.Image")));
+            this.applicationsToolStripMenuItem.Image = global::DVLD__Presentation_Tier.Properties.Resources.Applications64;
             this.applicationsToolStripMenuItem.Name = "applicationsToolStripMenuItem";
             this.applicationsToolStripMenuItem.Size = new System.Drawing.Size(196, 54);
             this.applicationsToolStripMenuItem.Text = "Applications";

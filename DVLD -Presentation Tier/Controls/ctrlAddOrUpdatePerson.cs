@@ -26,6 +26,7 @@ namespace DVLD__Presentation_Tier
             }
         }
 
+        // Event for Send Person Object to the Subs.
         public delegate void ReturnPersonObject(Person person);
         public event ReturnPersonObject ReturnPersonObject_OnClose;
         private void TriggerReturnPersonEvent(Person person)
@@ -38,7 +39,6 @@ namespace DVLD__Presentation_Tier
             eAdd = 1, eUpdate = 2
         }
         private enMode Mode { get; set; }
-
         private string _imagePath { get; set; }
         private int FormPersonId { get; set; }
         private Person PersonInfo { get; set; }        
@@ -70,7 +70,7 @@ namespace DVLD__Presentation_Tier
 
                 PersonInfo = PersonService.Find(FormPersonId);
                 if (PersonInfo == null) { MessageBox.Show("Person Not Found", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information); return; }
-                _loadDataInForm();               
+                _loadDataInForm();
             }
 
             // UI Load Logic.
@@ -78,6 +78,7 @@ namespace DVLD__Presentation_Tier
             _loadCountriesCB();
         }
 
+        // Button Event Handlers
         private void btnSave_Click(object sender, EventArgs e)
         {
             //TODO: Save the person information to the database, if PersonId is -1 then add a new person, otherwise update the existing person
@@ -129,56 +130,30 @@ namespace DVLD__Presentation_Tier
             }
                        
         }
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             _clearPictureBox();
             TriggerReturnPersonEvent(PersonInfo);
             CloseEvent();
         }
-
         private void btnSetImage_Click(object sender, EventArgs e)
         {
             // TODO: Set the person Image to person Object            
-            string imagePath = GetImagePath();
+            string imagePath = _getImagePath();
            
             if (imagePath!=string.Empty)
             {
                 _imagePath = imagePath;
-                pbPersonImage.Image = LoadImageWithoutLock(imagePath);
+                pbPersonImage.Image = _loadImageWithoutLock(imagePath);
             }            
         }       
-        public Image LoadImageWithoutLock(string path)
-        {
-            // 1. Read all bytes from the file. 
-            // This opens the file, reads it, and CLOSES it immediately.
-            byte[] imageBytes = File.ReadAllBytes(path);
-
-            // 2. Create a stream from the bytes in memory
-            MemoryStream ms = new MemoryStream(imageBytes);
-            // 3. Create the image from that memory stream
-            return Image.FromStream(ms);
-        }
-
-        private string GetImagePath()
-        {
-            string selectedFilePath = "";
-            Ookii.Dialogs.WinForms.VistaOpenFileDialog openFileDialog = new Ookii.Dialogs.WinForms.VistaOpenFileDialog();
-            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                selectedFilePath = openFileDialog.FileName;
-            }
-            return selectedFilePath;
-        }
         private void btnRemove_Click(object sender, EventArgs e)
         {
             //TODO: Remove the person Image
             _clearPictureBox();
             rbGenderMale_CheckedChanged(sender, e);
             _imagePath= string.Empty;
-        }
-        
+        }        
         private void rbGenderMale_CheckedChanged(object sender, EventArgs e)
         {
             if (rbGenderFemale.Checked)
@@ -191,6 +166,8 @@ namespace DVLD__Presentation_Tier
             }
         }
 
+
+        // Load Functions
         private void _loadDataInForm()
         {
             try
@@ -219,7 +196,7 @@ namespace DVLD__Presentation_Tier
                 if (!string.IsNullOrEmpty(PersonInfo.ImageName))
                 {
                     string imagePath = Path.Combine(@"F:\yamen - 2024\C#\Course\projects\PersonPic", PersonInfo.ImageName);
-                    pbPersonImage.Image = LoadImageWithoutLock(imagePath);
+                    pbPersonImage.Image = _loadImageWithoutLock(imagePath);
                 }
                 
             }
@@ -252,25 +229,7 @@ namespace DVLD__Presentation_Tier
             PersonInfo.ImageName = _imagePath;
             return true;
 
-        }
-        private bool _validateUIPersonInfo()
-        {
-
-            if (string.IsNullOrEmpty(tbFirstName.Text) || string.IsNullOrEmpty(tbSecondName.Text)
-                || string.IsNullOrEmpty(tbThirdName.Text) || string.IsNullOrEmpty(tbLastName.Text)
-                || string.IsNullOrEmpty(tbNationalNo.Text) || string.IsNullOrEmpty(tbEmail.Text) ||
-                string.IsNullOrEmpty(tbAddress.Text) || string.IsNullOrEmpty(_imagePath))
-            {
-                return false;
-            }                       
-
-            if (Mode == enMode.eAdd && PersonService.IsPersonExist(tbNationalNo.Text))
-            {
-                return false;
-            }
-
-            return true;
-        }
+        }        
         private void _loadCountriesCB()
         {
             List<Country> countriesList = CountryService.GetAllCountries();
@@ -293,12 +252,36 @@ namespace DVLD__Presentation_Tier
             
         }
 
+        //Image Handling Functions
+        private Image _loadImageWithoutLock(string path)
+        {
+            // 1. Read all bytes from the file. 
+            // This opens the file, reads it, and CLOSES it immediately.
+            byte[] imageBytes = File.ReadAllBytes(path);
+
+            // 2. Create a stream from the bytes in memory
+            MemoryStream ms = new MemoryStream(imageBytes);
+            // 3. Create the image from that memory stream
+            return Image.FromStream(ms);
+        }
+        private string _getImagePath()
+        {
+            string selectedFilePath = "";
+            Ookii.Dialogs.WinForms.VistaOpenFileDialog openFileDialog = new Ookii.Dialogs.WinForms.VistaOpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                selectedFilePath = openFileDialog.FileName;
+            }
+            return selectedFilePath;
+        }
         private void _clearPictureBox()
         {
             pbPersonImage.Image?.Dispose();
             pbPersonImage.Image = null;
         }
 
+        // UI Validation Event Handlers
         private void tbNationalNo_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(tbNationalNo.Text))
@@ -319,6 +302,29 @@ namespace DVLD__Presentation_Tier
                 }
             }
             
+        }
+        private bool _validateUIPersonInfo()
+        {
+
+            if (string.IsNullOrEmpty(tbFirstName.Text) || string.IsNullOrEmpty(tbSecondName.Text)
+                || string.IsNullOrEmpty(tbThirdName.Text) || string.IsNullOrEmpty(tbLastName.Text)
+                || string.IsNullOrEmpty(tbNationalNo.Text) || string.IsNullOrEmpty(tbEmail.Text) ||
+                string.IsNullOrEmpty(tbAddress.Text) || string.IsNullOrEmpty(_imagePath))
+            {
+                return false;
+            }
+
+            if (!tbEmail.Text.Contains("@"))
+            {
+                return false;
+            }
+
+            if (Mode == enMode.eAdd && PersonService.IsPersonExist(tbNationalNo.Text))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

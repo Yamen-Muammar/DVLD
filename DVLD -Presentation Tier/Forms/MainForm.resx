@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
-  </data>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="peopleToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
@@ -229,7 +229,7 @@
   <data name="userToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAJGtJREFUeF7VmgdUlNfW/l/ReBOjBo0hiChVpKlovMZEo8aSZqyxJXZRaaKCoNJ7
+        vgAADr4B6kKxwAAAJGtJREFUeF7VmgdUlNfW/l/ReBOjBo0hiChVpKlovMZEo8aSZqyxJXZRaaKCoNJ7
         72XowwwMHYZhhqHXoQ+99967IholSJ7/eseYm3D/N/dq8n3rfs9ae43AmnPm+b17n7PPGQniL9TfVy4k
         JIWIRVd3isvbXPz4op/Ol1a0+996UPW+dqFo7tGzP/fRV0ZH5EVVP1lN3D4gNf/t/1/FJXCEUjKzJcNj
         mSfum9uc1rW0v2NNDSm87+GNq9q60DOzhb6F7UM9M4tYfXNbvXvmtroPLOzPu1L8ls4f639Mkotfvh5V
