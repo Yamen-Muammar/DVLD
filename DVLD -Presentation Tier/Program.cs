@@ -17,7 +17,13 @@ namespace DVLD__Presentation_Tier
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmLogin());
+            using(frmLogin loginForm = new frmLogin())
+            {
+                if (loginForm.ShowDialog() == DialogResult.OK)
+                {
+                    Application.Run(new MainForm());
+                }
+            }            
         }
     }
 }

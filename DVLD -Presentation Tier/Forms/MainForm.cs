@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DVLD__Presentation_Tier.Forms;
-
+using DVLD__Core;
 namespace DVLD__Presentation_Tier
 {
     public partial class MainForm : Form
@@ -22,6 +22,18 @@ namespace DVLD__Presentation_Tier
         {
             frmPeopleListWithFilter frmPeopleListWithFilter = new frmPeopleListWithFilter();
             frmPeopleListWithFilter.ShowDialog();
+        }
+
+        private void currentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Global.User = null;
+            Application.Restart();
+
         }
     }
 }

@@ -31,13 +31,17 @@ namespace DVLD__Presentation_Tier.Forms
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            ShowAfterLoginSuccessForm();
+            //ShowAfterLoginSuccessForm();
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void ShowAfterLoginSuccessForm()
         {
-            MainForm mainForm = new MainForm();
-            mainForm.Show();
+            //this.Close();
+            
+            //MainForm mainForm = new MainForm();            
+            //mainForm.Show();
         }
     }
 }
