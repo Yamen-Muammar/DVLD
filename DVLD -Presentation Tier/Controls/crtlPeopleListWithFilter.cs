@@ -164,7 +164,7 @@ namespace DVLD__Presentation_Tier
         {
             people = PersonService.GetAll();
             dgvPeopleList.DataSource = people;
-            //lblRecordsCount.Text = people.Count.ToString();
+            lblRecordsCount.Text = people.Count.ToString();
         }
 
         private void _loadFilterComboBoxItems()
