@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DVLD__Core.Models;
+using DVLD__Core.View_Models;
 
 namespace DVLD__Data_Tier.Repositories
 {
@@ -125,9 +126,10 @@ namespace DVLD__Data_Tier.Repositories
         // ---------------------------------------------------------
         // 3. READ ALL (Get List of People)
         // ---------------------------------------------------------
-        public static DataTable GetAllPeople()
+        public static List<clsPersonView> GetAllPeople()
         {
-            DataTable dbPeople = new DataTable();
+             List<clsPersonView> peopleList = new List<clsPersonView>();
+
              using (SqlConnection conn = new SqlConnection(connectionString))
              {
                 string query = "select * from PeopleView";
@@ -138,7 +140,24 @@ namespace DVLD__Data_Tier.Repositories
                         conn.Open();
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            dbPeople.Load(reader);
+                            while (reader.Read())
+                            {
+                                peopleList.Add(new clsPersonView
+                                {
+                                    PersonID = (int)reader["PersonID"],
+                                    FirstName = (string)reader["FirstName"],
+                                    MiddelName = (reader["SecondName"] != DBNull.Value) ? (string)reader["SecondName"] : "",
+                                    ThirdName = (reader["ThirdName"] != DBNull.Value) ? (string)reader["ThirdName"] : "",
+                                    LastName = (string)reader["LastName"],
+                                    NationalNO = (string)reader["NationalNO"],
+                                    Gender = (string)reader["Gender"],
+                                    Email = (reader["Email"] != DBNull.Value) ? (string)reader["Email"] : "",
+                                    Phone = (string)reader["Phone"],
+                                    CountryName = reader["CountryName"].ToString(),
+                                    Address = (string)reader["Address"],                                    
+                                    DateOfBirth = (reader["DateOfBirth"] != DBNull.Value) ? (DateTime)reader["DateOfBirth"] : DateTime.MinValue
+                                });
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -147,46 +166,8 @@ namespace DVLD__Data_Tier.Repositories
                     }
                 }
              }
-
-            //using (SqlConnection conn = new SqlConnection(connectionString))
-            //{
-            //    string query = "select * from PeopleView";
-
-            //    using (SqlCommand cmd = new SqlCommand(query, conn))
-            //    {
-            //        try
-            //        {                        
-            //            conn.Open();
-            //            using (SqlDataReader reader = cmd.ExecuteReader())
-            //            {
-            //                while (reader.Read())
-            //                {
-            //                    people.Add(new Person
-            //                    {
-            //                        PersonID = (int)reader["PersonID"],
-            //                        FirstName = (string)reader["FirstName"],
-            //                        MiddelName = (reader["SecondName"] != DBNull.Value) ? (string)reader["SecondName"] : "",
-            //                        ThirdName = (reader["ThirdName"] != DBNull.Value) ? (string)reader["ThirdName"] : "",
-            //                        LastName = (string)reader["LastName"],
-            //                        NationalNO = (string)reader["NationalNO"],
-            //                        Gender = (string)reader["Gender"],
-            //                        Email = (reader["Email"] != DBNull.Value) ? (string)reader["Email"] : "",
-            //                        Phone = (string)reader["Phone"],
-            //                        //Country_ID = reader["Country_ID"],
-            //                        Address = (string)reader["Address"],
-            //                        //ImageName = (reader["ImageName"] != DBNull.Value) ? (string)reader["ImageName"] : "",
-            //                        DateOfBirth = (reader["DateOfBirth"] != DBNull.Value) ? (DateTime)reader["DateOfBirth"] : DateTime.MinValue
-            //                    });
-            //                }
-            //            }
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            Debug.WriteLine("** Error IN GetAllPeople :" + ex.ToString() + " ***");
-            //        }
-            //    }
-            //}
-            return dbPeople;
+             
+            return peopleList;
         }
 
         // ---------------------------------------------------------

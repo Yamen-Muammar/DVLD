@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DVLD__Core.Models;
+using DVLD__Core.View_Models;
 using DVLD__Data_Tier.Repositories;
 
 namespace DVLD__Business_Tier.Services
@@ -57,7 +58,7 @@ namespace DVLD__Business_Tier.Services
             return person;
         }
 
-        public static DataTable GetAll()
+        public static List<clsPersonView> GetAll()
         {
             return PersonRepository.GetAllPeople();
         }

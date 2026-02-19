@@ -10,12 +10,13 @@ using System.Windows.Forms;
 using DVLD__Presentation_Tier.Forms;
 using DVLD__Business_Tier.Services;
 using DVLD__Core.Models;
+using DVLD__Core.View_Models;
 namespace DVLD__Presentation_Tier
 {
     public partial class crtlPeopleListWithFilter : UserControl
     {
         //private List<Person> people { get; set; }
-        private DataTable people { get; set; }
+        private List<clsPersonView> people { get; set; }
         public crtlPeopleListWithFilter()
         {
             InitializeComponent();           
@@ -123,60 +124,36 @@ namespace DVLD__Presentation_Tier
         {
             string filterValue = tbFilterInput.Text;
 
-            //List<Person> filteredPeopleList = new List<Person>();         
-            DataTable filteredPeopleList = new DataTable();
-            filteredPeopleList = people.Copy();
+            List<clsPersonView> filteredPeopleList = new List<clsPersonView>();                     
 
             if (string.IsNullOrEmpty(filterValue) || cbFilterOn.SelectedItem.ToString() == "None")
             {
-                //filteredPeopleList.Clear();
+                filteredPeopleList.Clear();
                 dgvPeopleList.DataSource = people;
                 return;
             }
-            /*
-            //switch (cbFilterOn.SelectedItem.ToString())
-            //{
-            //    case "PersonID":
-            //        if (int.TryParse(filterValue, out int personId))
-            //        {
-            //            filteredPeopleList = people.Where(p => p.PersonID == personId).ToList();
-            //        }
-            //        break;
-            //        case "Country Name":
-            //            filteredPeopleList = people.Where(p => p.Country_ID.ToString().Contains(filterValue)).ToList();
-            //        break;
-            //        case "First Name":
-            //            filteredPeopleList = people.Where(p => p.FirstName.Contains(filterValue)).ToList();
-            //        break;
-            //        case "NationalNo.":
-            //            filteredPeopleList = people.Where(p => p.NationalNO.Contains(filterValue)).ToList();
-            //        break;
 
-            //    default:
-            //        break;
-            //}
-            */
             switch (cbFilterOn.SelectedItem.ToString())
             {
                 case "PersonID":
                     if (int.TryParse(filterValue, out int personId))
                     {
-                        filteredPeopleList.DefaultView.RowFilter= $"PersonID = {personId}";
+                        filteredPeopleList = people.Where(p => p.PersonID == personId).ToList();
                     }
                     break;
                 case "Country Name":
-                    filteredPeopleList.Select($"CountryName = '{filterValue}'");
+                    filteredPeopleList = people.Where(p => p.CountryName.ToLower().Trim().Contains(filterValue.Trim().ToLower())).ToList();
                     break;
                 case "First Name":
-                    filteredPeopleList.Select($"FirstName = '{filterValue}'");
+                    filteredPeopleList = people.Where(p => p.FirstName.Contains(filterValue)).ToList();
                     break;
                 case "NationalNo.":
-                    filteredPeopleList.Select($"NationalNo = '{filterValue}'");
+                    filteredPeopleList = people.Where(p => p.NationalNO.Contains(filterValue)).ToList();
                     break;
 
                 default:
                     break;
-            }                        
+            }                                           
 
             dgvPeopleList.DataSource = null;
             dgvPeopleList.DataSource = filteredPeopleList;            
