@@ -83,13 +83,24 @@ namespace DVLD__Presentation_Tier
                 string imagePath = Path.Combine(@"F:\yamen - 2024\C#\Course\projects\PersonPic", PersonInfo.ImageName);
                 if (File.Exists(imagePath))
                 {
-                    pbImage.Image = Image.FromFile(imagePath);
+                    pbImage.Image = _loadImageWithoutLock(imagePath);
                 }
                 
             }
            
         }
 
+        private Image _loadImageWithoutLock(string path)
+        {
+            // 1. Read all bytes from the file. 
+            // This opens the file, reads it, and CLOSES it immediately.
+            byte[] imageBytes = File.ReadAllBytes(path);
+
+            // 2. Create a stream from the bytes in memory
+            MemoryStream ms = new MemoryStream(imageBytes);
+            // 3. Create the image from that memory stream
+            return Image.FromStream(ms);
+        }
         private string GetCountryName()
         {
             //TODO:Get Country Name From Data Base >> Based on Country_ID;

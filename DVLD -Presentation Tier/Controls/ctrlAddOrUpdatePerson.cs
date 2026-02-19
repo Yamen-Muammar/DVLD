@@ -101,7 +101,7 @@ namespace DVLD__Presentation_Tier
                     else
                     {
                         Mode = enMode.eUpdate;
-                        MessageBox.Show("Person information saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Person information Saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         PersonInfo = null;
                         PersonInfo = PersonService.Find(InsertedPersonId);
                         _loadDataInForm();
@@ -120,6 +120,7 @@ namespace DVLD__Presentation_Tier
                 try
                 {
                     PersonService.Update(PersonInfo);
+                    MessageBox.Show("Person information updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
@@ -197,6 +198,7 @@ namespace DVLD__Presentation_Tier
                 {
                     string imagePath = Path.Combine(@"F:\yamen - 2024\C#\Course\projects\PersonPic", PersonInfo.ImageName);
                     pbPersonImage.Image = _loadImageWithoutLock(imagePath);
+                    _imagePath = PersonInfo.ImageName;
                 }
                 
             }
