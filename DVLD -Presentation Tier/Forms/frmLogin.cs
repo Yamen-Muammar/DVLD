@@ -31,17 +31,18 @@ namespace DVLD__Presentation_Tier.Forms
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            //ShowAfterLoginSuccessForm();
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-        }
+            //TODO: Implement actual login logic here, such as validating the username and password against a database or an authentication service.
+            bool isLoginSuccessful = false; // Placeholder for login success status
 
-        private void ShowAfterLoginSuccessForm()
-        {
-            //this.Close();
-            
-            //MainForm mainForm = new MainForm();            
-            //mainForm.Show();
-        }
+            if (isLoginSuccessful == true)
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Invalid username or password. Please try again.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }        
     }
 }
