@@ -28,5 +28,16 @@ namespace DVLD__Presentation_Tier.Forms
                 tbPassword.UseSystemPasswordChar = true;
             }
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            ShowAfterLoginSuccessForm();
+        }
+
+        private void ShowAfterLoginSuccessForm()
+        {
+            MainForm mainForm = new MainForm();
+            mainForm.Show();
+        }
     }
 }
