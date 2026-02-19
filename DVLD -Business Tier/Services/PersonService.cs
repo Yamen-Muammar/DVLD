@@ -60,7 +60,17 @@ namespace DVLD__Business_Tier.Services
 
         public static List<clsPersonView> GetAll()
         {
-            return PersonRepository.GetAllPeople();
+            List<clsPersonView> PeopleList= new List<clsPersonView>();
+            try
+            {
+                 PeopleList = PersonRepository.GetAllPeople();
+            }
+            catch (Exception)
+            {
+
+                throw new Exception("Error While Get All People,Try Again Later");
+            }
+            return PeopleList;
         }
 
         public static bool Delete(int id)
@@ -80,7 +90,17 @@ namespace DVLD__Business_Tier.Services
 
         public static bool IsPersonExist(string nationalNO)
         {
-            return PersonRepository.IsPersonExist(nationalNO);
+            bool isPersonExist = false;
+            try
+            {
+                isPersonExist = PersonRepository.IsPersonExist(nationalNO);
+            }
+            catch (Exception)
+            {
+
+                throw new Exception("Error While Searching on Person, Try Again Later") ;
+            }
+            return isPersonExist;
         }
 
         public static bool Update(Person person)

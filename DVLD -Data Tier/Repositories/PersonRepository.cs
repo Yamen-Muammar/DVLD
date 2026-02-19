@@ -117,6 +117,7 @@ namespace DVLD__Data_Tier.Repositories
                     catch (Exception ex)
                     {
                         Debug.WriteLine("** Error IN GetPersonByID :" + ex.ToString() + " ***");
+                        throw;
                     }
                 }
             }
@@ -163,6 +164,7 @@ namespace DVLD__Data_Tier.Repositories
                     catch (Exception ex)
                     {
                         Debug.WriteLine("** Error IN GetAllPeople :" + ex.ToString() + " ***");
+                        throw;
                     }
                 }
              }
@@ -248,6 +250,7 @@ namespace DVLD__Data_Tier.Repositories
                     catch (Exception ex)
                     {
                         Debug.WriteLine("** Error IN DeletePerson :" + ex.ToString() + " ***");
+                        throw;
                     }
                 }
             }
@@ -280,7 +283,7 @@ namespace DVLD__Data_Tier.Repositories
                     catch (Exception ex)
                     {
                         Debug.WriteLine("** Error IN IsPersonExist :" + ex.ToString() + " ***");
-                        isFound = false;
+                        throw;
                     }
                 }
             }
@@ -310,7 +313,7 @@ namespace DVLD__Data_Tier.Repositories
                     catch (Exception ex)
                     {
                         Debug.WriteLine("** Error IN IsPersonExist :" + ex.ToString() + " ***");
-                        isFound = false;
+                        throw;
                     }
                 }
             }
