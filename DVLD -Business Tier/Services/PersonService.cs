@@ -75,14 +75,19 @@ namespace DVLD__Business_Tier.Services
 
         public static bool Delete(int id)
         {
+            bool isPersonDeleted = false;
             if (!DeleteImage(id))
             {
                 throw new Exception("Error While Delete Image");
             }
 
-            if (!PersonRepository.DeletePerson(id))
+            try
             {
-                throw new Exception("Error While Delete Person");
+                isPersonDeleted=PersonRepository.DeletePerson(id);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error While Deleteing Person, Try Again Later");
             }
 
             return true;
