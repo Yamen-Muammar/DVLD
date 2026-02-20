@@ -59,7 +59,7 @@ namespace DVLD__Presentation_Tier
             InitializeComponent();
             FormPersonId = id;
 
-            Mode = (FormPersonId ==-1) ? enMode.eAdd :enMode.eUpdate;            
+            Mode = (FormPersonId == -1) ? enMode.eAdd :enMode.eUpdate;            
         }
 
         private void ctrlAddOrUpdatePerson_Load(object sender, EventArgs e)
@@ -101,9 +101,11 @@ namespace DVLD__Presentation_Tier
                     else
                     {
                         Mode = enMode.eUpdate;
-                        MessageBox.Show("Person information Saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Person information Saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);                        
                         PersonInfo = null;
                         PersonInfo = PersonService.Find(InsertedPersonId);
+                        if (PersonInfo == null) { MessageBox.Show("Person Not Found after Insert", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information); return; }
+                        lblTitle.Text = "Update Person";
                         _loadDataInForm();
                     }
                 }

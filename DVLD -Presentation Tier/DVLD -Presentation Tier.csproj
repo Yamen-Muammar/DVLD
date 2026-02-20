@@ -85,6 +85,18 @@
     <Compile Include="Controls\ctrlPersonInformation.Designer.cs">
       <DependentUpon>ctrlPersonInformation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ctrlPersonInformationWithFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ctrlPersonInformationWithFilter.Designer.cs">
+      <DependentUpon>ctrlPersonInformationWithFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmAddNewUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAddNewUser.Designer.cs">
+      <DependentUpon>frmAddNewUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmAddOrUpdatePersonInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +137,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ctrlPersonInformation.resx">
       <DependentUpon>ctrlPersonInformation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ctrlPersonInformationWithFilter.resx">
+      <DependentUpon>ctrlPersonInformationWithFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAddNewUser.resx">
+      <DependentUpon>frmAddNewUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmAddOrUpdatePersonInfo.resx">
       <DependentUpon>frmAddOrUpdatePersonInfo.cs</DependentUpon>

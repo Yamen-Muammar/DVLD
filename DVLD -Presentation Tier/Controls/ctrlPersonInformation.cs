@@ -26,9 +26,10 @@ namespace DVLD__Presentation_Tier
             }
         }
 
-        private int PersonId;
+        //for send the id to the AddOrUpdate form.
+        private int _personId;
 
-        private Person PersonInfo {  get; set; }
+        private Person PersonInfo { get; set; }
         public ctrlPersonInformation()
         {
             InitializeComponent();
@@ -37,12 +38,7 @@ namespace DVLD__Presentation_Tier
         public ctrlPersonInformation(int personId)
         {
             InitializeComponent();
-            PersonId = personId;
-            PersonInfo = PersonService.Find(PersonId);
-            if (PersonInfo == null)
-            {
-                MessageBox.Show("Person Not Found","Alert",MessageBoxButtons.OK,MessageBoxIcon.Information);
-            }
+            FindAndSetPersonInfo(personId);
         }
 
         private void ctrlPersonInformation_Load(object sender, EventArgs e)
@@ -50,9 +46,16 @@ namespace DVLD__Presentation_Tier
             _loadDataInForm();
         }
 
+
+        //Button Events
         private void btnEditePersonInfo_Click(object sender, EventArgs e)
         {
-            frmAddOrUpdatePersonInfo frmAddOrUpdatePersonInfoObj = new frmAddOrUpdatePersonInfo(PersonId);
+            if (PersonInfo == null)
+            {
+                MessageBox.Show("No Person Info To Edit", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            frmAddOrUpdatePersonInfo frmAddOrUpdatePersonInfoObj = new frmAddOrUpdatePersonInfo(_personId);
             frmAddOrUpdatePersonInfoObj.ctrlAddOrUpdatePerson1.ReturnPersonObject_OnClose += OnRetrundDataEvent;
             frmAddOrUpdatePersonInfoObj.ShowDialog();
         }
@@ -62,6 +65,7 @@ namespace DVLD__Presentation_Tier
             CloseEvent();
         }
 
+        // Helper Methods
         private void _loadDataInForm()
         {
             if (PersonInfo == null)
@@ -69,7 +73,7 @@ namespace DVLD__Presentation_Tier
                 return;
             }
             lblPersonID.Text = PersonInfo.PersonID.ToString();
-            lblFullName.Text = PersonInfo.FirstName + " "+PersonInfo.MiddelName+" "+ PersonInfo.ThirdName+" " + PersonInfo.LastName;
+            lblFullName.Text = PersonInfo.FirstName + " " + PersonInfo.MiddelName + " " + PersonInfo.ThirdName + " " + PersonInfo.LastName;
             lblNationalNo.Text = PersonInfo.NationalNO;
             lblGender.Text = PersonInfo.Gender;
             lblPhoneNumber.Text = PersonInfo.Phone;
@@ -85,11 +89,10 @@ namespace DVLD__Presentation_Tier
                 {
                     pbImage.Image = _loadImageWithoutLock(imagePath);
                 }
-                
-            }
-           
-        }
 
+            }
+
+        }
         private Image _loadImageWithoutLock(string path)
         {
             // 1. Read all bytes from the file. 
@@ -107,14 +110,40 @@ namespace DVLD__Presentation_Tier
             string countryName = CountryService.GetCountry(PersonInfo.Country_ID).CountryName;
             return countryName;
         }
+        private void FindAndSetPersonInfo(int PersonID)
+        {            
+            PersonInfo = PersonService.Find(_personId);
+            if (PersonInfo == null)
+            {                
+                MessageBox.Show("Person Not Found", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            _personId = PersonID;
+        }
 
+        //OUTSIDE CALLs TO UPDATE PERSON INFO IN THIS CONTROL AND REFRESH THE UI
+        public void UpdatePersonInfoANDRefreshUI(Person person)
+        {
+            if (person == null)
+            {
+                MessageBox.Show("Error While Handel Person Info , try Again Later", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            PersonInfo = person;
+            _personId = PersonInfo.PersonID;
+            _loadDataInForm();
+        }
         public void OnRetrundDataEvent(Person person)
         {
+            if (person == null)
+            {
+                MessageBox.Show("Error While Handel Person Info , try Again Later", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             PersonInfo = null;
             PersonInfo = person;
             _loadDataInForm();
         }
-        
-        
     }
 }

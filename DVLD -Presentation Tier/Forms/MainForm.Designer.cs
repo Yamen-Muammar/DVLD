@@ -36,8 +36,8 @@
             this.accountSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.currentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.signOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.signOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,6 +79,7 @@
             this.userToolStripMenuItem.Name = "userToolStripMenuItem";
             this.userToolStripMenuItem.Size = new System.Drawing.Size(126, 54);
             this.userToolStripMenuItem.Text = "Users";
+            this.userToolStripMenuItem.Click += new System.EventHandler(this.userToolStripMenuItem_Click);
             // 
             // accountSettingsToolStripMenuItem
             // 
@@ -107,6 +108,11 @@
             this.changePasswordToolStripMenuItem.Size = new System.Drawing.Size(306, 60);
             this.changePasswordToolStripMenuItem.Text = "Change Password";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(303, 6);
+            // 
             // signOutToolStripMenuItem
             // 
             this.signOutToolStripMenuItem.Image = global::DVLD__Presentation_Tier.Properties.Resources.sign_out;
@@ -114,11 +120,6 @@
             this.signOutToolStripMenuItem.Size = new System.Drawing.Size(306, 60);
             this.signOutToolStripMenuItem.Text = "Sign Out";
             this.signOutToolStripMenuItem.Click += new System.EventHandler(this.signOutToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(303, 6);
             // 
             // MainForm
             // 

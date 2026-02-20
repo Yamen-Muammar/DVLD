@@ -74,7 +74,7 @@ namespace DVLD__Data_Tier.Repositories
         }
 
         // ---------------------------------------------------------
-        // 2. READ (Get Person by ID)
+        // 2. READ (Get Person)
         // ---------------------------------------------------------
         public static Person GetPersonByID(int personID)
         {
@@ -118,6 +118,53 @@ namespace DVLD__Data_Tier.Repositories
                     {
                         Debug.WriteLine("** Error IN GetPersonByID :" + ex.ToString() + " ***");
                         throw;
+                    }
+                }
+            }
+            return foundPerson;
+        }
+        public static Person GetPersonByNationalNO(string nationalNO)
+        {
+            Person foundPerson = null;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM Persons WHERE NationalNO = @nationalNo";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@nationalNo", nationalNO);
+
+                    try
+                    {
+                        conn.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                foundPerson = new Person
+                                {
+                                    PersonID = (int)reader["PersonID"],
+                                    FirstName = (string)reader["FirstName"],
+                                    MiddelName = (reader["SecondName"] != DBNull.Value) ? (string)reader["SecondName"] : "",
+                                    ThirdName = (reader["ThirdName"] != DBNull.Value) ? (string)reader["ThirdName"] : "",
+                                    LastName = (string)reader["LastName"],
+                                    NationalNO = (string)reader["NationalNO"],
+                                    Gender = (string)reader["Gender"],
+                                    Email = (reader["Email"] != DBNull.Value) ? (string)reader["Email"] : "",
+                                    Phone = (string)reader["Phone"],
+                                    Country_ID = (int)reader["Country_ID"],
+                                    Address = (string)reader["Address"],
+                                    ImageName = (reader["ImageName"] != DBNull.Value) ? (string)reader["ImageName"] : "",
+                                    DateOfBirth = (reader["DateOfBirth"] != DBNull.Value) ? (DateTime)reader["DateOfBirth"] : DateTime.MinValue
+                                };
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine("** Error IN GetPersonByNationalNO :" + ex.ToString() + " ***");
+                        throw new Exception("Error While Searching on The Person");
                     }
                 }
             }

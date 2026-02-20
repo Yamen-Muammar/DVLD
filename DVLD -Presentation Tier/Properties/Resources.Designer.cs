@@ -63,6 +63,16 @@ namespace DVLD__Presentation_Tier.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AddPerson {
+            get {
+                object obj = ResourceManager.GetObject("AddPerson", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Applications64 {
             get {
                 object obj = ResourceManager.GetObject("Applications64", resourceCulture);
@@ -113,6 +123,16 @@ namespace DVLD__Presentation_Tier.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Next32 {
+            get {
+                object obj = ResourceManager.GetObject("Next32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Password {
             get {
                 object obj = ResourceManager.GetObject("Password", resourceCulture);
@@ -126,6 +146,26 @@ namespace DVLD__Presentation_Tier.Properties {
         internal static System.Drawing.Bitmap PersonDetails {
             get {
                 object obj = ResourceManager.GetObject("PersonDetails", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Save32 {
+            get {
+                object obj = ResourceManager.GetObject("Save32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SearchPerson {
+            get {
+                object obj = ResourceManager.GetObject("SearchPerson", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

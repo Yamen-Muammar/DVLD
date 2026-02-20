@@ -35,5 +35,11 @@ namespace DVLD__Presentation_Tier
             Application.Restart();
 
         }
+
+        private void userToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddNewUser frmAddNewUser = new frmAddNewUser();
+            frmAddNewUser.ShowDialog();
+        }
     }
 }

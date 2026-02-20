@@ -35,6 +35,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnShowPassword = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -67,7 +68,7 @@
             // 
             this.btnLogin.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnLogin.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.Location = new System.Drawing.Point(317, 294);
+            this.btnLogin.Location = new System.Drawing.Point(317, 305);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(153, 43);
             this.btnLogin.TabIndex = 3;
@@ -103,11 +104,22 @@
             this.btnShowPassword.UseVisualStyleBackColor = true;
             this.btnShowPassword.Click += new System.EventHandler(this.btnShowPassword_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(255, 275);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(125, 24);
+            this.checkBox1.TabIndex = 6;
+            this.checkBox1.Text = "Remaind me";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnShowPassword);
@@ -133,5 +145,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnShowPassword;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

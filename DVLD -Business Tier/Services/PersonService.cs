@@ -58,6 +58,16 @@ namespace DVLD__Business_Tier.Services
             return person;
         }
 
+        public static Person Find(string nationalNO)
+        {
+            Person person = PersonRepository.GetPersonByNationalNO(nationalNO);
+            if (person == null)
+            {
+                throw new Exception("Person Not Found,Try Again");
+            }
+            return person;
+        }
+
         public static List<clsPersonView> GetAll()
         {
             List<clsPersonView> PeopleList= new List<clsPersonView>();
