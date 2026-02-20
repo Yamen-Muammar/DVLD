@@ -38,7 +38,7 @@ namespace DVLD__Presentation_Tier.Forms
         private void btnLogin_Click(object sender, EventArgs e)
         {
             //TODO: Implement actual login logic here, such as validating the username and password against a database or an authentication service.
-            bool isLoginSuccessful = false; // Placeholder for login success status
+            bool isLoginSuccessful = true; // Placeholder for login success status
 
             if (isLoginSuccessful == true)
             {
