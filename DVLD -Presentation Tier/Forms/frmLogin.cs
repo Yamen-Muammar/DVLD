@@ -16,7 +16,13 @@ namespace DVLD__Presentation_Tier.Forms
         {
             InitializeComponent();
         }
+        //Event Handeling 
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
 
+        }
+
+        //Button Events 
         private void btnShowPassword_Click(object sender, EventArgs e)
         {
             if (tbPassword.UseSystemPasswordChar == true)
@@ -43,6 +49,6 @@ namespace DVLD__Presentation_Tier.Forms
             {
                 MessageBox.Show("Invalid username or password. Please try again.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }        
+        }
     }
 }
