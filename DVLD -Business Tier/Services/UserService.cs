@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DVLD__Core;
 using DVLD__Core.Models;
+using DVLD__Core.View_Models;
 using DVLD__Data_Tier.Repositories;
 
 namespace DVLD__Business_Tier.Services
@@ -142,5 +143,19 @@ namespace DVLD__Business_Tier.Services
         }
 
         //
+
+        public static List<clsUserView> GetAllUsers()
+        {
+            List<clsUserView> usersList = new List<clsUserView>();
+            try
+            {
+                usersList = UserRepository.GetAllUser();
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error While Retriveing Users Data");
+            }
+            return usersList;
+        }
     }
 }

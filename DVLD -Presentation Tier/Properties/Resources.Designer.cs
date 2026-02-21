@@ -63,6 +63,16 @@ namespace DVLD__Presentation_Tier.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AddNewUser32 {
+            get {
+                object obj = ResourceManager.GetObject("AddNewUser32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AddPerson {
             get {
                 object obj = ResourceManager.GetObject("AddPerson", resourceCulture);
@@ -123,6 +133,16 @@ namespace DVLD__Presentation_Tier.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap NewUser72 {
+            get {
+                object obj = ResourceManager.GetObject("NewUser72", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Next32 {
             get {
                 object obj = ResourceManager.GetObject("Next32", resourceCulture);
@@ -176,6 +196,16 @@ namespace DVLD__Presentation_Tier.Properties {
         internal static System.Drawing.Bitmap sign_out {
             get {
                 object obj = ResourceManager.GetObject("sign_out", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Users400 {
+            get {
+                object obj = ResourceManager.GetObject("Users400", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
