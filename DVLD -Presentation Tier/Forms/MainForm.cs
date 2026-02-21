@@ -38,8 +38,8 @@ namespace DVLD__Presentation_Tier
 
         private void userToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmAddNewUser frmAddNewUser = new frmAddNewUser();
-            frmAddNewUser.ShowDialog();
+            frmManageUsers frmManageUsers = new frmManageUsers();
+            frmManageUsers.ShowDialog();
         }
     }
 }

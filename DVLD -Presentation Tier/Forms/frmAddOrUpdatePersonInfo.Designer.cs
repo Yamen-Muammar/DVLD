@@ -56,7 +56,7 @@
         }
         private void InitializeComponent(int id)
         {
-            this.ctrlAddOrUpdatePerson1 = new DVLD__Presentation_Tier.ctrlAddOrUpdatePerson(id);
+            this.ctrlAddOrUpdatePerson1 = new DVLD__Presentation_Tier.ctrlAddOrUpdatePerson();
             this.SuspendLayout();
             // 
             // ctrlAddOrUpdatePerson1
@@ -72,10 +72,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1016, 563);
             this.Controls.Add(this.ctrlAddOrUpdatePerson1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmAddOrUpdatePersonInfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAddOrUpdatePersonInfo";

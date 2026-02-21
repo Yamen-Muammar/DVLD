@@ -165,6 +165,9 @@
     <EmbeddedResource Include="Forms\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmManageUsers.resx">
+      <DependentUpon>frmManageUsers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPeopleListWithFilter.resx">
       <DependentUpon>frmPeopleListWithFilter.cs</DependentUpon>
     </EmbeddedResource>
