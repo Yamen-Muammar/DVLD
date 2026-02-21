@@ -37,8 +37,13 @@ namespace DVLD__Presentation_Tier.Forms
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
-        {            
-            //TODO: Implement actual login logic here, such as validating the username and password against a database or an authentication service.
+        {
+            if (!_validationInput())
+            {
+                MessageBox.Show("Please Fill All Fields With Right Inforamtion","Alert",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                return;
+            }
+            
             string username = tbUsername.Text;
             string password = tbPassword.Text;
             bool isRememberMeChecked = cbRemaindme.Checked;
@@ -61,11 +66,20 @@ namespace DVLD__Presentation_Tier.Forms
             }            
         }
 
+        private bool _validationInput()
+        {
+            if (string.IsNullOrEmpty(tbUsername.Text) || string.IsNullOrEmpty(tbPassword.Text))
+            {
+                return false;
+            }
+            return true;
+        } 
+
         private void _loadSavedDataInfoAtFrom()
         {
             try
             {
-                List<string> data = UserService.GetRemaindInfo();
+                List<string> data = UserService.GetRemaindMeInfo();
                 if (data != null && data.Count > 0)
                 {
                     tbUsername.Text = data[0];

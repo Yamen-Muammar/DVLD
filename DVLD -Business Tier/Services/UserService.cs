@@ -13,6 +13,7 @@ namespace DVLD__Business_Tier.Services
 {
     public class UserService
     {
+        //Login Helper Methodes
         public static bool Login(string username, string password , bool isRemaindMeActive)
         {            
             User user = null;
@@ -50,17 +51,17 @@ namespace DVLD__Business_Tier.Services
 
             if (isRemaindMeActive)
             {
-                SaveRemaindInfo(username,password);
+                SaveRemaindMeInfo(username,password);
             }
             else
             {
-                RemoveDataInRemaindmeFile();
+                RemoveDataInRemaindMeFile();
             }
 
             return true; // Placeholder for successful login
         }
 
-        private static bool SaveRemaindInfo(string username , string password)
+        private static bool SaveRemaindMeInfo(string username , string password)
         {
             string seperator = "|||";
             string line = username + seperator + password;
@@ -80,7 +81,7 @@ namespace DVLD__Business_Tier.Services
             return true;
         }
 
-        private static bool RemoveDataInRemaindmeFile()
+        private static bool RemoveDataInRemaindMeFile()
         {
             string filePath = @"F:\yamen - 2024\C#\Course\projects\remaindInfo.txt";
 
@@ -95,7 +96,7 @@ namespace DVLD__Business_Tier.Services
             return true;
         }
 
-        public static List<string> GetRemaindInfo()
+        public static List<string> GetRemaindMeInfo()
         {
             List<string> list = new List<string>();
 
@@ -139,5 +140,7 @@ namespace DVLD__Business_Tier.Services
             }
             return list;
         }
+
+        //
     }
 }
