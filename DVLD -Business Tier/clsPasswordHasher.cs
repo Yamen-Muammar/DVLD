@@ -79,6 +79,6 @@ namespace DVLD__Business_Tier
                 // If the string is corrupted or invalid, fail the login
                 return false;
             }
-        }
+        }        
     }
 }

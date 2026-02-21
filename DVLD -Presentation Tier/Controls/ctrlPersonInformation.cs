@@ -17,7 +17,7 @@ namespace DVLD__Presentation_Tier
     public partial class ctrlPersonInformation : UserControl
     {
         public event Action OnClose_Clicked;
-        protected virtual void CloseEvent()
+        protected virtual void TriggerCloseEvent()
         {
             Action handler = OnClose_Clicked;
             if (handler != null)
@@ -43,6 +43,10 @@ namespace DVLD__Presentation_Tier
 
         private void ctrlPersonInformation_Load(object sender, EventArgs e)
         {
+            if (PersonInfo == null)
+            {
+                return;
+            }
             _loadDataInForm();
         }
 
@@ -62,7 +66,7 @@ namespace DVLD__Presentation_Tier
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            CloseEvent();
+            TriggerCloseEvent();
         }
 
         // Helper Methods
@@ -111,13 +115,16 @@ namespace DVLD__Presentation_Tier
             return countryName;
         }
         private void FindAndSetPersonInfo(int PersonID)
-        {            
-            PersonInfo = PersonService.Find(_personId);
-            if (PersonInfo == null)
-            {                
-                MessageBox.Show("Person Not Found", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+        {
+            try
+            {
+                PersonInfo = PersonService.Find(PersonID);
             }
+            catch (Exception)
+            {
+                MessageBox.Show("Person Not Found", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);                              
+            }
+                       
             _personId = PersonID;
         }
 

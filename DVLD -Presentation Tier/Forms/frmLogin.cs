@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DVLD__Business_Tier.Services;
 
 namespace DVLD__Presentation_Tier.Forms
 {
@@ -19,7 +20,7 @@ namespace DVLD__Presentation_Tier.Forms
         //Event Handeling 
         private void frmLogin_Load(object sender, EventArgs e)
         {
-
+            _loadSavedDataInfoAtFrom();
         }
 
         //Button Events 
@@ -36,18 +37,44 @@ namespace DVLD__Presentation_Tier.Forms
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
-        {
+        {            
             //TODO: Implement actual login logic here, such as validating the username and password against a database or an authentication service.
-            bool isLoginSuccessful = true; // Placeholder for login success status
+            string username = tbUsername.Text;
+            string password = tbPassword.Text;
+            bool isRememberMeChecked = cbRemaindme.Checked;
+            bool isLoginSuccessful = false;
+
+            try
+            {
+                isLoginSuccessful = UserService.Login(username, password, isRememberMeChecked); // Placeholder for login success status
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
 
             if (isLoginSuccessful == true)
             {
                 this.DialogResult = DialogResult.OK;
                 this.Close();
-            }
-            else
+            }            
+        }
+
+        private void _loadSavedDataInfoAtFrom()
+        {
+            try
             {
-                MessageBox.Show("Invalid username or password. Please try again.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                List<string> data = UserService.GetRemaindInfo();
+                if (data != null && data.Count > 0)
+                {
+                    tbUsername.Text = data[0];
+                    tbPassword.Text = data[1];
+                }
+            }
+            catch (Exception)
+            {
+                return;
             }
         }
     }

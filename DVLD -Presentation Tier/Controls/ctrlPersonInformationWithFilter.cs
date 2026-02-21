@@ -30,8 +30,7 @@ namespace DVLD__Presentation_Tier.Controls
             PersonInfo = RetrivePersonInfoOnSelectedFilter();
 
             if (PersonInfo == null)
-            {
-                MessageBox.Show("No Person Found","Alter",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            {                
                 return;
             }
 
@@ -55,25 +54,32 @@ namespace DVLD__Presentation_Tier.Controls
         {
             PersonInfo = person;
             ctrlPersonInformation1.UpdatePersonInfoANDRefreshUI(person);
+            _restartFilterArea();
         }
 
         private Person RetrivePersonInfoOnSelectedFilter()
         {
             Person person = null;
-            if(cbFilterOn.SelectedItem.ToString() == "Person ID")
+            try
             {
-                int personID = int.Parse(tbFilterInput.Text);
-                person = PersonService.Find(personID);
-            }
+                if (cbFilterOn.SelectedItem.ToString() == "Person ID")
+                {
+                    int personID = int.Parse(tbFilterInput.Text);
+                    person = PersonService.Find(personID);
+                }
 
-            if (cbFilterOn.SelectedItem.ToString() == "National NO")
+                if (cbFilterOn.SelectedItem.ToString() == "National NO")
+                {
+                    string nationalNO = tbFilterInput.Text;
+                    person = PersonService.Find(nationalNO.ToUpper());
+                }
+            }
+            catch (Exception)
             {
-                string nationalNO = tbFilterInput.Text;
-                person = PersonService.Find(nationalNO);
+                MessageBox.Show("Person Not Found", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             return person;
-            
         }
 
         private void _loadComboBox()
@@ -96,5 +102,11 @@ namespace DVLD__Presentation_Tier.Controls
                 tbFilterInput.Enabled = true;
             }
         }        
+
+        private void _restartFilterArea()
+        {
+            cbFilterOn.SelectedIndex = 0;            
+
+        }
     }
 }

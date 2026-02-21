@@ -56,7 +56,7 @@ namespace DVLD__Data_Tier.Repositories
         }
 
         // ---------------------------------------------------------
-        // 2. READ (Get User by ID)
+        // 2. READ (Get User)
         // ---------------------------------------------------------
         public static User GetUserByID(int userID)
         {
@@ -90,6 +90,44 @@ namespace DVLD__Data_Tier.Repositories
                     catch (Exception ex)
                     {
                         Debug.WriteLine("** Error IN GetPersonByID :" + ex.ToString() + " ***");
+                        throw new Exception("Error While Get The User Data");
+                    }
+                }
+            }
+            return foundUser;
+        }
+        public static User GetUserByUsername(string username)
+        {
+            User foundUser = null;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM Users WHERE Username = @username";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@username", username);
+
+                    try
+                    {
+                        conn.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                foundUser = new User
+                                {
+                                    UserID = (int)reader["UserID"],
+                                    Username = reader["Username"].ToString(),
+                                    HashedPassword = reader["HashedPassword"].ToString(),
+                                    isActive = (bool)reader["isActive"],
+                                };
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine("** Error IN GetUserByUsername :" + ex.ToString() + " ***");
                         throw new Exception("Error While Get The User Data");
                     }
                 }

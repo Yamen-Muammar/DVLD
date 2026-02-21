@@ -148,7 +148,7 @@ namespace DVLD__Presentation_Tier
                     filteredPeopleList = people.Where(p => p.FirstName.Contains(filterValue)).ToList();
                     break;
                 case "NationalNo.":
-                    filteredPeopleList = people.Where(p => p.NationalNO.Contains(filterValue)).ToList();
+                    filteredPeopleList = people.Where(p => p.NationalNO.Contains(filterValue.ToUpper())).ToList();
                     break;
 
                 default:
@@ -165,6 +165,7 @@ namespace DVLD__Presentation_Tier
             people = PersonService.GetAll();
             dgvPeopleList.DataSource = people;
             lblRecordsCount.Text = people.Count.ToString();
+            dgvPeopleList.Focus();
         }
 
         private void _loadFilterComboBoxItems()
