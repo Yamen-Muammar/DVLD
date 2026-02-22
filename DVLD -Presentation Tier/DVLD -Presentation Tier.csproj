@@ -67,46 +67,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\crtlPeopleListWithFilter.cs">
+    <Compile Include="Controls\PersonControls\crtlPeopleListWithFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\crtlPeopleListWithFilter.Designer.cs">
+    <Compile Include="Controls\PersonControls\crtlPeopleListWithFilter.Designer.cs">
       <DependentUpon>crtlPeopleListWithFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ctrlAddOrUpdatePerson.cs">
+    <Compile Include="Controls\PersonControls\ctrlAddOrUpdatePerson.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ctrlAddOrUpdatePerson.Designer.cs">
+    <Compile Include="Controls\PersonControls\ctrlAddOrUpdatePerson.Designer.cs">
       <DependentUpon>ctrlAddOrUpdatePerson.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ctrlPersonInformation.cs">
+    <Compile Include="Controls\PersonControls\ctrlPersonInformation.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ctrlPersonInformation.Designer.cs">
+    <Compile Include="Controls\PersonControls\ctrlPersonInformation.Designer.cs">
       <DependentUpon>ctrlPersonInformation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ctrlPersonInformationWithFilter.cs">
+    <Compile Include="Controls\PersonControls\ctrlPersonInformationWithFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ctrlPersonInformationWithFilter.Designer.cs">
+    <Compile Include="Controls\PersonControls\ctrlPersonInformationWithFilter.Designer.cs">
       <DependentUpon>ctrlPersonInformationWithFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ctrlUsersList.cs">
+    <Compile Include="Controls\UserControls\ctrlUserInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ctrlUsersList.Designer.cs">
+    <Compile Include="Controls\UserControls\ctrlUserInfo.Designer.cs">
+      <DependentUpon>ctrlUserInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserControls\ctrlUsersList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UserControls\ctrlUsersList.Designer.cs">
       <DependentUpon>ctrlUsersList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmAddNewUser.cs">
+    <Compile Include="Forms\UserForms\frmAddNewUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmAddNewUser.Designer.cs">
+    <Compile Include="Forms\UserForms\frmAddNewUser.Designer.cs">
       <DependentUpon>frmAddNewUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmAddOrUpdatePersonInfo.cs">
+    <Compile Include="Forms\PersonForms\frmAddOrUpdatePersonInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmAddOrUpdatePersonInfo.Designer.cs">
+    <Compile Include="Forms\PersonForms\frmAddOrUpdatePersonInfo.Designer.cs">
       <DependentUpon>frmAddOrUpdatePersonInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmLogin.cs">
@@ -115,23 +121,29 @@
     <Compile Include="Forms\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmManageUsers.cs">
+    <Compile Include="Forms\UserForms\frmManageUsers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmManageUsers.Designer.cs">
+    <Compile Include="Forms\UserForms\frmManageUsers.Designer.cs">
       <DependentUpon>frmManageUsers.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmPeopleListWithFilter.cs">
+    <Compile Include="Forms\PersonForms\frmPeopleListWithFilter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmPeopleListWithFilter.Designer.cs">
+    <Compile Include="Forms\PersonForms\frmPeopleListWithFilter.Designer.cs">
       <DependentUpon>frmPeopleListWithFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmPersonInformation.cs">
+    <Compile Include="Forms\PersonForms\frmPersonInformation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmPersonInformation.Designer.cs">
+    <Compile Include="Forms\PersonForms\frmPersonInformation.Designer.cs">
       <DependentUpon>frmPersonInformation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserForms\frmUserInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UserForms\frmUserInfo.Designer.cs">
+      <DependentUpon>frmUserInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -141,37 +153,40 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\crtlPeopleListWithFilter.resx">
+    <EmbeddedResource Include="Controls\PersonControls\crtlPeopleListWithFilter.resx">
       <DependentUpon>crtlPeopleListWithFilter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ctrlAddOrUpdatePerson.resx">
+    <EmbeddedResource Include="Controls\PersonControls\ctrlAddOrUpdatePerson.resx">
       <DependentUpon>ctrlAddOrUpdatePerson.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ctrlPersonInformation.resx">
+    <EmbeddedResource Include="Controls\PersonControls\ctrlPersonInformation.resx">
       <DependentUpon>ctrlPersonInformation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ctrlPersonInformationWithFilter.resx">
+    <EmbeddedResource Include="Controls\PersonControls\ctrlPersonInformationWithFilter.resx">
       <DependentUpon>ctrlPersonInformationWithFilter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ctrlUsersList.resx">
+    <EmbeddedResource Include="Controls\UserControls\ctrlUserInfo.resx">
+      <DependentUpon>ctrlUserInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UserControls\ctrlUsersList.resx">
       <DependentUpon>ctrlUsersList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmAddNewUser.resx">
+    <EmbeddedResource Include="Forms\UserForms\frmAddNewUser.resx">
       <DependentUpon>frmAddNewUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmAddOrUpdatePersonInfo.resx">
+    <EmbeddedResource Include="Forms\PersonForms\frmAddOrUpdatePersonInfo.resx">
       <DependentUpon>frmAddOrUpdatePersonInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmManageUsers.resx">
+    <EmbeddedResource Include="Forms\UserForms\frmManageUsers.resx">
       <DependentUpon>frmManageUsers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmPeopleListWithFilter.resx">
+    <EmbeddedResource Include="Forms\PersonForms\frmPeopleListWithFilter.resx">
       <DependentUpon>frmPeopleListWithFilter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmPersonInformation.resx">
+    <EmbeddedResource Include="Forms\PersonForms\frmPersonInformation.resx">
       <DependentUpon>frmPersonInformation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">

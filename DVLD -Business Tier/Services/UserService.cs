@@ -15,8 +15,8 @@ namespace DVLD__Business_Tier.Services
     public class UserService
     {
         //Login Helper Methodes
-        public static bool Login(string username, string password , bool isRemaindMeActive)
-        {            
+        public static bool Login(string username, string password, bool isRemaindMeActive)
+        {
             User user = null;
 
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
@@ -38,12 +38,12 @@ namespace DVLD__Business_Tier.Services
                 throw new Exception("User Not Found.");
             }
 
-            if(!user.isActive)
+            if (!user.isActive)
             {
                 throw new Exception("User Is Not Active.");
             }
 
-            if (!clsPasswordHasher.VerifyPassword(password,user.HashedPassword))
+            if (!clsPasswordHasher.VerifyPassword(password, user.HashedPassword))
             {
                 throw new Exception("Invalid username or password. Please try again.");
             }
@@ -52,7 +52,7 @@ namespace DVLD__Business_Tier.Services
 
             if (isRemaindMeActive)
             {
-                SaveRemaindMeInfo(username,password);
+                SaveRemaindMeInfo(username, password);
             }
             else
             {
@@ -62,7 +62,7 @@ namespace DVLD__Business_Tier.Services
             return true; // Placeholder for successful login
         }
 
-        private static bool SaveRemaindMeInfo(string username , string password)
+        private static bool SaveRemaindMeInfo(string username, string password)
         {
             string seperator = "|||";
             string line = username + seperator + password;
@@ -70,15 +70,15 @@ namespace DVLD__Business_Tier.Services
             string filePath = @"F:\yamen - 2024\C#\Course\projects\remaindInfo.txt";
 
             try
-            {                               
-                 File.WriteAllLines(filePath, new[] { line });                
+            {
+                File.WriteAllLines(filePath, new[] { line });
             }
             catch (Exception)
             {
 
                 //throw new Exception("Error While Save User Information");
             }
-           
+
             return true;
         }
 
@@ -109,12 +109,12 @@ namespace DVLD__Business_Tier.Services
                     //throw new Exception("File Does not Exists");
                 }
 
-                foreach(string line in File.ReadLines(filePath))
+                foreach (string line in File.ReadLines(filePath))
                 {
 
-                   list = _decodeLine(line,"|||");
+                    list = _decodeLine(line, "|||");
                 }
-                
+
             }
             catch (Exception)
             {
@@ -123,26 +123,26 @@ namespace DVLD__Business_Tier.Services
             return list;
         }
 
-        private static List<string> _decodeLine(string line ,string seperator)
+        private static List<string> _decodeLine(string line, string seperator)
         {
-            List <string> list = new List<string>();
+            List<string> list = new List<string>();
 
             for (int i = 0; i < line.Length; i++)
             {
-                if (line[i] == seperator[0] && line[i+1] == seperator[1] && line[i+2] == seperator[2])
+                if (line[i] == seperator[0] && line[i + 1] == seperator[1] && line[i + 2] == seperator[2])
                 {
-                    string username = line.Substring(0,i);
-                    string password = line.Substring(i+3);
+                    string username = line.Substring(0, i);
+                    string password = line.Substring(i + 3);
                     list.Add(username);
                     list.Add(password);
                     break;
                 }
-            
+
             }
             return list;
         }
 
-        //
+        // Gets
 
         public static List<clsUserView> GetAllUsers()
         {
@@ -156,6 +156,20 @@ namespace DVLD__Business_Tier.Services
                 throw new Exception("Error While Retriveing Users Data");
             }
             return usersList;
+        }
+
+        public static User GetUserById(int userId)
+        {
+            User user = null;
+            try
+            {
+                user = UserRepository.GetUserByID(userId);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error While Retriveing User Data");
+            }
+            return user;
         }
     }
 }
