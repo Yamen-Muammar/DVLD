@@ -33,20 +33,20 @@
             this.PersonInfo = new System.Windows.Forms.TabPage();
             this.btnNext = new System.Windows.Forms.Button();
             this.LoginInfo = new System.Windows.Forms.TabPage();
+            this.cbIsActive = new System.Windows.Forms.CheckBox();
+            this.tbConfirmPassword = new System.Windows.Forms.TextBox();
+            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.tbUsername = new System.Windows.Forms.TextBox();
+            this.lbNewID = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lbNewID = new System.Windows.Forms.Label();
-            this.tbUsername = new System.Windows.Forms.TextBox();
-            this.tbPassword = new System.Windows.Forms.TextBox();
-            this.tbConfirmPassword = new System.Windows.Forms.TextBox();
-            this.cbIsActive = new System.Windows.Forms.CheckBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.ctrlPersonInformationWithFilter1 = new DVLD__Presentation_Tier.Controls.ctrlPersonInformationWithFilter();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.ctrlPersonInformationWithFilter1 = new DVLD__Presentation_Tier.Controls.ctrlPersonInformationWithFilter();
             this.tabControl1.SuspendLayout();
             this.PersonInfo.SuspendLayout();
             this.LoginInfo.SuspendLayout();
@@ -107,70 +107,39 @@
             this.LoginInfo.Text = "Login Info";
             this.LoginInfo.UseVisualStyleBackColor = true;
             // 
-            // btnSave
+            // cbIsActive
             // 
-            this.btnSave.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Image = global::DVLD__Presentation_Tier.Properties.Resources.Save32;
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(824, 663);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(139, 45);
-            this.btnSave.TabIndex = 2;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.cbIsActive.AutoSize = true;
+            this.cbIsActive.Checked = true;
+            this.cbIsActive.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbIsActive.Location = new System.Drawing.Point(277, 273);
+            this.cbIsActive.Name = "cbIsActive";
+            this.cbIsActive.Size = new System.Drawing.Size(89, 24);
+            this.cbIsActive.TabIndex = 4;
+            this.cbIsActive.Text = "isActive";
+            this.cbIsActive.UseVisualStyleBackColor = true;
             // 
-            // btnCancel
+            // tbConfirmPassword
             // 
-            this.btnCancel.Image = global::DVLD__Presentation_Tier.Properties.Resources.btnClose_Image;
-            this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancel.Location = new System.Drawing.Point(679, 663);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(139, 45);
-            this.btnCancel.TabIndex = 2;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.tbConfirmPassword.Location = new System.Drawing.Point(276, 215);
+            this.tbConfirmPassword.Name = "tbConfirmPassword";
+            this.tbConfirmPassword.Size = new System.Drawing.Size(249, 26);
+            this.tbConfirmPassword.TabIndex = 3;
+            this.tbConfirmPassword.Leave += new System.EventHandler(this.tbConfirmPassword_Leave);
             // 
-            // label1
+            // tbPassword
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Symbol", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(177, 79);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 28);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "User ID :";
+            this.tbPassword.Location = new System.Drawing.Point(277, 171);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.Size = new System.Drawing.Size(249, 26);
+            this.tbPassword.TabIndex = 2;
             // 
-            // label2
+            // tbUsername
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Symbol", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(148, 123);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 28);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "UserName :";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Symbol", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(157, 167);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(113, 28);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Password :";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI Symbol", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(74, 211);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(196, 28);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Confirm Password :";
+            this.tbUsername.Location = new System.Drawing.Point(277, 124);
+            this.tbUsername.Name = "tbUsername";
+            this.tbUsername.Size = new System.Drawing.Size(249, 26);
+            this.tbUsername.TabIndex = 1;
             // 
             // lbNewID
             // 
@@ -183,51 +152,74 @@
             this.lbNewID.TabIndex = 0;
             this.lbNewID.Text = "????";
             // 
-            // tbUsername
+            // label4
             // 
-            this.tbUsername.Location = new System.Drawing.Point(277, 124);
-            this.tbUsername.Name = "tbUsername";
-            this.tbUsername.Size = new System.Drawing.Size(249, 26);
-            this.tbUsername.TabIndex = 1;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI Symbol", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(74, 211);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(196, 28);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Confirm Password :";
             // 
-            // tbPassword
+            // label3
             // 
-            this.tbPassword.Location = new System.Drawing.Point(277, 171);
-            this.tbPassword.Name = "tbPassword";
-            this.tbPassword.Size = new System.Drawing.Size(249, 26);
-            this.tbPassword.TabIndex = 1;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Symbol", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(157, 167);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(113, 28);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Password :";
             // 
-            // tbConfirmPassword
+            // label2
             // 
-            this.errorProvider1.SetError(this.tbConfirmPassword, "Does not Match");
-            this.tbConfirmPassword.Location = new System.Drawing.Point(276, 215);
-            this.tbConfirmPassword.Name = "tbConfirmPassword";
-            this.tbConfirmPassword.Size = new System.Drawing.Size(249, 26);
-            this.tbConfirmPassword.TabIndex = 1;
-            this.tbConfirmPassword.Leave += new System.EventHandler(this.tbConfirmPassword_Leave);
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI Symbol", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(148, 123);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(122, 28);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "UserName :";
             // 
-            // cbIsActive
+            // label1
             // 
-            this.cbIsActive.AutoSize = true;
-            this.cbIsActive.Checked = true;
-            this.cbIsActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbIsActive.Location = new System.Drawing.Point(277, 273);
-            this.cbIsActive.Name = "cbIsActive";
-            this.cbIsActive.Size = new System.Drawing.Size(89, 24);
-            this.cbIsActive.TabIndex = 2;
-            this.cbIsActive.Text = "isActive";
-            this.cbIsActive.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Symbol", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(177, 79);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(93, 28);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "User ID :";
+            // 
+            // btnSave
+            // 
+            this.btnSave.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Image = global::DVLD__Presentation_Tier.Properties.Resources.Save32;
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSave.Location = new System.Drawing.Point(824, 663);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(139, 45);
+            this.btnSave.TabIndex = 5;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Image = global::DVLD__Presentation_Tier.Properties.Resources.btnClose_Image;
+            this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCancel.Location = new System.Drawing.Point(679, 663);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(139, 45);
+            this.btnCancel.TabIndex = 6;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // ctrlPersonInformationWithFilter1
-            // 
-            this.ctrlPersonInformationWithFilter1.Location = new System.Drawing.Point(6, 6);
-            this.ctrlPersonInformationWithFilter1.Name = "ctrlPersonInformationWithFilter1";
-            this.ctrlPersonInformationWithFilter1.Size = new System.Drawing.Size(943, 450);
-            this.ctrlPersonInformationWithFilter1.TabIndex = 0;
             // 
             // lblTitle
             // 
@@ -239,6 +231,13 @@
             this.lblTitle.Size = new System.Drawing.Size(278, 66);
             this.lblTitle.TabIndex = 17;
             this.lblTitle.Text = "Add New User";
+            // 
+            // ctrlPersonInformationWithFilter1
+            // 
+            this.ctrlPersonInformationWithFilter1.Location = new System.Drawing.Point(6, 6);
+            this.ctrlPersonInformationWithFilter1.Name = "ctrlPersonInformationWithFilter1";
+            this.ctrlPersonInformationWithFilter1.Size = new System.Drawing.Size(943, 450);
+            this.ctrlPersonInformationWithFilter1.TabIndex = 0;
             // 
             // frmAddNewUser
             // 

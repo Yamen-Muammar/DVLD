@@ -16,6 +16,15 @@ namespace DVLD__Presentation_Tier.Controls
     public partial class ctrlPersonInformationWithFilter : UserControl
     {
         private Person PersonInfo { get; set; }
+
+        //Event to return the person ID on find Peron
+        public delegate void ReturnPersonIDEvent(int PersonID);
+        public event ReturnPersonIDEvent ReturnPersonID_OnFindPerson;
+        protected virtual void OnReturnPersonID_OnFindPerson(int PersonID)
+        {
+            ReturnPersonID_OnFindPerson?.Invoke(PersonID);
+        }
+
         public ctrlPersonInformationWithFilter()
         {
             InitializeComponent();
@@ -34,6 +43,7 @@ namespace DVLD__Presentation_Tier.Controls
                 return;
             }
 
+            OnReturnPersonID_OnFindPerson(PersonInfo.PersonID);
             UpdatePersonInfoANDRefreshUI(PersonInfo);
         }
 

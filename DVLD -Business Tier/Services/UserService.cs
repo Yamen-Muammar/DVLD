@@ -195,5 +195,30 @@ namespace DVLD__Business_Tier.Services
             }
             return true;
         }
+
+        // Add 
+
+        public static int AddNewUser(User user)
+        {
+            int insertedUser = -1;
+            try
+            {
+                if(UserRepository.IsUserExist(user.Person_ID))
+                {
+                    throw new Exception("User Already Exists");
+                }
+
+                insertedUser = UserRepository.AddNewUser(user);
+                if (insertedUser == -1)
+                {
+                    throw new Exception("Can not Add the User");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return insertedUser;
+        }
     }
 }
