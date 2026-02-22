@@ -50,6 +50,10 @@ namespace DVLD__Business_Tier.Services
 
         public static Person Find(int id)
         {
+            if (id == 0)
+            {
+                throw new Exception("No Data Passed");
+            }
             Person person = PersonRepository.GetPersonByID(id);
             if (person == null)
             {

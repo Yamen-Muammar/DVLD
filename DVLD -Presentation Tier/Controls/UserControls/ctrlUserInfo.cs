@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DVLD__Business_Tier.Services;
+using DVLD__Core;
 using DVLD__Core.Models;
 
 namespace DVLD__Presentation_Tier.Controls.UserControls
@@ -18,6 +19,7 @@ namespace DVLD__Presentation_Tier.Controls.UserControls
         public ctrlUserInfo()
         {
             InitializeComponent();
+            UserInfo = Global.User;
         }
 
         public ctrlUserInfo(int UserId)

@@ -119,6 +119,7 @@ namespace DVLD__Data_Tier.Repositories
                                 foundUser = new User
                                 {
                                     UserID = (int)reader["UserID"],
+                                    Person_ID = (int)reader["Person_ID"],
                                     Username = reader["Username"].ToString(),
                                     HashedPassword = reader["HashedPassword"].ToString(),
                                     isActive = (bool)reader["isActive"],
