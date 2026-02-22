@@ -82,6 +82,7 @@ namespace DVLD__Data_Tier.Repositories
                                     UserID = (int)reader["UserID"],
                                     Username = reader["Username"].ToString(),
                                     HashedPassword = reader["HashedPassword"].ToString(),
+                                    Person_ID = (int)reader["Person_ID"],
                                     isActive = (bool)reader["isActive"],
                                 };
                             }

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DVLD__Presentation_Tier.Forms
+namespace DVLD__Presentation_Tier.Forms.UserForms
 {
     public partial class frmAddNewUser : Form
     {

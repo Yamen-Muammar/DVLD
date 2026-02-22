@@ -1,4 +1,4 @@
-﻿namespace DVLD__Presentation_Tier.Forms
+﻿namespace DVLD__Presentation_Tier.Forms.UserForms
 {
     partial class frmAddNewUser
     {

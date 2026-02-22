@@ -1,4 +1,4 @@
-﻿namespace DVLD__Presentation_Tier.Controls
+﻿namespace DVLD__Presentation_Tier.Controls.UserControls
 {
     partial class ctrlUserInfo
     {
@@ -125,7 +125,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ctrlPersonInformation1);
             this.Name = "ctrlUserInfo";
-            this.Size = new System.Drawing.Size(956, 484);
+            this.Size = new System.Drawing.Size(956, 503);
             this.Load += new System.EventHandler(this.ctrlUserInfo_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

@@ -171,5 +171,29 @@ namespace DVLD__Business_Tier.Services
             }
             return user;
         }
+
+        //Delete 
+        public static bool DeleteUser(int userId)
+        {
+            
+            try
+            {
+                if (!UserRepository.IsUserExist(userId))
+                {
+                    throw new Exception("User Not Found");
+                }
+
+                if (!UserRepository.DeleteUser(userId))
+                {                    
+                    return false;
+                    throw new Exception("Can not Delete the User");
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error While Deleting User,Try Again");
+            }
+            return true;
+        }
     }
 }

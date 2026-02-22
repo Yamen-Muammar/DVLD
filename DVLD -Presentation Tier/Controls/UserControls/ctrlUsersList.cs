@@ -10,9 +10,9 @@ using System.Windows.Forms;
 using DVLD__Business_Tier.Services;
 using DVLD__Core.Models;
 using DVLD__Core.View_Models;
-using DVLD__Presentation_Tier.Forms;
+using DVLD__Presentation_Tier.Forms.UserForms;
 
-namespace DVLD__Presentation_Tier.Controls
+namespace DVLD__Presentation_Tier.Controls.UserControls
 {
     public partial class ctrlUsersList : UserControl
     {
@@ -24,9 +24,9 @@ namespace DVLD__Presentation_Tier.Controls
 
         private void ctrlUsersList_Load(object sender, EventArgs e)
         {
-            _refreshUI();
+            _RefreshData();
         }
-        private void _refreshUI()
+        private void _RefreshData()
         {
             UsersList = _getAllUsers();
             dgvUsersList.DataSource = null;
@@ -44,11 +44,14 @@ namespace DVLD__Presentation_Tier.Controls
         {
             frmAddNewUser frmAddNewUser = new frmAddNewUser();
             frmAddNewUser.ShowDialog();
-            _refreshUI();
+            _RefreshData();
         }
 
         private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            int UserId = (int)dgvUsersList.CurrentRow.Cells[0].Value;
+            frmUserInfo frmUserInfo = new frmUserInfo(UserId);
+            frmUserInfo.ShowDialog();
 
         }
 
@@ -56,7 +59,7 @@ namespace DVLD__Presentation_Tier.Controls
         {
             frmAddNewUser frmAddNewUser = new frmAddNewUser();
             frmAddNewUser.ShowDialog();
-            _refreshUI();
+            _RefreshData();
         }
 
         private void editeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -66,7 +69,25 @@ namespace DVLD__Presentation_Tier.Controls
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Are You Sure ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            {
+                return;
+            }
 
+            int UserId = (int)dgvUsersList.CurrentRow.Cells[0].Value;
+            try
+            {
+                if (UserService.DeleteUser(UserId))
+                {
+                    MessageBox.Show("User was deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _RefreshData();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);                
+            }            
         }
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)

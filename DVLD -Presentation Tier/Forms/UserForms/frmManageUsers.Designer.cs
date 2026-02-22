@@ -1,4 +1,4 @@
-﻿namespace DVLD__Presentation_Tier.Forms
+﻿namespace DVLD__Presentation_Tier.Forms.UserForms
 {
     partial class frmManageUsers
     {
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.ctrlUsersList1 = new DVLD__Presentation_Tier.Controls.ctrlUsersList();
+            this.ctrlUsersList1 = new DVLD__Presentation_Tier.Controls.UserControls.ctrlUsersList();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -146,7 +146,7 @@
 
         #endregion
 
-        private Controls.ctrlUsersList ctrlUsersList1;
+        private DVLD__Presentation_Tier.Controls.UserControls.ctrlUsersList ctrlUsersList1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem showDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

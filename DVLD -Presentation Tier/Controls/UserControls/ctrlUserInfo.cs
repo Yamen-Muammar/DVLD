@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using DVLD__Business_Tier.Services;
 using DVLD__Core.Models;
 
-namespace DVLD__Presentation_Tier.Controls
+namespace DVLD__Presentation_Tier.Controls.UserControls
 {
     public partial class ctrlUserInfo : UserControl
     {
@@ -19,13 +19,14 @@ namespace DVLD__Presentation_Tier.Controls
         {
             InitializeComponent();
         }
+
         public ctrlUserInfo(int UserId)
         {
             InitializeComponent();
-            _getUserInfo(UserId);
+            UserInfo = _getUserInfo(UserId);
         }
         private void ctrlUserInfo_Load(object sender, EventArgs e)
-        {
+        {      
             _loadUserInforamtionInForm(UserInfo);
         }
         private User _getUserInfo(int userId)
@@ -37,6 +38,7 @@ namespace DVLD__Presentation_Tier.Controls
                 if (userInfo == null)
                 {
                     MessageBox.Show("User not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 }
             }
             catch (Exception)
@@ -48,6 +50,11 @@ namespace DVLD__Presentation_Tier.Controls
 
         private void _loadUserInforamtionInForm(User user)
         {
+            if (user == null)
+            {
+                return;
+            }
+
             Person person = PersonService.Find(user.Person_ID);
             if (person == null)
             {

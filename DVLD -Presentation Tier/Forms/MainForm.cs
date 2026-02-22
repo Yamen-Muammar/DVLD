@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DVLD__Presentation_Tier.Forms;
+using DVLD__Presentation_Tier.Forms.UserForms;
 using DVLD__Core;
 namespace DVLD__Presentation_Tier
 {
@@ -26,7 +27,8 @@ namespace DVLD__Presentation_Tier
 
         private void currentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmUserInfo frmUserInfo = new frmUserInfo();
+            frmUserInfo.ShowDialog();
         }
 
         private void signOutToolStripMenuItem_Click(object sender, EventArgs e)

@@ -1,4 +1,4 @@
-﻿namespace DVLD__Presentation_Tier.Controls
+﻿namespace DVLD__Presentation_Tier.Controls.UserControls
 {
     partial class ctrlUsersList
     {

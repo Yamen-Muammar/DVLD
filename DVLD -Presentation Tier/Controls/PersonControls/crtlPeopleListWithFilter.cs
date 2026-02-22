@@ -14,8 +14,7 @@ using DVLD__Core.View_Models;
 namespace DVLD__Presentation_Tier
 {
     public partial class crtlPeopleListWithFilter : UserControl
-    {
-        //private List<Person> people { get; set; }
+    {        
         private List<clsPersonView> people { get; set; }
         public crtlPeopleListWithFilter()
         {
@@ -46,7 +45,8 @@ namespace DVLD__Presentation_Tier
         }
         private void editeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmAddOrUpdatePersonInfo frmAddOrUpdatePersonInfo = new frmAddOrUpdatePersonInfo((int)dgvPeopleList.CurrentRow.Cells[0].Value);
+            int PersonId = (int)dgvPeopleList.CurrentRow.Cells[0].Value;
+            frmAddOrUpdatePersonInfo frmAddOrUpdatePersonInfo = new frmAddOrUpdatePersonInfo(PersonId);
             frmAddOrUpdatePersonInfo.ShowDialog();
             _RefreshData();
         }
