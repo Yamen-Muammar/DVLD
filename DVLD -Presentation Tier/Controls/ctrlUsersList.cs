@@ -76,12 +76,12 @@ namespace DVLD__Presentation_Tier.Controls
 
         private void sendEmailToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("No Implemented Yet.", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("Not Implemented Yet.", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void phoneCallToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("No Implemented Yet.", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("Not Implemented Yet.", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }
