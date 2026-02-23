@@ -42,6 +42,7 @@ namespace DVLD__Presentation_Tier.Forms.UserForms
                 if (UserService.UpdateUserInfo(hashedNewPassword,true))
                 {
                     MessageBox.Show("Password updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
                 }
             }
             catch (Exception ex)
