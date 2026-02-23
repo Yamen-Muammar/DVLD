@@ -34,14 +34,19 @@ namespace DVLD__Presentation_Tier
         private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Global.User = null;
-            Application.Restart();
-
+            Application.Restart();            
         }
 
         private void userToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmManageUsers frmManageUsers = new frmManageUsers();
             frmManageUsers.ShowDialog();
+        }
+
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmChangePassword frmChangePassword = new frmChangePassword();
+            frmChangePassword.ShowDialog();
         }
     }
 }

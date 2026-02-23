@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DVLD__Core;
 using DVLD__Core.Models;
 using DVLD__Core.View_Models;
 
@@ -181,24 +182,24 @@ namespace DVLD__Data_Tier.Repositories
         // ---------------------------------------------------------
         // 4. UPDATE (Update Existing User)
         // ---------------------------------------------------------
-        public static bool UpdateUser(User user)
+        public static bool UpdateUser(string newHashedPassword, bool isActive)
         {
             int rowsAffected = 0;
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 string query = @"UPDATE Users 
-                            SET Username = @username,
+                            SET 
                                 HashedPassword = @hashedPassword,
                                 isActive = @isActive,
                             WHERE UserID = @userID";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@username", user.Username);
-                    cmd.Parameters.AddWithValue("@hashedPassword", user.HashedPassword);
-                    cmd.Parameters.AddWithValue("@isActive", user.isActive);
-                    cmd.Parameters.AddWithValue("@userID", user.UserID);
+                    
+                    cmd.Parameters.AddWithValue("@hashedPassword", newHashedPassword);
+                    cmd.Parameters.AddWithValue("@isActive", isActive);
+                    cmd.Parameters.AddWithValue("@userID", Global.User.UserID);
 
                     try
                     {

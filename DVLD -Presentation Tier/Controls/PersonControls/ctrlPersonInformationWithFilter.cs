@@ -55,8 +55,7 @@ namespace DVLD__Presentation_Tier.Controls
         }
 
         private void OnRetrundDataEvent(Person person)
-        {
-            //todo : Updat the ui after colse the add or update form
+        {           
             UpdatePersonInfoANDRefreshUI(person);
         }
 

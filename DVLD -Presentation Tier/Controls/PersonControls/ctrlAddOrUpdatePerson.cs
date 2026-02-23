@@ -80,8 +80,7 @@ namespace DVLD__Presentation_Tier
 
         // Button Event Handlers
         private void btnSave_Click(object sender, EventArgs e)
-        {
-            //TODO: Save the person information to the database, if PersonId is -1 then add a new person, otherwise update the existing person
+        {            
             if (!_loadDataInPersonInfoObject())
             {
                 MessageBox.Show("Please fill all the required fields and set an image", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -141,7 +140,7 @@ namespace DVLD__Presentation_Tier
         }
         private void btnSetImage_Click(object sender, EventArgs e)
         {
-            // TODO: Set the person Image to person Object            
+            
             string imagePath = _getImagePath();
            
             if (imagePath!=string.Empty)
@@ -151,8 +150,7 @@ namespace DVLD__Presentation_Tier
             }            
         }       
         private void btnRemove_Click(object sender, EventArgs e)
-        {
-            //TODO: Remove the person Image
+        {            
             _clearPictureBox();
             rbGenderMale_CheckedChanged(sender, e);
             _imagePath= string.Empty;

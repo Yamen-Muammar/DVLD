@@ -109,8 +109,7 @@ namespace DVLD__Presentation_Tier
             return Image.FromStream(ms);
         }
         private string GetCountryName()
-        {
-            //TODO:Get Country Name From Data Base >> Based on Country_ID;
+        {            
             string countryName = CountryService.GetCountry(PersonInfo.Country_ID).CountryName;
             return countryName;
         }
