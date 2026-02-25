@@ -58,5 +58,26 @@ namespace DVLD__Business_Tier.Services
             }
             return true;
         }
+
+        public static ApplicationType GetApplicationTypeByID(int applicationTypeID)
+        {
+            ApplicationType applicationType = null;
+            try
+            {
+                applicationType = ApplicationsTypesRepository.GetApplicationTypeByID(applicationTypeID);
+                if (applicationType == null)
+                {
+                    throw new Exception("Application type not found.");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return applicationType;
+        } 
     }
 }
+

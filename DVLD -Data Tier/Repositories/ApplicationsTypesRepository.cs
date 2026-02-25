@@ -11,20 +11,20 @@ using DVLD__Core.Models;
 namespace DVLD__Data_Tier.Repositories
 {
     public class ApplicationsTypesRepository
-    {        
+    {
         public static bool UpdateApplicationType(ApplicationType applicationType)
         {
-            int rowsAffected = 0;            
-            
+            int rowsAffected = 0;
+
             string query = @"UPDATE ApplicationTypes  
-                         SET ApplicationTypeTitle = @Title, 
-                             ApplicationFees = @Fees
+                         SET
+                             ApplicationTypeFees = @Fees
                          WHERE ApplicationTypeID = @ID";
-            
+
             using (SqlConnection connection = new SqlConnection(DataBaseSettings.DataBaseConnectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
             {
-                
+
                 command.Parameters.AddWithValue("@ID", applicationType.ApplicationTypeID);
                 command.Parameters.AddWithValue("@Title", applicationType.ApplicationTypeTitle);
                 command.Parameters.AddWithValue("@Fees", applicationType.ApplicationTypeFees);
@@ -32,21 +32,21 @@ namespace DVLD__Data_Tier.Repositories
                 try
                 {
                     connection.Open();
-                   
+
                     rowsAffected = command.ExecuteNonQuery();
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"***Error UpdateApplicationType  :{ex} ***");                
+                    Debug.WriteLine($"***Error UpdateApplicationType  :{ex} ***");
                     return false;
                 }
-            }          
+            }
             return (rowsAffected > 0);
         }
 
         public static List<ApplicationType> GetAllApplicationTypes()
         {
-            
+
             List<ApplicationType> types = new List<ApplicationType>();
             string query = "SELECT * FROM ApplicationTypes ORDER BY ApplicationTypeID ASC";
 
@@ -65,7 +65,7 @@ namespace DVLD__Data_Tier.Repositories
                         {
                             types.Add(new ApplicationType
                             {
-                                ApplicationTypeID = (int)reader["ApplicationTypeID"], 
+                                ApplicationTypeID = (int)reader["ApplicationTypeID"],
                                 ApplicationTypeTitle = reader["ApplicationTypeTitle"].ToString(),
                                 ApplicationTypeFees = (decimal)reader["ApplicationTypeFees"]
                             });
@@ -74,10 +74,42 @@ namespace DVLD__Data_Tier.Repositories
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"***Error GetAllApplicationTypes  :{ex} ***");                    
+                    Debug.WriteLine($"***Error GetAllApplicationTypes  :{ex} ***");
                 }
-            }            
+            }
             return types;
+        }
+
+        public static ApplicationType GetApplicationTypeByID(int applicationTypeID)
+        {
+            ApplicationType applicationType = null;
+            string query = "SELECT * FROM ApplicationTypes WHERE ApplicationTypeID = @ID";
+            using (SqlConnection connection = new SqlConnection(DataBaseSettings.DataBaseConnectionString))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@ID", applicationTypeID);
+                try
+                {
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            applicationType = new ApplicationType
+                            {
+                                ApplicationTypeID = (int)reader["ApplicationTypeID"],
+                                ApplicationTypeTitle = reader["ApplicationTypeTitle"].ToString(),
+                                ApplicationTypeFees = (decimal)reader["ApplicationTypeFees"]
+                            };
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"***Error GetApplicationTypeByID  :{ex} ***");
+                }
+            }
+            return applicationType;
         }
     }
 }

@@ -55,7 +55,8 @@ namespace DVLD__Presentation_Tier.Forms.Application_Types_Forms
 
         private bool _validateSelectedApplicationType()
         {
-            if (dgvListOfApplicationsTypes.SelectedRows.Count == 0)
+            int selectrdID = (int)dgvListOfApplicationsTypes.CurrentRow.Cells[0].Value;
+            if (selectrdID == 0)
             {
                 MessageBox.Show("Please select an application type to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
