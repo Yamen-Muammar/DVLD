@@ -57,8 +57,7 @@ namespace DVLD__Data_Tier.Repositories
                 try
                 {
                     connection.Open();
-
-                    // 3. Use SqlDataReader to fetch the data
+                  
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())

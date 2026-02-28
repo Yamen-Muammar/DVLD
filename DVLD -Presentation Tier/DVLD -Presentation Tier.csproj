@@ -207,6 +207,9 @@
     <EmbeddedResource Include="Forms\Application Types Forms\frmUpdateApplicationTypeInfo.resx">
       <DependentUpon>frmUpdateApplicationTypeInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Test Types Forms\frmUpdateTestType.resx">
+      <DependentUpon>frmUpdateTestType.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserForms\frmAddNewUser.resx">
       <DependentUpon>frmAddNewUser.cs</DependentUpon>
     </EmbeddedResource>
