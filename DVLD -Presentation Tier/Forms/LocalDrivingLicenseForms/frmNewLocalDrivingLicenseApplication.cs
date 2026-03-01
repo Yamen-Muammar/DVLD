@@ -31,13 +31,13 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
 
         private void frmNewLocalDrivingLicenseApplication_Load(object sender, EventArgs e)
         {
-
+            _loadDataInForm();
         }
         private void btnNext_Click(object sender, EventArgs e)
         {
             if (_personID == -1)
             {
-                MessageBox.Show("Set A Person First", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Select a Person First", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             tabControl1.SelectedTab = tbApplicationInfo;
@@ -45,7 +45,22 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (!_validateInputs())
+            {
+                return;
+            }
 
+            DVLD__Core.Models.Application application = _fillApplicationInfo();
+
+            try
+            {
+                ApplicationService.SaveApplication(application);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,"Alert",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                throw;
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -63,12 +78,73 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             lblApplicationDate.Text = DateTime.Now.ToString("d");
             lblCreatedName.Text = Global.User.Username;
             lblApplicationFees.Text = _applicationType.ApplicationTypeFees.ToString();
-
+            _loadLicenseClassComboBox();
         }
 
         private void _loadLicenseClassComboBox()
         {
+            List<LicenseClass> licenseClasses = new List<LicenseClass>();
+            try
+            {
+                licenseClasses = LicenseClassService.GetAlllicenseClasses();
+                if (licenseClasses.Count < 1)
+                {
+                    MessageBox.Show("Get License Classes Error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                    return;
+                }
 
+                foreach (LicenseClass licenseClass in licenseClasses) {
+                    cbLicenseClasses.Items.Add(licenseClass.ClassName);
+                };
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }            
+            cbLicenseClasses.SelectedIndex = 0;
+        }
+
+        private bool _validateInputs()
+        {
+            if (_personID == -1)
+            {
+                MessageBox.Show("You Have To Select Person Before", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (Global.User.UserID == -1)
+            {
+                MessageBox.Show("UnKnown User", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return 
+                    false;
+            }
+
+            if (_applicationType.ApplicationTypeID == -1)
+            {
+                MessageBox.Show("UnKnown ApplicationType", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return 
+                true;
+        }
+
+        private DVLD__Core.Models.Application _fillApplicationInfo()
+        {
+            return new DVLD__Core.Models.Application
+            {
+                ApplicationID = 0,
+                ApplicationType_ID = _applicationType.ApplicationTypeID,
+                CreatedByUser_ID = Global.User.UserID,
+                ApplicationDate = DateTime.Now,
+                ApplicationStatus = "New",
+                LastStatusDate = null,
+                PaidFees = _applicationType.ApplicationTypeFees,
+                Person_ID = _personID,
+                           
+            };
         }
     }
 }

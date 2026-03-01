@@ -15,6 +15,6 @@ namespace DVLD__Core.Models
         public DateTime ApplicationDate { get; set; }
         public decimal PaidFees { get; set; }        
         public DateTime? LastStatusDate { get; set; }
-        public int ApplicationStatus { get; set; }
+        public string ApplicationStatus { get; set; }
     }
 }
