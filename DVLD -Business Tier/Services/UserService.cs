@@ -188,26 +188,34 @@ namespace DVLD__Business_Tier.Services
 
         //Delete 
         public static bool DeleteUser(int userId)
-        {
-            
+        {         
+            bool isDeleted = false;
             try
             {
-                if (!UserRepository.IsUserExist(userId))
+                User userToDelete = UserService.GetUserById(userId);
+                if (userToDelete == null)
                 {
                     throw new Exception("User Not Found");
                 }
+                if (userToDelete.UserID == Global.User.UserID)
+                {
+                    throw new Exception("You Can not delete yourself");
+                }
 
                 if (!UserRepository.DeleteUser(userId))
-                {                    
-                    return false;
+                {                                        
                     throw new Exception("Can not Delete the User");
+                }
+                else
+                {
+                    isDeleted = true;
                 }
             }
             catch (Exception)
             {
-                throw new Exception("Error While Deleting User,Try Again");
+                throw;
             }
-            return true;
+            return isDeleted;
         }
 
         // Add 

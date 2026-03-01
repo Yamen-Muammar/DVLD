@@ -107,6 +107,8 @@
             // cbRemaindme
             // 
             this.cbRemaindme.AutoSize = true;
+            this.cbRemaindme.Checked = true;
+            this.cbRemaindme.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbRemaindme.Location = new System.Drawing.Point(255, 275);
             this.cbRemaindme.Name = "cbRemaindme";
             this.cbRemaindme.Size = new System.Drawing.Size(125, 24);

@@ -64,7 +64,7 @@ namespace DVLD__Presentation_Tier.Controls.UserControls
 
         private void editeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("This Function has not implemented yet!");
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
