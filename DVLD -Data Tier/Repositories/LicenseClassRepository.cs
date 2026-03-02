@@ -46,6 +46,6 @@ namespace DVLD__Data_Tier.Repositories
                 }
             }           
             return classesList;
-        }
+        }         
     }
 }

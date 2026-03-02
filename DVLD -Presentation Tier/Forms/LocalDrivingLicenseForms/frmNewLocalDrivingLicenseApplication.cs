@@ -16,8 +16,9 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
     public partial class frmNewLocalDrivingLicenseApplication : Form
     {
         private int _personID = -1; //store id from retriveing event from ctrlPersonInformationWithFilter.
-
         private ApplicationType _applicationType {  get; set; }
+        private List<LicenseClass> _licenseClasses;
+
         public frmNewLocalDrivingLicenseApplication()
         {
             InitializeComponent();
@@ -51,10 +52,15 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             }
 
             DVLD__Core.Models.Application application = _fillApplicationInfo();
+            string selectedClass = cbLicenseClasses.SelectedItem.ToString();
+            int ClassTypeID = _licenseClasses.FirstOrDefault(c => c.ClassName == selectedClass).LicenseClassID;
 
             try
             {
-                ApplicationService.SaveApplication(application);
+                if(ApplicationService.SaveLocalDrivingLicenseApplication(application, ClassTypeID))
+                {
+                    MessageBox.Show("Application Added Successfully", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {
@@ -62,7 +68,6 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
                 throw;
             }
         }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -83,18 +88,18 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
 
         private void _loadLicenseClassComboBox()
         {
-            List<LicenseClass> licenseClasses = new List<LicenseClass>();
+            _licenseClasses = new List<LicenseClass>();
             try
             {
-                licenseClasses = LicenseClassService.GetAlllicenseClasses();
-                if (licenseClasses.Count < 1)
+                _licenseClasses = LicenseClassService.GetAlllicenseClasses();
+                if (_licenseClasses.Count < 1)
                 {
                     MessageBox.Show("Get License Classes Error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.Close();
                     return;
                 }
 
-                foreach (LicenseClass licenseClass in licenseClasses) {
+                foreach (LicenseClass licenseClass in _licenseClasses) {
                     cbLicenseClasses.Items.Add(licenseClass.ClassName);
                 };
             }
@@ -135,7 +140,7 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
         {
             return new DVLD__Core.Models.Application
             {
-                ApplicationID = 0,
+                ApplicationID = -1,
                 ApplicationType_ID = _applicationType.ApplicationTypeID,
                 CreatedByUser_ID = Global.User.UserID,
                 ApplicationDate = DateTime.Now,

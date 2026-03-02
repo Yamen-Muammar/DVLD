@@ -21,8 +21,8 @@ namespace DVLD__Business_Tier.Services
             }
 
             // --- ROUTING LOGIC ---
-            // If the ID is 0, it means this object hasn't been saved to the database yet.
-            if (application.ApplicationID == 0)
+            // If the ID is -1, it means this object hasn't been saved to the database yet.
+            if (application.ApplicationID == -1)
             {
                 try
                 {
@@ -64,6 +64,63 @@ namespace DVLD__Business_Tier.Services
                     throw;
                 }
              
+            }
+            return false;
+        }
+
+        public static bool SaveLocalDrivingLicenseApplication(Application application,int classTypeID)
+        {
+            int newId = -1;
+
+            if (!_ValidApplication(application))
+            {
+                return false;
+            }
+
+            // --- ROUTING LOGIC ---
+            // If the ID is -1, it means this object hasn't been saved to the database yet.
+            if (application.ApplicationID == -1)
+            {
+                try
+                {
+                    newId = ApplicationRepository.AddNewLocalDriveApplication(application, classTypeID);
+
+                    if (newId == -1)
+                    {
+                        return false;
+                        throw new Exception("Can't Create New Application");
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("**** Error SaveApplication >>" + ex + "****");
+                    throw;
+                }
+                finally
+                {
+                    application.ApplicationID = newId;
+                }
+                return true;
+            }
+
+            // If the ID is greater than 0, it already exists. We are Updating it!
+            if (application.ApplicationID > 0)
+            {
+
+                try
+                {
+                    if (!ApplicationRepository.UpdateApplication(application))
+                    {
+                        throw new Exception("Error While Updateing");
+                    }
+                    return true;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
             }
             return false;
         }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DVLD__Core.Models;
 
+
 namespace DVLD__Data_Tier.Repositories
 {
     public class ApplicationRepository
@@ -14,13 +15,10 @@ namespace DVLD__Data_Tier.Repositories
         // ==========================================
         // 1. CREATE (Insert)
         // ==========================================
-        public static int AddNewApplication(Application newApplication)
+        public static int AddNewApplication(DVLD__Core.Models.Application newApplication)
         {
-            // We return an int so we can send the newly created ApplicationID back to the UI
+            
             int newApplicationID = -1;
-
-            // 💡 Mentor Tip: Notice 'SCOPE_IDENTITY()'. This tells SQL to immediately 
-            // give us back the new ID it just created for this row!
             string query = @"INSERT INTO Applications 
                          (CreatedByUser_ID, ApplicationType_ID, Person_ID, ApplicationDate, PaidFees, LastStatusDate, ApplicationStatus)
                          VALUES 
@@ -63,10 +61,87 @@ namespace DVLD__Data_Tier.Repositories
             return newApplicationID;
         }
 
+        public static int AddNewLocalDriveApplication(DVLD__Core.Models.Application newApplication,int classTypeID)
+        {
+            
+            int newApplicationID = -1;
+
+            string query = @"INSERT INTO Applications 
+                         (CreatedByUser_ID, ApplicationType_ID, Person_ID, ApplicationDate, PaidFees, LastStatusDate, ApplicationStatus)
+                         VALUES 
+                         (@CreatedByUser_ID, @ApplicationType_ID, @Person_ID, @ApplicationDate, @PaidFees, @LastStatusDate, @ApplicationStatus);
+                         SELECT SCOPE_IDENTITY();";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@CreatedByUser_ID", newApplication.CreatedByUser_ID);
+                command.Parameters.AddWithValue("@ApplicationType_ID", newApplication.ApplicationType_ID);
+                command.Parameters.AddWithValue("@Person_ID", newApplication.Person_ID);
+                command.Parameters.AddWithValue("@ApplicationDate", newApplication.ApplicationDate);
+                command.Parameters.AddWithValue("@PaidFees", newApplication.PaidFees);
+                if (newApplication.LastStatusDate == null)
+                {
+                    command.Parameters.AddWithValue("@LastStatusDate", DBNull.Value);
+                }
+                else
+                {
+                    command.Parameters.AddWithValue("@LastStatusDate", newApplication.LastStatusDate);
+                }
+
+                command.Parameters.AddWithValue("@ApplicationStatus", newApplication.ApplicationStatus);
+
+                try
+                {
+                    connection.Open();
+                    object result = command.ExecuteScalar();
+                    if (result != null && int.TryParse(result.ToString(), out int insertedID))
+                    {
+                        newApplicationID = insertedID;
+                        AddNewLocalDrivingLicesnse(classTypeID,newApplicationID);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+            return newApplicationID;
+        }
+        private static int AddNewLocalDrivingLicesnse(int classTypeID, int applicationID)
+        {
+            int newInsertedID = -1;
+            string query = @"INSERT INTO LocalDrivingLicenseApplications 
+                         (Application_ID,LicenseClass_ID)
+                         VALUES 
+                         (@application_ID, @licenseClass_ID);
+                         SELECT SCOPE_IDENTITY();";
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            using(SqlCommand cmd = new SqlCommand(query, conn)) 
+            {
+                cmd.Parameters.AddWithValue("@application_ID", applicationID);
+                cmd.Parameters.AddWithValue("@licenseClass_ID", classTypeID);
+                try
+                {
+                    conn.Open();
+                    object result = cmd.ExecuteScalar();
+                    if (result != null && int.TryParse(result.ToString(), out int InsertedID))
+                    {
+                        newInsertedID = InsertedID;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }               
+            }
+            return newInsertedID;
+        }
         // ==========================================
         // 2. READ (Get By ID)
         // ==========================================
-        public static Application GetApplicationByID(int applicationID)
+        public static DVLD__Core.Models.Application GetApplicationByID(int applicationID)
         {
             Application application = null;
             string query = "SELECT * FROM Applications WHERE ApplicationID = @ApplicationID";
