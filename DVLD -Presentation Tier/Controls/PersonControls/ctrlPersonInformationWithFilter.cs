@@ -57,6 +57,7 @@ namespace DVLD__Presentation_Tier.Controls
         private void OnRetrundDataEvent(Person person)
         {           
             UpdatePersonInfoANDRefreshUI(person);
+            OnReturnPersonID_OnFindPerson(person.PersonID);
         }
 
         private void UpdatePersonInfoANDRefreshUI(Person person)

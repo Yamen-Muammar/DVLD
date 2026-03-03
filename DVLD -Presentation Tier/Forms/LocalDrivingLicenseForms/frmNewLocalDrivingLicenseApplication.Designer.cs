@@ -32,6 +32,7 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tbPersonalInfo = new System.Windows.Forms.TabPage();
+            this.ctrlPersonInformationWithFilter1 = new DVLD__Presentation_Tier.Controls.ctrlPersonInformationWithFilter();
             this.tbApplicationInfo = new System.Windows.Forms.TabPage();
             this.cbLicenseClasses = new System.Windows.Forms.ComboBox();
             this.lblCreatedName = new System.Windows.Forms.Label();
@@ -45,7 +46,6 @@
             this.l1 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ctrlPersonInformationWithFilter1 = new DVLD__Presentation_Tier.Controls.ctrlPersonInformationWithFilter();
             this.tabControl1.SuspendLayout();
             this.tbPersonalInfo.SuspendLayout();
             this.tbApplicationInfo.SuspendLayout();
@@ -95,6 +95,14 @@
             this.tbPersonalInfo.TabIndex = 0;
             this.tbPersonalInfo.Text = "Personal Info";
             this.tbPersonalInfo.UseVisualStyleBackColor = true;
+            // 
+            // ctrlPersonInformationWithFilter1
+            // 
+            this.ctrlPersonInformationWithFilter1.Location = new System.Drawing.Point(13, 6);
+            this.ctrlPersonInformationWithFilter1.Name = "ctrlPersonInformationWithFilter1";
+            this.ctrlPersonInformationWithFilter1.Size = new System.Drawing.Size(975, 493);
+            this.ctrlPersonInformationWithFilter1.TabIndex = 0;
+            this.ctrlPersonInformationWithFilter1.ReturnPersonID_OnFindPerson += new DVLD__Presentation_Tier.Controls.ctrlPersonInformationWithFilter.ReturnPersonIDEvent(this.ctrlPersonInformationWithFilter1_ReturnPersonID_OnFindPerson);
             // 
             // tbApplicationInfo
             // 
@@ -242,14 +250,6 @@
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // ctrlPersonInformationWithFilter1
-            // 
-            this.ctrlPersonInformationWithFilter1.Location = new System.Drawing.Point(13, 6);
-            this.ctrlPersonInformationWithFilter1.Name = "ctrlPersonInformationWithFilter1";
-            this.ctrlPersonInformationWithFilter1.Size = new System.Drawing.Size(975, 493);
-            this.ctrlPersonInformationWithFilter1.TabIndex = 0;
-            this.ctrlPersonInformationWithFilter1.ReturnPersonID_OnFindPerson += new DVLD__Presentation_Tier.Controls.ctrlPersonInformationWithFilter.ReturnPersonIDEvent(this.ctrlPersonInformationWithFilter1_ReturnPersonID_OnFindPerson);
             // 
             // frmNewLocalDrivingLicenseApplication
             // 
