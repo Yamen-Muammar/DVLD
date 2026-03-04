@@ -55,6 +55,8 @@
             this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.signOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.localDrivingLicenseApplicationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.internationalDrivingLicenseApplicationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -172,10 +174,13 @@
             // 
             // manageApplicationsToolStripMenuItem
             // 
+            this.manageApplicationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.localDrivingLicenseApplicationsToolStripMenuItem,
+            this.internationalDrivingLicenseApplicationsToolStripMenuItem});
             this.manageApplicationsToolStripMenuItem.Image = global::DVLD__Presentation_Tier.Properties.Resources.ManageApplications32;
             this.manageApplicationsToolStripMenuItem.Name = "manageApplicationsToolStripMenuItem";
             this.manageApplicationsToolStripMenuItem.Size = new System.Drawing.Size(376, 60);
-            this.manageApplicationsToolStripMenuItem.Text = "Manage Applications";
+            this.manageApplicationsToolStripMenuItem.Text = "Manage Applications";            
             // 
             // toolStripSeparator4
             // 
@@ -272,6 +277,22 @@
             this.signOutToolStripMenuItem.Text = "Sign Out";
             this.signOutToolStripMenuItem.Click += new System.EventHandler(this.signOutToolStripMenuItem_Click);
             // 
+            // localDrivingLicenseApplicationsToolStripMenuItem
+            // 
+            this.localDrivingLicenseApplicationsToolStripMenuItem.Image = global::DVLD__Presentation_Tier.Properties.Resources.DriverLicense48;
+            this.localDrivingLicenseApplicationsToolStripMenuItem.Name = "localDrivingLicenseApplicationsToolStripMenuItem";
+            this.localDrivingLicenseApplicationsToolStripMenuItem.Size = new System.Drawing.Size(556, 60);
+            this.localDrivingLicenseApplicationsToolStripMenuItem.Text = "Local Driving License Applications";
+            this.localDrivingLicenseApplicationsToolStripMenuItem.Click += new System.EventHandler(this.localDrivingLicenseApplicationsToolStripMenuItem_Click);
+            // 
+            // internationalDrivingLicenseApplicationsToolStripMenuItem
+            // 
+            this.internationalDrivingLicenseApplicationsToolStripMenuItem.Image = global::DVLD__Presentation_Tier.Properties.Resources.International32;
+            this.internationalDrivingLicenseApplicationsToolStripMenuItem.Name = "internationalDrivingLicenseApplicationsToolStripMenuItem";
+            this.internationalDrivingLicenseApplicationsToolStripMenuItem.Size = new System.Drawing.Size(556, 60);
+            this.internationalDrivingLicenseApplicationsToolStripMenuItem.Text = "International Driving License Applications";
+            this.internationalDrivingLicenseApplicationsToolStripMenuItem.Click += new System.EventHandler(this.internationalDrivingLicenseApplicationsToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -322,5 +343,7 @@
         private System.Windows.Forms.ToolStripMenuItem retakeTestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem localLicenseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem internationalLicenseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem localDrivingLicenseApplicationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem internationalDrivingLicenseApplicationsToolStripMenuItem;
     }
 }

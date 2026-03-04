@@ -59,6 +59,7 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             {
                 if(ApplicationService.SaveLocalDrivingLicenseApplication(application, ClassTypeID))
                 {
+                    lblApplicationID.Text = application.ApplicationID.ToString();
                     MessageBox.Show("Application Added Successfully", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }

@@ -19,7 +19,7 @@ namespace DVLD__Data_Tier.Repositories
         public static int AddNewLocalDrivingLicesneApplication(Application newApplication, int licenseClassID)
         {            
             int newLocalAppID = -1;
-
+            int newBaseAppID = -1;
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 
@@ -43,15 +43,23 @@ namespace DVLD__Data_Tier.Repositories
                             command.Parameters.AddWithValue("@Person_ID", newApplication.Person_ID);
                             command.Parameters.AddWithValue("@ApplicationDate", newApplication.ApplicationDate);
                             command.Parameters.AddWithValue("@PaidFees", newApplication.PaidFees);
-                            command.Parameters.AddWithValue("@LastStatusDate", newApplication.LastStatusDate);
+                            if (newApplication.LastStatusDate == null)
+                            {
+                                command.Parameters.AddWithValue("@LastStatusDate", DBNull.Value);
+                            }
+                            else
+                            {
+                                command.Parameters.AddWithValue("@LastStatusDate", newApplication.LastStatusDate);
+                            }
+                            
                             command.Parameters.AddWithValue("@ApplicationStatus", newApplication.ApplicationStatus);
                             
-                            object result = command.ExecuteScalar();
-                            int newBaseAppID = Convert.ToInt32(result);
+                            object applicationReturnedID = command.ExecuteScalar();
+                            
 
                            
-                            string query2 = @"INSERT INTO LocalApplications 
-                                         (ApplicationID, LicenseClassID)
+                            string query2 = @"INSERT INTO LocalDrivingLicenseApplications 
+                                         (Application_ID, LicenseClass_ID)
                                          VALUES 
                                          (@ApplicationID, @LicenseClassID);
                                          SELECT SCOPE_IDENTITY();";
@@ -64,8 +72,10 @@ namespace DVLD__Data_Tier.Repositories
                             command.Parameters.AddWithValue("@ApplicationID", newBaseAppID);
                             command.Parameters.AddWithValue("@LicenseClassID", licenseClassID);
                             
-                            object localResult = command.ExecuteScalar();
-                            newLocalAppID = Convert.ToInt32(localResult);
+                            object LDLApplicationReturnedID = command.ExecuteScalar();
+
+                            newBaseAppID = Convert.ToInt32(applicationReturnedID);
+                            newLocalAppID = Convert.ToInt32(LDLApplicationReturnedID);
                         }
                       
                         transaction.Commit();
@@ -78,7 +88,7 @@ namespace DVLD__Data_Tier.Repositories
                 }
             }
 
-            return newLocalAppID;
+            return newBaseAppID;
         }
         public static int AddNewApplication(DVLD__Core.Models.Application newApplication)
         {
@@ -169,19 +179,19 @@ namespace DVLD__Data_Tier.Repositories
             return application;
         }
         
-        public static int doesHasAnActiveLocalDrivingLicenseApplication(int personID)
+        public static int doesHasAnActiveLocalDrivingLicenseApplication(int personID,int licenseClassID)
         {
             int foundApplicationID = -1;
             string query = "select Applications.ApplicationID from Applications " +
                 "inner join LocalDrivingLicenseApplications" +
-                " on Applications.ApplicationID = LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID " +
-                "where ApplicationStatus in('New','Completed') and Applications.Person_ID = @person_ID;  ";
+                " on Applications.ApplicationID = LocalDrivingLicenseApplications.Application_ID " +
+                "where ApplicationStatus in('New','Completed') and Applications.Person_ID = @person_ID and LocalDrivingLicenseApplications.LicenseClass_ID = @licenseClassID;";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@person_ID", personID);
-
+                command.Parameters.AddWithValue("@licenseClassID", licenseClassID);
                 try
                 {
                     connection.Open();
@@ -199,7 +209,7 @@ namespace DVLD__Data_Tier.Repositories
             }
             return foundApplicationID;
         }
-
+        
         // ==========================================
         // 3. READ ALL (Get All as List)
         // ==========================================

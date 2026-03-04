@@ -67,12 +67,11 @@ namespace DVLD__Business_Tier.Services
             }
             return false;
         }
-
-        public static bool SaveLocalDrivingLicenseApplication(Application application,int classTypeID)
+        public static bool SaveLocalDrivingLicenseApplication(Application application,int licenseClassID)
         {
             int newId = -1;
 
-            if (!_ValidApplication(application))
+            if (!_ValidApplication(application, licenseClassID))
             {
                 return false;
             }
@@ -83,12 +82,11 @@ namespace DVLD__Business_Tier.Services
             {
                 try
                 {
-                    newId = ApplicationRepository.AddNewLocalDrivingLicesneApplication(application, classTypeID);
+                    newId = ApplicationRepository.AddNewLocalDrivingLicesneApplication(application, licenseClassID);
 
                     if (newId == -1)
-                    {
-                        return false;
-                        throw new Exception("Can't Create New Application");
+                    {                        
+                        throw new Exception("Error While Createing New Application");
                     }
 
                 }
@@ -144,12 +142,34 @@ namespace DVLD__Business_Tier.Services
                 return false;
             }
 
-            int FounedID = ApplicationRepository.doesHasAnActiveLocalDrivingLicenseApplication(application.Person_ID);
+            //int FounedID = ApplicationRepository.doesHasAnActiveLocalDrivingLicenseApplication(application.Person_ID);
+            //if (FounedID != -1)
+            //{
+            //    throw new Exception($"User Already Has an Active Application , Id = {FounedID}");                
+            //} 
+            
+            return true;
+        }
+        private static bool _ValidApplication(Application application, int licenseClassID)
+        {
+            if (application.PaidFees < 0)
+            {
+
+                return false;
+            }
+
+            if (application.ApplicationDate > DateTime.Now)
+            {
+
+                return false;
+            }
+
+            int FounedID = ApplicationRepository.doesHasAnActiveLocalDrivingLicenseApplication(application.Person_ID, licenseClassID);
             if (FounedID != -1)
             {
-                throw new Exception($"User Already Has an Active Application , Id = {FounedID}");                
-            } 
-            
+                throw new Exception($"User Already Has an Active Application , Id = {FounedID}");
+            }
+
             return true;
         }
     }

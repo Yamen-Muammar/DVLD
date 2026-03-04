@@ -19,9 +19,10 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
         
         private void frmLocalDrivingLicenseApplication_Load(object sender, EventArgs e)
         {
-
+            _loadComboBox();
         }
 
+        private List<> _loadApplicationsListData
 
         private void _loadComboBox()
         {
@@ -46,12 +47,13 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
         private void _restartFilterArea()
         {
             cbFilterOn.SelectedIndex = 0;
-
         }
+        
 
-        private void tbFilterInput_TextChanged(object sender, EventArgs e)
+        private void btnAddNewLDApplication_Click(object sender, EventArgs e)
         {
-
+            frmNewLocalDrivingLicenseApplication frmNewLocalDrivingLicenseApplication = new frmNewLocalDrivingLicenseApplication();
+            frmNewLocalDrivingLicenseApplication.ShowDialog();
         }
     }
 }

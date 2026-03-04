@@ -71,6 +71,7 @@
             this.btnAddNewLDApplication.Size = new System.Drawing.Size(95, 67);
             this.btnAddNewLDApplication.TabIndex = 2;
             this.btnAddNewLDApplication.UseVisualStyleBackColor = true;
+            this.btnAddNewLDApplication.Click += new System.EventHandler(this.btnAddNewLDApplication_Click);
             // 
             // label2
             // 
@@ -99,7 +100,6 @@
             this.tbFilterInput.Name = "tbFilterInput";
             this.tbFilterInput.Size = new System.Drawing.Size(264, 26);
             this.tbFilterInput.TabIndex = 8;
-            this.tbFilterInput.TextChanged += new System.EventHandler(this.tbFilterInput_TextChanged);
             // 
             // cbFilterOn
             // 
