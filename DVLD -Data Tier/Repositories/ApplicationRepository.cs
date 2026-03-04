@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DVLD__Core.Models;
+using DVLD__Core.View_Models;
 
 
 namespace DVLD__Data_Tier.Repositories
@@ -244,7 +245,41 @@ namespace DVLD__Data_Tier.Repositories
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error: " + ex.Message);
+                    throw;
+                }
+            }
+            return appsList;
+        }
+        public static List<clsLocalDrivingLicesnseApplicationView> GetAllLDLApplications()
+        {
+            List<clsLocalDrivingLicesnseApplicationView> appsList = new List<clsLocalDrivingLicesnseApplicationView>();
+            string query = "SELECT LocalDrivingLicenseApplicationID,ClassName,NationalNO,FullName,ApplicationDate,ApplicationStatus FROM Applications ORDER BY ApplicationDate DESC"; // Newest first!
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            appsList.Add(new clsLocalDrivingLicesnseApplicationView
+                            {
+                                LDLApplicationID = (int)reader["LocalDrivingLicenseApplicationID"],
+                                DrivingClassTitle = reader["ClassName"].ToString(),
+                                NationalNO = reader["NationalNO"].ToString(),
+                                FullName = reader["FullName"].ToString(),
+                                ApplicationDate = (DateTime)reader["ApplicationDate"],
+                                Status = reader["ApplicationStatus"].ToString()
+                            });                            
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw;
                 }
             }
             return appsList;

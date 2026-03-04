@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DVLD__Business_Tier.Services;
+using DVLD__Core.View_Models;
 
 namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
 {
     public partial class frmLocalDrivingLicenseApplication : Form
     {
+        private List<clsLocalDrivingLicesnseApplicationView> _list { get; set; } 
         public frmLocalDrivingLicenseApplication()
         {
             InitializeComponent();
@@ -20,9 +23,23 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
         private void frmLocalDrivingLicenseApplication_Load(object sender, EventArgs e)
         {
             _loadComboBox();
+            _refreshData();
         }
 
-        private List<> _loadApplicationsListData
+        private void _loadApplicationsListData()
+        {
+            _list = new List<clsLocalDrivingLicesnseApplicationView>();
+            try
+            {
+                _list = ApplicationService.GetAllLDLApplications();
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error While Retriving Date","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+
+        }
 
         private void _loadComboBox()
         {
@@ -54,6 +71,16 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
         {
             frmNewLocalDrivingLicenseApplication frmNewLocalDrivingLicenseApplication = new frmNewLocalDrivingLicenseApplication();
             frmNewLocalDrivingLicenseApplication.ShowDialog();
+            _refreshData();
+        }
+
+        private void _refreshData()
+        {
+            dgvApplicationsList.DataSource = null;
+            _loadApplicationsListData();
+            dgvApplicationsList.DataSource = _list;
+            lblRecordsCount.Text = _list.Count.ToString();
+
         }
     }
 }

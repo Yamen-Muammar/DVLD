@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DVLD__Core.Models;
+using DVLD__Core.View_Models;
 using DVLD__Data_Tier.Repositories;
 
 namespace DVLD__Business_Tier.Services
@@ -123,10 +124,17 @@ namespace DVLD__Business_Tier.Services
             return false;
         }
 
-        public static List<Application> GetAllApplications()
+        public static List<clsLocalDrivingLicesnseApplicationView> GetAllLDLApplications()
         {
-           
-            return ApplicationRepository.GetAllApplications();
+            try
+            {
+                return ApplicationRepository.GetAllLDLApplications();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }   
         }
         private static bool _ValidApplication(Application application)
         {
