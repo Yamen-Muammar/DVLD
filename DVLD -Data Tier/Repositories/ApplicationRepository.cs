@@ -141,15 +141,23 @@ namespace DVLD__Data_Tier.Repositories
         // ==========================================
         // 2. READ (Get By ID)
         // ==========================================
-        public static DVLD__Core.Models.Application GetApplicationByID(int applicationID)
+        public static DVLD__Core.Models.Application GetApplicationByID(int appID)
+        {
+            throw new NotImplementedException();
+        }
+        public static DVLD__Core.Models.Application GetApplicationByLDL_ID(int localDrivingLicenseApplicationID)
         {
             Application application = null;
-            string query = "SELECT * FROM Applications WHERE ApplicationID = @ApplicationID";
+            string query = "SELECT ApplicationID,CreatedByUser_ID,ApplicationType_ID,Person_ID,ApplicationDate,PaidFees,LastStatusDate,ApplicationStatus" +
+                " FROM Applications " +
+                "inner join LocalDrivingLicenseApplications" +
+                " on Applications.ApplicationID = LocalDrivingLicenseApplications.Application_ID " +
+                "where LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = @LDLApplicationId;";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
             {
-                command.Parameters.AddWithValue("@ApplicationID", applicationID);
+                command.Parameters.AddWithValue("@LDLApplicationId", localDrivingLicenseApplicationID);
 
                 try
                 {
@@ -302,10 +310,7 @@ namespace DVLD__Data_Tier.Repositories
         {
             int rowsAffected = 0;
 
-            // Notice we do NOT update the ApplicationID, we just use it in the WHERE clauSse
-
-            // TODO : SPPLING (Applicationss) ERROR TO SEE HOW THE BBL error handeling works ?
-            string query = @"UPDATE Applicationss  
+            string query = @"UPDATE Applications
                          SET CreatedByUser_ID = @CreatedByUser_ID, 
                              ApplicationType_ID = @ApplicationType_ID,
                              Person_ID = @Person_ID,
@@ -318,14 +323,22 @@ namespace DVLD__Data_Tier.Repositories
             using (SqlConnection connection = new SqlConnection(_connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
             {
-                // We pass the entire object in, so we just read its properties here
+                
                 command.Parameters.AddWithValue("@ApplicationID", app.ApplicationID);
                 command.Parameters.AddWithValue("@CreatedByUser_ID", app.CreatedByUser_ID);
                 command.Parameters.AddWithValue("@ApplicationType_ID", app.ApplicationType_ID);
                 command.Parameters.AddWithValue("@Person_ID", app.Person_ID);
                 command.Parameters.AddWithValue("@ApplicationDate", app.ApplicationDate);
                 command.Parameters.AddWithValue("@PaidFees", app.PaidFees);
-                command.Parameters.AddWithValue("@LastStatusDate", app.LastStatusDate);
+                if (app.LastStatusDate == null)
+                {
+                    command.Parameters.AddWithValue("@LastStatusDate",DBNull.Value);
+                }
+                else
+                {
+                    command.Parameters.AddWithValue("@LastStatusDate", app.LastStatusDate);
+                }
+              
                 command.Parameters.AddWithValue("@ApplicationStatus", app.ApplicationStatus);
 
                 try

@@ -31,11 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvApplicationsList = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblRecordsCount = new System.Windows.Forms.Label();
-            this.tbFilterInput = new System.Windows.Forms.TextBox();
-            this.cbFilterOn = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showApplicationDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -52,6 +47,11 @@
             this.showLicenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.showPersonLicenseHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblRecordsCount = new System.Windows.Forms.Label();
+            this.tbFilterInput = new System.Windows.Forms.TextBox();
+            this.cbFilterOn = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnAddNewLDApplication = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvApplicationsList)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -73,6 +73,7 @@
             this.dgvApplicationsList.AllowUserToAddRows = false;
             this.dgvApplicationsList.AllowUserToDeleteRows = false;
             this.dgvApplicationsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvApplicationsList.ContextMenuStrip = this.contextMenuStrip1;
             this.dgvApplicationsList.Location = new System.Drawing.Point(12, 228);
             this.dgvApplicationsList.Name = "dgvApplicationsList";
             this.dgvApplicationsList.ReadOnly = true;
@@ -80,54 +81,6 @@
             this.dgvApplicationsList.RowTemplate.Height = 28;
             this.dgvApplicationsList.Size = new System.Drawing.Size(1257, 476);
             this.dgvApplicationsList.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(13, 711);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 25);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "# Records :";
-            // 
-            // lblRecordsCount
-            // 
-            this.lblRecordsCount.AutoSize = true;
-            this.lblRecordsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRecordsCount.Location = new System.Drawing.Point(141, 714);
-            this.lblRecordsCount.Name = "lblRecordsCount";
-            this.lblRecordsCount.Size = new System.Drawing.Size(24, 25);
-            this.lblRecordsCount.TabIndex = 3;
-            this.lblRecordsCount.Text = "0";
-            // 
-            // tbFilterInput
-            // 
-            this.tbFilterInput.Location = new System.Drawing.Point(386, 195);
-            this.tbFilterInput.MaxLength = 100;
-            this.tbFilterInput.Name = "tbFilterInput";
-            this.tbFilterInput.Size = new System.Drawing.Size(264, 26);
-            this.tbFilterInput.TabIndex = 8;
-            // 
-            // cbFilterOn
-            // 
-            this.cbFilterOn.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.cbFilterOn.FormattingEnabled = true;
-            this.cbFilterOn.Location = new System.Drawing.Point(123, 194);
-            this.cbFilterOn.Name = "cbFilterOn";
-            this.cbFilterOn.Size = new System.Drawing.Size(246, 28);
-            this.cbFilterOn.TabIndex = 7;
-            this.cbFilterOn.SelectedIndexChanged += new System.EventHandler(this.cbFilterOn_SelectedIndexChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Nirmala Text", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(15, 194);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(102, 28);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Filter By :";
             // 
             // contextMenuStrip1
             // 
@@ -149,7 +102,7 @@
             this.toolStripSeparator6,
             this.showPersonLicenseHistoryToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(347, 335);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(347, 302);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // showApplicationDetailsToolStripMenuItem
@@ -243,6 +196,55 @@
             this.showPersonLicenseHistoryToolStripMenuItem.Name = "showPersonLicenseHistoryToolStripMenuItem";
             this.showPersonLicenseHistoryToolStripMenuItem.Size = new System.Drawing.Size(346, 32);
             this.showPersonLicenseHistoryToolStripMenuItem.Text = "Show Person License History";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(13, 711);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(122, 25);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "# Records :";
+            // 
+            // lblRecordsCount
+            // 
+            this.lblRecordsCount.AutoSize = true;
+            this.lblRecordsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRecordsCount.Location = new System.Drawing.Point(141, 714);
+            this.lblRecordsCount.Name = "lblRecordsCount";
+            this.lblRecordsCount.Size = new System.Drawing.Size(24, 25);
+            this.lblRecordsCount.TabIndex = 3;
+            this.lblRecordsCount.Text = "0";
+            // 
+            // tbFilterInput
+            // 
+            this.tbFilterInput.Location = new System.Drawing.Point(378, 172);
+            this.tbFilterInput.MaxLength = 100;
+            this.tbFilterInput.Name = "tbFilterInput";
+            this.tbFilterInput.Size = new System.Drawing.Size(264, 26);
+            this.tbFilterInput.TabIndex = 8;
+            this.tbFilterInput.TextChanged += new System.EventHandler(this.tbFilterInput_TextChanged);
+            // 
+            // cbFilterOn
+            // 
+            this.cbFilterOn.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.cbFilterOn.FormattingEnabled = true;
+            this.cbFilterOn.Location = new System.Drawing.Point(115, 171);
+            this.cbFilterOn.Name = "cbFilterOn";
+            this.cbFilterOn.Size = new System.Drawing.Size(246, 28);
+            this.cbFilterOn.TabIndex = 7;
+            this.cbFilterOn.SelectedIndexChanged += new System.EventHandler(this.cbFilterOn_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Nirmala Text", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(7, 171);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(102, 28);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Filter By :";
             // 
             // btnAddNewLDApplication
             // 

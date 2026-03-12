@@ -41,6 +41,11 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
 
         }
 
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
         private void _loadComboBox()
         {
             List<string> FilterOptions = new List<string>() { "None", "Person ID", "National NO" };
@@ -64,9 +69,8 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
         private void _restartFilterArea()
         {
             cbFilterOn.SelectedIndex = 0;
-        }
-        
-
+            tbFilterInput.Text = string.Empty;
+        }  
         private void btnAddNewLDApplication_Click(object sender, EventArgs e)
         {
             frmNewLocalDrivingLicenseApplication frmNewLocalDrivingLicenseApplication = new frmNewLocalDrivingLicenseApplication();
@@ -80,29 +84,21 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             _loadApplicationsListData();
             dgvApplicationsList.DataSource = _list;
             lblRecordsCount.Text = _list.Count.ToString();
+            _restartFilterArea();
 
         }
-
-        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
-        {
-
-        }
-
+ 
         private void cancelApplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int applicationID = (int)dgvApplicationsList.CurrentRow.Cells[0].Value;
-
-            DVLD__Core.Models.Application selectedApplication = _getApplication(applicationID);
-            if (selectedApplication == null)
-            {
-                return;
-            }
+            int localDrivingLicenseApplicationID = (int)dgvApplicationsList.CurrentRow.Cells[0].Value;
 
             try
             {
-                //TODO:TEST THE STATUS CONDITIONS ,IF THE ENTERED ANY THING WRONG.
-                selectedApplication.ApplicationStatus = "Canceled";
-                ApplicationService.UpdateApplication(selectedApplication);
+                if (ApplicationService.UpdateLDLApplicationStatus(localDrivingLicenseApplicationID, ApplicationService.enStatus.Canceled))
+                {
+                    MessageBox.Show("Application Status Updated Successfully", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _refreshData();
+                }
             }
             catch (Exception ex)
             {
@@ -111,17 +107,9 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             }
         }
 
-        private DVLD__Core.Models.Application _getApplication(int appID)
+        private void tbFilterInput_TextChanged(object sender, EventArgs e)
         {
-            
-            DVLD__Core.Models.Application application = ApplicationService.GetApplicationByID(appID);
-
-            if (application != null)
-            {
-                MessageBox.Show("Application Details Not Found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-           
-            return application;
+            // TODO : CREATE FILTER LOGIC
         }
     }
 }

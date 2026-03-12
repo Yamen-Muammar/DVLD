@@ -8,6 +8,7 @@ namespace DVLD__Core.Models
 {
     public class Application
     {
+        private string _applicationStatus;
         public int ApplicationID { get; set; }
         public int CreatedByUser_ID { get; set; }
         public int ApplicationType_ID { get; set; }
@@ -16,20 +17,15 @@ namespace DVLD__Core.Models
         public decimal PaidFees { get; set; }        
         public DateTime? LastStatusDate { get; set; }
         public string ApplicationStatus 
-        { 
-            get
-            {
-                return ApplicationStatus;
-            }
+        {
+            get => _applicationStatus;
             set
             {
                 if (!_isStatusValid(value))
                 {
                     throw new ArgumentException("Status Must be one of these (New , Canceled,Completed)");
                 }
-
-                ApplicationStatus = value;
-            
+                _applicationStatus = value;
             } 
         }
         
@@ -38,11 +34,21 @@ namespace DVLD__Core.Models
         {
             if (string.IsNullOrEmpty(enteredstatus)) { return false; }
 
-            if(enteredstatus != "New" || enteredstatus != "Canceled"|| enteredstatus != "Completed")
+            if(enteredstatus == "New")
             {
-                return false; 
+                return true; 
             }
-            return true;
+
+            if (enteredstatus == "Canceled")
+            {
+                return true;
+            }
+
+            if (enteredstatus == "Completed")
+            {
+                return true;
+            }
+            return false;
 
         }
     }
