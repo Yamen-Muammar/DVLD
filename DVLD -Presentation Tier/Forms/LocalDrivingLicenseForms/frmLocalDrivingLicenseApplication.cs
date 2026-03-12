@@ -14,7 +14,24 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
 {
     public partial class frmLocalDrivingLicenseApplication : Form
     {
-        private List<clsLocalDrivingLicesnseApplicationView> _list { get; set; } 
+        private List<clsLocalDrivingLicesnseApplicationView> _list { get; set; }
+
+        private  List<clsLocalDrivingLicesnseApplicationView> DataBasePiplineSource 
+        {
+            get
+            {
+                try
+                {
+                    return ApplicationService.GetAllLDLApplications();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    this.Close();
+                }
+                return null;
+            }            
+        }
         public frmLocalDrivingLicenseApplication()
         {
             InitializeComponent();
@@ -23,32 +40,70 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
         private void frmLocalDrivingLicenseApplication_Load(object sender, EventArgs e)
         {
             _loadComboBox();
-            _refreshData();
+            _refreshData(DataBasePiplineSource);
         }
 
-        private void _loadApplicationsListData()
+        private void _loadApplicationsListData(List<clsLocalDrivingLicesnseApplicationView> source)
         {
             _list = new List<clsLocalDrivingLicesnseApplicationView>();
             try
             {
-                _list = ApplicationService.GetAllLDLApplications();
+                _list = source;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                MessageBox.Show("Error While Retriving Date","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                this.Close();
             }
 
         }
-
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
 
+        }             
+        private void btnAddNewLDApplication_Click(object sender, EventArgs e)
+        {
+            frmNewLocalDrivingLicenseApplication frmNewLocalDrivingLicenseApplication = new frmNewLocalDrivingLicenseApplication();
+            frmNewLocalDrivingLicenseApplication.ShowDialog();
+            _refreshData(DataBasePiplineSource);
         }
+
+        private void _refreshData(List<clsLocalDrivingLicesnseApplicationView> source)
+        {
+            dgvApplicationsList.DataSource = null;
+            _loadApplicationsListData(source);
+            dgvApplicationsList.DataSource = _list;
+            lblRecordsCount.Text = _list.Count.ToString();
+            _restartFilterArea();
+
+        }
+ 
+
+        private void cancelApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int localDrivingLicenseApplicationID = (int)dgvApplicationsList.CurrentRow.Cells[0].Value;
+
+            try
+            {
+                if (ApplicationService.UpdateLDLApplicationStatus(localDrivingLicenseApplicationID, ApplicationService.enStatus.Canceled))
+                {
+                    MessageBox.Show("Application Status Updated Successfully", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _refreshData(DataBasePiplineSource);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+        }
+
+        //Filtering combo Box Logic
 
         private void _loadComboBox()
         {
-            List<string> FilterOptions = new List<string>() { "None", "Person ID", "National NO" };
+            List<string> FilterOptions = new List<string>() { "None", "National NO" };
             cbFilterOn.DataSource = FilterOptions;
             cbFilterOn.SelectedIndex = 0;
         }
@@ -60,9 +115,13 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             {
                 tbFilterInput.Enabled = false;
             }
-            else
+            else if (cbFilterOn.SelectedItem.ToString() == "National NO")
             {
                 tbFilterInput.Enabled = true;
+            }
+            else
+            {
+                tbFilterInput.Enabled = false;
             }
         }
 
@@ -70,46 +129,50 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
         {
             cbFilterOn.SelectedIndex = 0;
             tbFilterInput.Text = string.Empty;
-        }  
-        private void btnAddNewLDApplication_Click(object sender, EventArgs e)
-        {
-            frmNewLocalDrivingLicenseApplication frmNewLocalDrivingLicenseApplication = new frmNewLocalDrivingLicenseApplication();
-            frmNewLocalDrivingLicenseApplication.ShowDialog();
-            _refreshData();
         }
-
-        private void _refreshData()
-        {
-            dgvApplicationsList.DataSource = null;
-            _loadApplicationsListData();
-            dgvApplicationsList.DataSource = _list;
-            lblRecordsCount.Text = _list.Count.ToString();
-            _restartFilterArea();
-
-        }
- 
-        private void cancelApplicationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            int localDrivingLicenseApplicationID = (int)dgvApplicationsList.CurrentRow.Cells[0].Value;
-
-            try
-            {
-                if (ApplicationService.UpdateLDLApplicationStatus(localDrivingLicenseApplicationID, ApplicationService.enStatus.Canceled))
-                {
-                    MessageBox.Show("Application Status Updated Successfully", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    _refreshData();
-                }
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
-            }
-        }
-
         private void tbFilterInput_TextChanged(object sender, EventArgs e)
         {
-            // TODO : CREATE FILTER LOGIC
+            // TODO : Handile if the user set own filter .            
+
+            if (!cbFilterOn.Items.Contains(cbFilterOn.SelectedItem))
+            {
+                MessageBox.Show("Select Filter","Alert",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                return;
+            }
+            string selectedFilter = cbFilterOn.SelectedItem.ToString();
+            string searchingTarget = tbFilterInput.Text;
+
+            if (string.IsNullOrEmpty(searchingTarget) || searchingTarget.Length < 2)
+            {
+                dgvApplicationsList.DataSource = _list;
+                return;
+            }
+            dgvApplicationsList.DataSource = null;
+
+            dgvApplicationsList.DataSource = _returnDataOnFilter(selectedFilter,searchingTarget);
+            
+        }
+
+        private List<clsLocalDrivingLicesnseApplicationView> _returnDataOnFilter(string selectedFilter,string serchingTarget)
+        {
+            List<clsLocalDrivingLicesnseApplicationView> filteredList = new List<clsLocalDrivingLicesnseApplicationView>();
+            switch (selectedFilter)
+            {
+                case "None":
+
+                    break;
+                
+                case "National NO":
+                   
+                    filteredList = _list.Where(i => i.NationalNO == serchingTarget.ToUpper()).ToList();
+                    break;
+
+                default:
+                    tbFilterInput.Enabled = false;
+                    break;
+            }
+
+            return filteredList;
         }
     }
 }
