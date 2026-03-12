@@ -52,6 +52,7 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             frmNewLocalDrivingLicenseApplication frmNewLocalDrivingLicenseApplication = new frmNewLocalDrivingLicenseApplication();
             frmNewLocalDrivingLicenseApplication.ShowDialog();
             _refreshData(DataBasePiplineSource);
+            _refreshDGVDataSource(DataBasePiplineSource);
         }
         private void cancelApplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -63,6 +64,7 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
                 {
                     MessageBox.Show("Application Status Updated Successfully", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     _refreshData(DataBasePiplineSource);
+                    _refreshDGVDataSource(DataBasePiplineSource);
                 }
             }
             catch (Exception ex)

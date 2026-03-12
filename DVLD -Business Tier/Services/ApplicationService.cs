@@ -144,6 +144,12 @@ namespace DVLD__Business_Tier.Services
         public static bool UpdateLDLApplicationStatus(int localDrivingLicenseApplicationID , enStatus status)
         {
             DVLD__Core.Models.Application selectedApplication = _getApplicationOnLDLA_ID(localDrivingLicenseApplicationID);
+
+            if (selectedApplication.ApplicationStatus == _getSelectedStatus(status))
+            {
+                throw new Exception($"Status Already {_getSelectedStatus(status)}");
+            }
+
             if (selectedApplication == null)
             {
                 throw new Exception("Application Not Found!");

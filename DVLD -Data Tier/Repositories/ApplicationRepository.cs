@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -30,67 +31,73 @@ namespace DVLD__Data_Tier.Repositories
                 using (SqlTransaction transaction = connection.BeginTransaction())
                 {
                     try
-                    {                        
-                        string query1 = @"INSERT INTO Applications 
-                                     (CreatedByUser_ID, ApplicationType_ID, Person_ID, ApplicationDate, PaidFees, LastStatusDate, ApplicationStatus)
-                                     VALUES 
-                                     (@CreatedByUser_ID, @ApplicationType_ID, @Person_ID, @ApplicationDate, @PaidFees, @LastStatusDate, @ApplicationStatus);
-                                     SELECT SCOPE_IDENTITY();";
-                     
-                        using (SqlCommand command = new SqlCommand(query1, connection, transaction))
-                        {
-                            command.Parameters.AddWithValue("@CreatedByUser_ID", newApplication.CreatedByUser_ID);
-                            command.Parameters.AddWithValue("@ApplicationType_ID", newApplication.ApplicationType_ID);
-                            command.Parameters.AddWithValue("@Person_ID", newApplication.Person_ID);
-                            command.Parameters.AddWithValue("@ApplicationDate", newApplication.ApplicationDate);
-                            command.Parameters.AddWithValue("@PaidFees", newApplication.PaidFees);
-                            if (newApplication.LastStatusDate == null)
-                            {
-                                command.Parameters.AddWithValue("@LastStatusDate", DBNull.Value);
-                            }
-                            else
-                            {
-                                command.Parameters.AddWithValue("@LastStatusDate", newApplication.LastStatusDate);
-                            }
-                            
-                            command.Parameters.AddWithValue("@ApplicationStatus", newApplication.ApplicationStatus);
-                            
-                            object applicationReturnedID = command.ExecuteScalar();
-                            newBaseAppID = Convert.ToInt32(applicationReturnedID);
-
-
-                            string query2 = @"INSERT INTO LocalDrivingLicenseApplications 
-                                         (Application_ID, LicenseClass_ID)
-                                         VALUES 
-                                         (@ApplicationID, @LicenseClassID);
-                                         SELECT SCOPE_IDENTITY();";
-
-                            
-                            command.CommandText = query2;
-                            command.Parameters.Clear();
-
-                            
-
-                            command.Parameters.AddWithValue("@ApplicationID", newBaseAppID);
-                            command.Parameters.AddWithValue("@LicenseClassID", licenseClassID);
-                            
-                            object LDLApplicationReturnedID = command.ExecuteScalar();
-
-                            
-                            newLocalAppID = Convert.ToInt32(LDLApplicationReturnedID);
-                        }
-                      
+                    {
+                       
+                        newBaseAppID = _insertApplication(connection, transaction, newApplication);
+                        newLocalAppID = _insertLDLAppliaction(newBaseAppID, licenseClassID, connection, transaction);
+                    
                         transaction.Commit();
                     }
                     catch (Exception ex)
                     {                        
-                        transaction.Rollback();                        
-                        return -1; 
+                        transaction.Rollback();
+                        throw new Exception(ex.Message);
                     }
                 }
             }
 
             return newBaseAppID;
+        }
+        private static int _insertApplication(SqlConnection connection, SqlTransaction transaction, Application newApplication)
+        {
+            int newLocalAppID = -1;
+            string query = @"INSERT INTO Applications 
+                                     (CreatedByUser_ID, ApplicationType_ID, Person_ID, ApplicationDate, PaidFees, LastStatusDate, ApplicationStatus)
+                                     VALUES 
+                                     (@CreatedByUser_ID, @ApplicationType_ID, @Person_ID, @ApplicationDate, @PaidFees, @LastStatusDate, @ApplicationStatus);
+                                     SELECT SCOPE_IDENTITY();";
+
+            using (SqlCommand command = new SqlCommand(query, connection, transaction))
+            {
+                command.Parameters.AddWithValue("@CreatedByUser_ID", newApplication.CreatedByUser_ID);
+                command.Parameters.AddWithValue("@ApplicationType_ID", newApplication.ApplicationType_ID);
+                command.Parameters.AddWithValue("@Person_ID", newApplication.Person_ID);
+                command.Parameters.AddWithValue("@ApplicationDate", newApplication.ApplicationDate);
+                command.Parameters.AddWithValue("@PaidFees", newApplication.PaidFees);
+                if (newApplication.LastStatusDate == null)
+                {
+                    command.Parameters.AddWithValue("@LastStatusDate", DBNull.Value);
+                }
+                else
+                {
+                    command.Parameters.AddWithValue("@LastStatusDate", newApplication.LastStatusDate);
+                }
+
+                command.Parameters.AddWithValue("@ApplicationStatus", newApplication.ApplicationStatus);
+
+                object applicationReturnedID = command.ExecuteScalar();
+                int.TryParse(applicationReturnedID.ToString(), out newLocalAppID);
+            }
+            return 
+                newLocalAppID;
+        }
+        private static int _insertLDLAppliaction(int insertedApplicationID,int LicenseClassTypeID, SqlConnection connection, SqlTransaction transaction)
+        {
+            int newLocalAppID = -1;
+            string query = @"INSERT INTO LocalDrivingLicenseApplications
+                                         (Application_ID, LicenseClass_ID)
+                                         VALUES 
+                                         (@ApplicationID, @LicenseClassID);
+                                         SELECT SCOPE_IDENTITY();";
+            using (SqlCommand cmd = new SqlCommand(query, connection, transaction))
+            {
+                cmd.Parameters.AddWithValue("@ApplicationID", insertedApplicationID);
+                cmd.Parameters.AddWithValue("@LicenseClassID",LicenseClassTypeID);
+
+                object applicationReturnedID = cmd.ExecuteScalar();
+                int.TryParse(applicationReturnedID.ToString(), out newLocalAppID);
+            }
+            return newLocalAppID;
         }
         public static int AddNewApplication(DVLD__Core.Models.Application newApplication)
         {
