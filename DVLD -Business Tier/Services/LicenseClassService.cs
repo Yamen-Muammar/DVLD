@@ -12,19 +12,8 @@ namespace DVLD__Business_Tier.Services
     {
         public static List<LicenseClass> GetAlllicenseClasses()
         {
-			var list = new List<LicenseClass>();
-			try
-			{
-				list = LicenseClassRepository.GetAllLicenseClasses();
-			}
-			catch (Exception)
-			{
-
-				throw new Exception("Error while Get All license classes");
-			}
+            List<LicenseClass> list = LicenseClassRepository.GetAllLicenseClasses();
 			return list;
         }
-
-
     }
 }

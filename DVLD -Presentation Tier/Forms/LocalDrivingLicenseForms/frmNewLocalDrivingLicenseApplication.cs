@@ -97,20 +97,16 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             try
             {
                 _licenseClasses = LicenseClassService.GetAlllicenseClasses();
-                if (_licenseClasses.Count < 1)
-                {
-                    MessageBox.Show("Get License Classes Error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    this.Close();
-                    return;
-                }
 
-                foreach (LicenseClass licenseClass in _licenseClasses) {
+                foreach (LicenseClass licenseClass in _licenseClasses)
+                {
                     cbLicenseClasses.Items.Add(licenseClass.ClassName);
                 };
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Close();
                 return;
             }            
             cbLicenseClasses.SelectedIndex = 0;
