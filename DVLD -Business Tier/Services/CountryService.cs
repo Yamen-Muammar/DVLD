@@ -17,11 +17,19 @@ namespace DVLD__Business_Tier.Services
 
         public static Country GetCountry(int id)
         {
+            if (id <= 0)
+            {
+                throw new ArgumentException("Just Valid IDs");
+            }
             return CountryRepository.GetCountryByID(id);
         }
 
         public static Country GetCountry(string countryName)
         {
+            if (string.IsNullOrEmpty(countryName))
+            {
+                throw new ArgumentException();
+            }
             return CountryRepository.GetCountryByName(countryName);        
         }
 

@@ -39,9 +39,9 @@ namespace DVLD__Data_Tier.Repositories
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Debug.WriteLine("** Error IN GetCountryByID :" + ex.ToString() + " ***");
+                        throw;
                     }
                 }
             }
@@ -71,15 +71,14 @@ namespace DVLD__Data_Tier.Repositories
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Debug.WriteLine("** Error IN GetCountries :" + ex.ToString() + " ***");
+                        throw;
                     }
                 }
             }
             return countries;
         }
-
         public static Country GetCountryByName(string countryName)
         {
             Country foundCountry = null;
@@ -107,9 +106,9 @@ namespace DVLD__Data_Tier.Repositories
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Debug.WriteLine("** Error IN GetCountryByID :" + ex.ToString() + " ***");
+                        throw;
                     }
                 }
             }

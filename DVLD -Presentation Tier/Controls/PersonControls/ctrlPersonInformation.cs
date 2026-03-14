@@ -83,7 +83,7 @@ namespace DVLD__Presentation_Tier
             lblPhoneNumber.Text = PersonInfo.Phone;
             lblEmail.Text = PersonInfo.Email;
             lblAddress.Text = PersonInfo.Address;
-            lblCountry.Text = GetCountryName();
+            lblCountry.Text = _getCountryNameOnPersonID();
             lblDateOfBirth.Text = PersonInfo.DateOfBirth.ToString("d");
 
             if (PersonInfo.ImageName != "")
@@ -108,9 +108,19 @@ namespace DVLD__Presentation_Tier
             // 3. Create the image from that memory stream
             return Image.FromStream(ms);
         }
-        private string GetCountryName()
-        {            
-            string countryName = CountryService.GetCountry(PersonInfo.Country_ID).CountryName;
+        private string _getCountryNameOnPersonID()
+        {
+            string countryName = string.Empty;
+            try
+            {
+                 countryName = CountryService.GetCountry(PersonInfo.Country_ID).CountryName;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
             return countryName;
         }
         private void FindAndSetPersonInfo(int PersonID)

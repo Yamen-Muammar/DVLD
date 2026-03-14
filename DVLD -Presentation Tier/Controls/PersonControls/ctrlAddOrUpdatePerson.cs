@@ -226,7 +226,20 @@ namespace DVLD__Presentation_Tier
             PersonInfo.Gender = (rbGenderMale.Checked) ? "Male" : "Female";
 
             string selectedCountryName = cbCountry.SelectedItem.ToString();
-            int countryID = CountryService.GetCountry(selectedCountryName).CountryID;            
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            int countryID = _getCountryIDOnName(selectedCountryName);
+            if (countryID == -1)
+            {
+                return false;
+            }
             PersonInfo.Country_ID = countryID;            
             PersonInfo.ImageName = _imagePath;
             return true;
@@ -234,8 +247,8 @@ namespace DVLD__Presentation_Tier
         }        
         private void _loadCountriesCB()
         {
-            List<Country> countriesList = CountryService.GetAllCountries();
-
+            List<Country> countriesList = _loadCountriesList();
+            
             foreach (Country country in countriesList)
             {
                 cbCountry.Items.Add(country.CountryName);                
@@ -247,11 +260,53 @@ namespace DVLD__Presentation_Tier
             }
             else
             {
-                string countryName = CountryService.GetCountry(PersonInfo.Country_ID).CountryName;
+                string countryName = _getCountryNameOnPersonID();
                 cbCountry.SelectedIndex = cbCountry.FindString(countryName);
             }
 
             
+        }
+        private int _getCountryIDOnName(string selectedCountryName)
+        {
+            try
+            {
+                return (int)CountryService.GetCountry(selectedCountryName).CountryID;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return -1;
+        }
+        private string _getCountryNameOnPersonID()
+        {
+            string countryName = string.Empty;
+            try
+            {
+                countryName = CountryService.GetCountry(PersonInfo.Country_ID).CountryName;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return countryName;
+        }
+        private List<Country> _loadCountriesList()
+        {
+            List<Country> countriesList = new List<Country>();
+            try
+            {
+                countriesList = CountryService.GetAllCountries();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return countriesList;
         }
 
         //Image Handling Functions
