@@ -23,20 +23,7 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
         {
             InitializeComponent();
         }
-        private async Task _loadDataAsync()
-        {
-            _applicationService = new ApplicationService();
-            _dataBaseSource = new List<clsLocalDrivingLicesnseApplicationView>();
-            try
-            {
-                _dataBaseSource = await _applicationService.GetAllLDLApplications(); 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
-            }
-        }
+       
         private async void frmLocalDrivingLicenseApplication_Load(object sender, EventArgs e)
         {
             _loadComboBox();
@@ -112,7 +99,20 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             dgvApplicationsList.DataSource = source;
             lblRecordsCount.Text = source.Count.ToString();
         }
-        
+        private async Task _loadDataAsync()
+        {
+            _applicationService = new ApplicationService();
+            _dataBaseSource = new List<clsLocalDrivingLicesnseApplicationView>();
+            try
+            {
+                _dataBaseSource = await _applicationService.GetAllLDLApplications();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
+        }
 
         //Filtering combo Box Logic
 
