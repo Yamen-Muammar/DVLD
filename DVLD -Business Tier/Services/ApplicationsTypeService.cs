@@ -10,24 +10,30 @@ namespace DVLD__Business_Tier.Services
 {
     public class ApplicationsTypeService
     {
-        public static bool UpdateApplicationType(ApplicationType applicationType)
+        private ApplicationsTypesRepository _repository;
+
+        public ApplicationsTypeService()
+        {
+            _repository = new ApplicationsTypesRepository();
+        }
+        public async Task<bool> UpdateApplicationType(ApplicationType applicationType)
         {
             if (!_validateApplicationType(applicationType))
             {
                 return false;
             }
 
-            if (!ApplicationsTypesRepository.UpdateApplicationType(applicationType))
+            if (!await _repository.UpdateApplicationType(applicationType))
             {
                 throw new Exception("Can not update!. Please try again later.");
             }
             return true;
         }
-        public static List<ApplicationType> GetAllApplicationTypes()
+        public async Task<List<ApplicationType>> GetAllApplicationTypes()
         {
             List<ApplicationType> applicationTypes = null;
             
-            applicationTypes = ApplicationsTypesRepository.GetAllApplicationTypes();
+            applicationTypes = await _repository.GetAllApplicationTypes();
 
             if (applicationTypes == null)
             {
@@ -36,7 +42,7 @@ namespace DVLD__Business_Tier.Services
          
            return applicationTypes;
         }
-        private static bool _validateApplicationType(ApplicationType applicationType)
+        private bool _validateApplicationType(ApplicationType applicationType)
         {
             if (applicationType == null)
             {
@@ -52,12 +58,11 @@ namespace DVLD__Business_Tier.Services
             }
             return true;
         }
-
-        public static ApplicationType GetApplicationTypeByID(int applicationTypeID)
+        public async Task<ApplicationType> GetApplicationTypeByID(int applicationTypeID)
         {
             ApplicationType applicationType = null;
             
-            applicationType = ApplicationsTypesRepository.GetApplicationTypeByID(applicationTypeID);
+            applicationType = await _repository.GetApplicationTypeByID(applicationTypeID);
 
             if (applicationType == null)
             {

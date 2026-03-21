@@ -12,7 +12,7 @@ namespace DVLD__Data_Tier.Repositories
 {
     public class ApplicationsTypesRepository
     {
-        public static bool UpdateApplicationType(ApplicationType applicationType)
+        public async Task<bool> UpdateApplicationType(ApplicationType applicationType)
         {
             int rowsAffected = 0;
 
@@ -31,9 +31,9 @@ namespace DVLD__Data_Tier.Repositories
 
                 try
                 {
-                    connection.Open();
+                    await connection.OpenAsync();
 
-                    rowsAffected = command.ExecuteNonQuery();
+                    rowsAffected =await command.ExecuteNonQueryAsync();
                 }
                 catch (Exception)
                 {
@@ -43,7 +43,7 @@ namespace DVLD__Data_Tier.Repositories
             return (rowsAffected > 0);
         }
 
-        public static List<ApplicationType> GetAllApplicationTypes()
+        public async Task<List<ApplicationType>> GetAllApplicationTypes()
         {
 
             List<ApplicationType> types = new List<ApplicationType>();
@@ -55,11 +55,11 @@ namespace DVLD__Data_Tier.Repositories
             {
                 try
                 {
-                    connection.Open();
+                    await connection.OpenAsync();
                   
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    using (SqlDataReader reader =await command.ExecuteReaderAsync())
                     {
-                        while (reader.Read())
+                        while (await reader.ReadAsync())
                         {
                             types.Add(new ApplicationType
                             {
@@ -78,7 +78,7 @@ namespace DVLD__Data_Tier.Repositories
             return types;
         }
 
-        public static ApplicationType GetApplicationTypeByID(int applicationTypeID)
+        public async Task<ApplicationType> GetApplicationTypeByID(int applicationTypeID)
         {
             ApplicationType applicationType = null;
             string query = "SELECT * FROM ApplicationTypes WHERE ApplicationTypeID = @ID";
@@ -88,10 +88,10 @@ namespace DVLD__Data_Tier.Repositories
                 command.Parameters.AddWithValue("@ID", applicationTypeID);
                 try
                 {
-                    connection.Open();
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    await connection.OpenAsync();
+                    using (SqlDataReader reader =await command.ExecuteReaderAsync())
                     {
-                        if (reader.Read())
+                        if (await reader.ReadAsync())
                         {
                             applicationType = new ApplicationType
                             {

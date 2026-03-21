@@ -16,21 +16,24 @@ namespace DVLD__Presentation_Tier.Forms.Application_Types_Forms
     {
         private int _applicationTypeID;
         private ApplicationType _applicationType;
+        private ApplicationsTypeService _applicationsTypeService;
         public frmUpdateApplicationTypeInfo()
         {
             InitializeComponent();
+            _applicationsTypeService = new ApplicationsTypeService();
         }
         public frmUpdateApplicationTypeInfo(int applicationTypeID)
         {
             InitializeComponent();
             _applicationTypeID = applicationTypeID;
+            _applicationsTypeService = new ApplicationsTypeService();
         }
 
-        private void frmUpdateApplicationTypeInfo_Load(object sender, EventArgs e)
+        private async void frmUpdateApplicationTypeInfo_Load(object sender, EventArgs e)
         {
             try
             {
-                _applicationType = ApplicationsTypeService.GetApplicationTypeByID(_applicationTypeID);
+                await _loadApplcationINobject();
 
                 if (_applicationType == null)
                 {
@@ -45,15 +48,24 @@ namespace DVLD__Presentation_Tier.Forms.Application_Types_Forms
                 return;
             }
         }
-
         private void LoadDataTOForm()
         {
             lblID.Text = _applicationType.ApplicationTypeID.ToString();
             lblTitle.Text = _applicationType.ApplicationTypeTitle.ToString();
             tbFees.Text = _applicationType.ApplicationTypeFees.ToString("F2");
         }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private async Task _loadApplcationINobject()
+        {
+            try
+            {
+                _applicationType = await _applicationsTypeService.GetApplicationTypeByID(_applicationTypeID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);        
+            }
+        }
+        private async void btnUpdate_Click(object sender, EventArgs e)
         {
             if (!_loadInfoToObject())
             {
@@ -62,7 +74,7 @@ namespace DVLD__Presentation_Tier.Forms.Application_Types_Forms
 
             try
             {                
-                if (ApplicationsTypeService.UpdateApplicationType(_applicationType))
+                if (await _applicationsTypeService.UpdateApplicationType(_applicationType))
                 {
                     MessageBox.Show("Application Type updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
@@ -77,7 +89,6 @@ namespace DVLD__Presentation_Tier.Forms.Application_Types_Forms
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private bool ValidateInput()
         {
             if (string.IsNullOrWhiteSpace(tbFees.Text))
@@ -92,7 +103,6 @@ namespace DVLD__Presentation_Tier.Forms.Application_Types_Forms
             }
             return true;
         }
-
         private bool _loadInfoToObject()
         {
             if (!ValidateInput())

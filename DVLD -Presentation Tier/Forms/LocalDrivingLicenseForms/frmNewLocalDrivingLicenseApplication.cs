@@ -23,20 +23,22 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
         public frmNewLocalDrivingLicenseApplication()
         {
             InitializeComponent();
+        }
+        private async Task _getApplicationTypeByID(int LDLApplicationType_ID)
+        {
+            ApplicationsTypeService applicationsTypeService = new ApplicationsTypeService();
             try
             {
-                _applicationType = ApplicationsTypeService.GetApplicationTypeByID(LDLApplicationType_ID);
+                _applicationType = await applicationsTypeService.GetApplicationTypeByID(LDLApplicationType_ID);
             }
             catch (Exception)
             {
-                MessageBox.Show("Error While Getting the Application Type.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                this.Close(); 
-                return;
+                MessageBox.Show("Error While Getting the Application Type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void frmNewLocalDrivingLicenseApplication_Load(object sender, EventArgs e)
+        private async void frmNewLocalDrivingLicenseApplication_Load(object sender, EventArgs e)
         {
+            await _getApplicationTypeByID(LDLApplicationType_ID);
             _loadDataInForm();
         }
         private void btnNext_Click(object sender, EventArgs e)

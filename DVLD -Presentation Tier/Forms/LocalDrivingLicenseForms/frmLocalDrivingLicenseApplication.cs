@@ -33,8 +33,7 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
         }
         private async void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            TestService testService = new TestService();
-            // TODO : Viabilty logic 
+            TestService testService = new TestService(); 
             string nationalNo = _getSelectedNationalNo();
             int CountOfPassedTest= await testService.PassedTestCount(nationalNo);
             _visbleComboItemsOnPassedTests(CountOfPassedTest);
@@ -258,12 +257,51 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
         private void SetVisibleMenuItems(bool VisionTest,bool WrittenTest,bool StreetTest,bool issueDrivingLicense, bool showLicense)
         {
             issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = issueDrivingLicense;
-            // TODO : if he is got license you can show this create it when we make the license service class.
+            // TODO : if he has license you can show this( create it when we make the license service class).
             showLicenseToolStripMenuItem.Enabled = showLicense;
             sechduleStreetTestToolStripMenuItem.Enabled = StreetTest;
             sechduleVisionTestToolStripMenuItem.Enabled = VisionTest;
             sechduleWrittenTestToolStripMenuItem.Enabled = WrittenTest;
         }
 
+        private void showApplicationDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void editeApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void sechduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void sechduleWrittenTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void sechduleStreetTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void issueDrivingLicenseFirstTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void showLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

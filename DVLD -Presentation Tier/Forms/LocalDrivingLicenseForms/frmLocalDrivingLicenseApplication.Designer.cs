@@ -114,6 +114,7 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             this.showApplicationDetailsToolStripMenuItem.Name = "showApplicationDetailsToolStripMenuItem";
             this.showApplicationDetailsToolStripMenuItem.Size = new System.Drawing.Size(346, 32);
             this.showApplicationDetailsToolStripMenuItem.Text = "Show Application Details";
+            this.showApplicationDetailsToolStripMenuItem.Click += new System.EventHandler(this.showApplicationDetailsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -126,6 +127,7 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             this.editeApplicationToolStripMenuItem.Name = "editeApplicationToolStripMenuItem";
             this.editeApplicationToolStripMenuItem.Size = new System.Drawing.Size(346, 32);
             this.editeApplicationToolStripMenuItem.Text = "Edite Application";
+            this.editeApplicationToolStripMenuItem.Click += new System.EventHandler(this.editeApplicationToolStripMenuItem_Click);
             // 
             // deleteApplicationToolStripMenuItem
             // 
@@ -170,6 +172,7 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             this.sechduleVisionTestToolStripMenuItem.Name = "sechduleVisionTestToolStripMenuItem";
             this.sechduleVisionTestToolStripMenuItem.Size = new System.Drawing.Size(283, 34);
             this.sechduleVisionTestToolStripMenuItem.Text = "Sechdule Vision Test";
+            this.sechduleVisionTestToolStripMenuItem.Click += new System.EventHandler(this.sechduleVisionTestToolStripMenuItem_Click);
             // 
             // sechduleWrittenTestToolStripMenuItem
             // 
@@ -177,6 +180,7 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             this.sechduleWrittenTestToolStripMenuItem.Name = "sechduleWrittenTestToolStripMenuItem";
             this.sechduleWrittenTestToolStripMenuItem.Size = new System.Drawing.Size(283, 34);
             this.sechduleWrittenTestToolStripMenuItem.Text = "Sechdule Written Test";
+            this.sechduleWrittenTestToolStripMenuItem.Click += new System.EventHandler(this.sechduleWrittenTestToolStripMenuItem_Click);
             // 
             // sechduleStreetTestToolStripMenuItem
             // 
@@ -184,6 +188,7 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             this.sechduleStreetTestToolStripMenuItem.Name = "sechduleStreetTestToolStripMenuItem";
             this.sechduleStreetTestToolStripMenuItem.Size = new System.Drawing.Size(283, 34);
             this.sechduleStreetTestToolStripMenuItem.Text = "Sechdule Street Test";
+            this.sechduleStreetTestToolStripMenuItem.Click += new System.EventHandler(this.sechduleStreetTestToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
@@ -196,6 +201,7 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             this.issueDrivingLicenseFirstTimeToolStripMenuItem.Name = "issueDrivingLicenseFirstTimeToolStripMenuItem";
             this.issueDrivingLicenseFirstTimeToolStripMenuItem.Size = new System.Drawing.Size(346, 32);
             this.issueDrivingLicenseFirstTimeToolStripMenuItem.Text = "Issue Driving License (First Time)";
+            this.issueDrivingLicenseFirstTimeToolStripMenuItem.Click += new System.EventHandler(this.issueDrivingLicenseFirstTimeToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
@@ -208,6 +214,7 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             this.showLicenseToolStripMenuItem.Name = "showLicenseToolStripMenuItem";
             this.showLicenseToolStripMenuItem.Size = new System.Drawing.Size(346, 32);
             this.showLicenseToolStripMenuItem.Text = "Show License";
+            this.showLicenseToolStripMenuItem.Click += new System.EventHandler(this.showLicenseToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
@@ -220,6 +227,7 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             this.showPersonLicenseHistoryToolStripMenuItem.Name = "showPersonLicenseHistoryToolStripMenuItem";
             this.showPersonLicenseHistoryToolStripMenuItem.Size = new System.Drawing.Size(346, 32);
             this.showPersonLicenseHistoryToolStripMenuItem.Text = "Show Person License History";
+            this.showPersonLicenseHistoryToolStripMenuItem.Click += new System.EventHandler(this.showPersonLicenseHistoryToolStripMenuItem_Click);
             // 
             // label2
             // 

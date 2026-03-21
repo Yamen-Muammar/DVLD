@@ -15,14 +15,16 @@ namespace DVLD__Presentation_Tier.Forms.Application_Types_Forms
     public partial class frmManageApplicationTypes : Form
     {
         private List<ApplicationType> _applicationTypesList { get; set; }
+        private ApplicationsTypeService _applicationsTypeService;
         public frmManageApplicationTypes()
         {
             InitializeComponent();
+            _applicationsTypeService = new ApplicationsTypeService();
         }
 
-        private void frmManageApplicationTypes_Load(object sender, EventArgs e)
+        private async void frmManageApplicationTypes_Load(object sender, EventArgs e)
         {
-            _refreshApplicationTypesDataList();
+            await _refreshApplicationTypesDataList();
             _refreshDataGridView(_applicationTypesList);
         }
 
@@ -31,12 +33,12 @@ namespace DVLD__Presentation_Tier.Forms.Application_Types_Forms
             this.Close();
         }
 
-        private  void _refreshApplicationTypesDataList()
+        private  async Task _refreshApplicationTypesDataList()
         {
             _applicationTypesList = null;
             try
             {
-                _applicationTypesList = ApplicationsTypeService.GetAllApplicationTypes();
+                _applicationTypesList = await _applicationsTypeService.GetAllApplicationTypes();
             }
             catch (Exception ex)
             {
@@ -51,7 +53,7 @@ namespace DVLD__Presentation_Tier.Forms.Application_Types_Forms
             dgvListOfApplicationsTypes.DataSource = source;
             lblRecordsCount.Text = source.Count.ToString();
         }
-        private void editeApplicationTypeToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void editeApplicationTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!_validateSelectedApplicationType())
             {
@@ -61,7 +63,7 @@ namespace DVLD__Presentation_Tier.Forms.Application_Types_Forms
             int selectedApplicationTypeID = (int)dgvListOfApplicationsTypes.CurrentRow.Cells[0].Value;
             frmUpdateApplicationTypeInfo frmUpdateApplicationTypeInfo = new frmUpdateApplicationTypeInfo(selectedApplicationTypeID);
             frmUpdateApplicationTypeInfo.ShowDialog();
-            _refreshApplicationTypesDataList();
+            await _refreshApplicationTypesDataList();
             _refreshDataGridView(_applicationTypesList);
         }
 
