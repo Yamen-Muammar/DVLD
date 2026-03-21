@@ -8,29 +8,33 @@ using DVLD__Data_Tier.Repositories;
 
 namespace DVLD__Business_Tier.Services
 {
-    public static class CountryService
+    public class CountryService
     {
-        public static List<Country> GetAllCountries()
-        {           
-            return CountryRepository.GetCountries();
-        }
+        private CountryRepository _repo;
 
-        public static Country GetCountry(int id)
+        public CountryService()
+        {
+            _repo = new CountryRepository();
+        }
+        public async Task<List<Country>> GetAllCountries()
+        {           
+            return await _repo.GetCountries();
+        }
+        public  async Task<Country> GetCountry(int id)
         {
             if (id <= 0)
             {
                 throw new ArgumentException("Just Valid IDs");
             }
-            return CountryRepository.GetCountryByID(id);
+            return await _repo.GetCountryByID(id);
         }
-
-        public static Country GetCountry(string countryName)
+        public async Task<Country> GetCountry(string countryName)
         {
             if (string.IsNullOrEmpty(countryName))
             {
                 throw new ArgumentException();
             }
-            return CountryRepository.GetCountryByName(countryName);        
+            return await _repo.GetCountryByName(countryName);        
         }
 
     }

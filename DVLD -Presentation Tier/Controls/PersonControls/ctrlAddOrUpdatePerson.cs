@@ -41,12 +41,13 @@ namespace DVLD__Presentation_Tier
         private enMode Mode { get; set; }
         private string _imagePath { get; set; }
         private int FormPersonId { get; set; }
-        private Person PersonInfo { get; set; }        
+        private Person PersonInfo { get; set; }
 
+        private CountryService _countryService;
         public ctrlAddOrUpdatePerson()
         {
             InitializeComponent();
-
+            _countryService = new CountryService();
             FormPersonId = -1;
 
             Mode = enMode.eAdd;
@@ -57,6 +58,7 @@ namespace DVLD__Presentation_Tier
         public ctrlAddOrUpdatePerson(int id)
         {
             InitializeComponent();
+            _countryService = new CountryService();
             FormPersonId = id;
 
             Mode = (FormPersonId == -1) ? enMode.eAdd :enMode.eUpdate;            
@@ -90,9 +92,9 @@ namespace DVLD__Presentation_Tier
         }
 
         // Button Event Handlers
-        private void btnSave_Click(object sender, EventArgs e)
+        private async void btnSave_Click(object sender, EventArgs e)
         {            
-            if (!_loadDataInPersonInfoObject())
+            if (!await _loadDataInPersonInfoObject())
             {
                 MessageBox.Show("Please fill all the required fields and set an image", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -221,7 +223,7 @@ namespace DVLD__Presentation_Tier
                 Debug.WriteLine("** Error in LoadDataInForm : " + ex +" **" );                
             }
         }
-        private bool _loadDataInPersonInfoObject()
+        private async Task<bool> _loadDataInPersonInfoObject()
         {
             if (!_validateUIPersonInfo())
             {
@@ -240,28 +242,20 @@ namespace DVLD__Presentation_Tier
             PersonInfo.Gender = (rbGenderMale.Checked) ? "Male" : "Female";
 
             string selectedCountryName = cbCountry.SelectedItem.ToString();
-            try
-            {
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            int countryID = _getCountryIDOnName(selectedCountryName);
+            int countryID = await _getCountryIDOnName(selectedCountryName);
             if (countryID == -1)
             {
                 return false;
             }
-            PersonInfo.Country_ID = countryID;            
+
+            PersonInfo.Country_ID = countryID;     
             PersonInfo.ImageName = _imagePath;
             return true;
 
         }        
-        private void _loadCountriesCB()
+        private async void _loadCountriesCB()
         {
-            List<Country> countriesList = _loadCountriesList();
+            List<Country> countriesList =await _loadCountriesList();
             
             foreach (Country country in countriesList)
             {
@@ -274,17 +268,17 @@ namespace DVLD__Presentation_Tier
             }
             else
             {
-                string countryName = _getCountryNameOnPersonID();
+                string countryName = await _getCountryNameOnPersonID();
                 cbCountry.SelectedIndex = cbCountry.FindString(countryName);
             }
 
             
         }
-        private int _getCountryIDOnName(string selectedCountryName)
+        private async Task<int> _getCountryIDOnName(string selectedCountryName)
         {
             try
             {
-                return (int)CountryService.GetCountry(selectedCountryName).CountryID;
+                return (int)((await _countryService.GetCountry(selectedCountryName)).CountryID);
             }
             catch (Exception ex)
             {
@@ -293,12 +287,12 @@ namespace DVLD__Presentation_Tier
             }
             return -1;
         }
-        private string _getCountryNameOnPersonID()
+        private async Task<string> _getCountryNameOnPersonID()
         {
             string countryName = string.Empty;
             try
             {
-                countryName = CountryService.GetCountry(PersonInfo.Country_ID).CountryName;
+                countryName = (await _countryService.GetCountry(PersonInfo.Country_ID)).CountryName;
             }
             catch (Exception ex)
             {
@@ -308,12 +302,12 @@ namespace DVLD__Presentation_Tier
 
             return countryName;
         }
-        private List<Country> _loadCountriesList()
+        private async Task<List<Country>> _loadCountriesList()
         {
             List<Country> countriesList = new List<Country>();
             try
             {
-                countriesList = CountryService.GetAllCountries();
+                countriesList = await _countryService.GetAllCountries();
             }
             catch (Exception ex)
             {

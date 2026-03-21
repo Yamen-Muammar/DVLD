@@ -12,7 +12,7 @@ namespace DVLD__Data_Tier.Repositories
     public class CountryRepository
     {
         private static string connectionString = DataBaseSettings.DataBaseConnectionString;
-        public static Country GetCountryByID(int CountryId)
+        public async Task<Country> GetCountryByID(int CountryId)
         {
             Country foundCountry = null;
 
@@ -26,10 +26,10 @@ namespace DVLD__Data_Tier.Repositories
 
                     try
                     {
-                        conn.Open();
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        await conn.OpenAsync();
+                        using (SqlDataReader reader =await cmd.ExecuteReaderAsync())
                         {
-                            if (reader.Read())
+                            if (await reader.ReadAsync())
                             {
                                 foundCountry = new Country
                                 {
@@ -47,7 +47,7 @@ namespace DVLD__Data_Tier.Repositories
             }
             return foundCountry;
         }
-        public static List<Country> GetCountries()
+        public async Task<List<Country>> GetCountries()
         {
             List<Country> countries = new List<Country>();
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -58,10 +58,10 @@ namespace DVLD__Data_Tier.Repositories
                 {
                     try
                     {
-                        conn.Open();
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        await conn.OpenAsync();
+                        using (SqlDataReader reader =await cmd.ExecuteReaderAsync())
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 countries.Add(new Country
                                 {
@@ -79,7 +79,7 @@ namespace DVLD__Data_Tier.Repositories
             }
             return countries;
         }
-        public static Country GetCountryByName(string countryName)
+        public async Task<Country> GetCountryByName(string countryName)
         {
             Country foundCountry = null;
 
@@ -93,10 +93,10 @@ namespace DVLD__Data_Tier.Repositories
 
                     try
                     {
-                        conn.Open();
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        await conn.OpenAsync();
+                        using ( SqlDataReader reader =await cmd.ExecuteReaderAsync())
                         {
-                            if (reader.Read())
+                            if (await reader.ReadAsync())
                             {
                                 foundCountry = new Country
                                 {

@@ -28,16 +28,18 @@ namespace DVLD__Presentation_Tier
 
         //for send the id to the AddOrUpdate form.
         private int _personId;
-
+        private CountryService _countryService;
         private Person PersonInfo { get; set; }
         public ctrlPersonInformation()
         {
             InitializeComponent();
+            _countryService = new CountryService();
         }
 
         public ctrlPersonInformation(int personId)
         {
             InitializeComponent();
+            _countryService = new CountryService();
             SetPersonInfo(personId);
             if (PersonInfo == null)
             {
@@ -46,13 +48,13 @@ namespace DVLD__Presentation_Tier
             _personId = PersonInfo.PersonID;
         }
 
-        private void ctrlPersonInformation_Load(object sender, EventArgs e)
+        private async void ctrlPersonInformation_Load(object sender, EventArgs e)
         {
             if (PersonInfo == null)
             {
                 return;
             }
-            _loadDataInForm();
+            await _loadDataInForm();
         }
 
         private Person _getPerson(int personId)
@@ -82,7 +84,7 @@ namespace DVLD__Presentation_Tier
         }
 
         // Helper Methods
-        private void _loadDataInForm()
+        private async Task _loadDataInForm()
         {
             if (PersonInfo == null)
             {
@@ -95,7 +97,7 @@ namespace DVLD__Presentation_Tier
             lblPhoneNumber.Text = PersonInfo.Phone;
             lblEmail.Text = PersonInfo.Email;
             lblAddress.Text = PersonInfo.Address;
-            lblCountry.Text = _getCountryNameOnPersonID();
+            lblCountry.Text = await _getCountryNameOnPersonID();
             lblDateOfBirth.Text = PersonInfo.DateOfBirth.ToString("d");
 
             if (PersonInfo.ImageName != "")
@@ -120,12 +122,12 @@ namespace DVLD__Presentation_Tier
             // 3. Create the image from that memory stream
             return Image.FromStream(ms);
         }
-        private string _getCountryNameOnPersonID()
+        private async Task<string> _getCountryNameOnPersonID()
         {
             string countryName = string.Empty;
             try
             {
-                 countryName = CountryService.GetCountry(PersonInfo.Country_ID).CountryName;
+                 countryName = (await _countryService.GetCountry(PersonInfo.Country_ID)).CountryName;
             }
             catch (Exception ex)
             {
@@ -148,7 +150,7 @@ namespace DVLD__Presentation_Tier
         }
 
         //OUTSIDE CALLs TO UPDATE PERSON INFO IN THIS CONTROL AND REFRESH THE UI
-        public void UpdatePersonInfoANDRefreshUI(Person person)
+        public async void UpdatePersonInfoANDRefreshUI(Person person)
         {
             if (person == null)
             {
@@ -157,9 +159,9 @@ namespace DVLD__Presentation_Tier
             }
             PersonInfo = person;
             _personId = PersonInfo.PersonID;
-            _loadDataInForm();
+             await _loadDataInForm();
         }
-        public void OnRetrundDataEvent(Person person)
+        public async void OnRetrundDataEvent(Person person)
         {
             if (person == null)
             {
@@ -169,7 +171,7 @@ namespace DVLD__Presentation_Tier
 
             PersonInfo = null;
             PersonInfo = person;
-            _loadDataInForm();
+            await _loadDataInForm();
         }
     }
 }
