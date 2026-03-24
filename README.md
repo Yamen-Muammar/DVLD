@@ -1,12 +1,20 @@
 # Driving License Management System (DVLD)
 A comprehensive desktop application designed to streamline the processes of the Driving & Vehicle License Department. This system manages the full lifecycle of driving licenses, from initial application and testing to issuance, renewal, and replacement.
   
-🛠 Tech Stack
+🛠 Tech Stack  
+
+
 • Language: C#
+
+
 • Framework: .NET WinForms
+
 • Database: Microsoft SQL Server
+
 • Data Access: ADO.NET
+
 • Architecture: 3-Tier Architecture (Presentation, Business, and Data Access Layers)
+
 🚀 Key Features
 1. Application Management
 • New Local Driving Licenses: Full workflow for first-time applicants.
