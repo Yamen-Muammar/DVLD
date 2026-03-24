@@ -1,4 +1,4 @@
-# Driving License Management System (DVLD)
+# Driving License Management System (DLMS)
 A comprehensive desktop application designed to streamline the processes of the Driving & Vehicle License Department. This system manages the full lifecycle of driving licenses, from initial application and testing to issuance, renewal, and replacement.
   
 🛠 Tech Stack  
