@@ -35,6 +35,9 @@ A comprehensive desktop application designed to streamline the processes of the 
 
 🏗 System Architecture
 The project follows a strict 3-Tier Architecture to ensure scalability and maintainability:
+
 • Presentation Layer: Handles the UI/UX using Windows Forms.
+
 • Business Layer: Implements core business logic, validation rules, and application workflows.
+
 • Data Access Layer: Manages all direct interactions with the SQL Server database via ADO.NET.
