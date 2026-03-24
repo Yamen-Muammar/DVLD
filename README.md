@@ -28,7 +28,7 @@ A comprehensive desktop application designed to streamline the processes of the 
 
 • Detain & Release: Manage the detention and release of licenses with associated fine tracking.
 
-3. People & User Management
+2. People & User Management
    
 • Global People Registry: Centralized management of personal details (National ID, contact info, etc.) linked across the system.
 
@@ -36,7 +36,7 @@ A comprehensive desktop application designed to streamline the processes of the 
 
 • Account Controls: Enable/disable user access and manage login credentials.
 
-4. Examination & Testing
+3. Examination & Testing
    
 • Three-Stage Testing: Integration of Vision, Written, and Practical Street tests.
 
@@ -44,7 +44,7 @@ A comprehensive desktop application designed to streamline the processes of the 
 
 • Result Tracking: Historical logging of all test attempts and outcomes.
 
-5. License Classes
+4. License Classes
    
 • Support for multiple license categories (e.g., Small Motorcycles, Regular Driving, Commercial, Heavy Vehicles) with distinct requirements for age and fees.
 
