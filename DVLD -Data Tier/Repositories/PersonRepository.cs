@@ -13,12 +13,12 @@ namespace DVLD__Data_Tier.Repositories
 {
     public class PersonRepository
     {
-        private static string connectionString = DataBaseSettings.DataBaseConnectionString;
+        private string connectionString = DataBaseSettings.DataBaseConnectionString;
 
         // ---------------------------------------------------------
         // 1. CREATE (Insert New Person)
         // ---------------------------------------------------------
-        public static int AddNewPerson(Person person)
+        public  async Task<int> AddNewPerson(Person person)
         {
             int newPersonID = -1;
 
@@ -55,8 +55,9 @@ namespace DVLD__Data_Tier.Repositories
 
                     try
                     {
-                        conn.Open();
-                        object result = cmd.ExecuteScalar();
+                        await conn.OpenAsync();
+
+                        object result =await cmd.ExecuteScalarAsync();
 
                         if (result != null && int.TryParse(result.ToString(), out int insertedID))
                         {
@@ -75,7 +76,7 @@ namespace DVLD__Data_Tier.Repositories
         // ---------------------------------------------------------
         // 2. READ (Get Person)
         // ---------------------------------------------------------
-        public static Person GetPersonByID(int personID)
+        public async Task<Person> GetPersonByID(int personID)
         {
             Person foundPerson = null;
 
@@ -89,10 +90,10 @@ namespace DVLD__Data_Tier.Repositories
 
                     try
                     {
-                        conn.Open();
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        await  conn.OpenAsync();
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
-                            if (reader.Read())
+                            if (await reader.ReadAsync())
                             {
                                 foundPerson = new Person
                                 {
@@ -121,7 +122,7 @@ namespace DVLD__Data_Tier.Repositories
             }
             return foundPerson;
         }
-        public static Person GetPersonByNationalNO(string nationalNO)
+        public async Task<Person> GetPersonByNationalNO(string nationalNO)
         {
             Person foundPerson = null;
 
@@ -135,10 +136,10 @@ namespace DVLD__Data_Tier.Repositories
 
                     try
                     {
-                        conn.Open();
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        await conn.OpenAsync();
+                        using (SqlDataReader reader =await cmd.ExecuteReaderAsync())
                         {
-                            if (reader.Read())
+                            if (await reader.ReadAsync())
                             {
                                 foundPerson = new Person
                                 {
@@ -171,7 +172,7 @@ namespace DVLD__Data_Tier.Repositories
         // ---------------------------------------------------------
         // 3. READ ALL (Get List of People)
         // ---------------------------------------------------------
-        public static List<clsPersonView> GetAllPeople()
+        public async Task<List<clsPersonView>> GetAllPeople()
         {
              List<clsPersonView> peopleList = new List<clsPersonView>();
 
@@ -182,10 +183,10 @@ namespace DVLD__Data_Tier.Repositories
                 {
                     try
                     {
-                        conn.Open();
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        await conn.OpenAsync();
+                        using (SqlDataReader reader =await cmd.ExecuteReaderAsync())
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 peopleList.Add(new clsPersonView
                                 {
@@ -218,7 +219,7 @@ namespace DVLD__Data_Tier.Repositories
         // ---------------------------------------------------------
         // 4. UPDATE (Update Existing Person)
         // ---------------------------------------------------------
-        public static bool UpdatePerson(Person person)
+        public async Task<bool> UpdatePerson(Person person)
         {
             int rowsAffected = 0;
 
@@ -257,8 +258,8 @@ namespace DVLD__Data_Tier.Repositories
 
                     try
                     {
-                        conn.Open();
-                        rowsAffected = cmd.ExecuteNonQuery();
+                        await conn.OpenAsync();
+                        rowsAffected =await cmd.ExecuteNonQueryAsync();
                     }
                     catch (Exception)
                     {
@@ -272,7 +273,7 @@ namespace DVLD__Data_Tier.Repositories
         // ---------------------------------------------------------
         // 5. DELETE (Delete Person)
         // ---------------------------------------------------------
-        public static bool DeletePerson(int personID)
+        public async Task<bool> DeletePerson(int personID)
         {
             int rowsAffected = 0;
 
@@ -286,8 +287,8 @@ namespace DVLD__Data_Tier.Repositories
 
                     try
                     {
-                        conn.Open();
-                        rowsAffected = cmd.ExecuteNonQuery();
+                        await conn.OpenAsync();
+                        rowsAffected =await cmd.ExecuteNonQueryAsync();
                     }
                     catch (Exception)
                     {
@@ -301,7 +302,7 @@ namespace DVLD__Data_Tier.Repositories
         // ---------------------------------------------------------
         // 6. CHECK EXISTENCE (Is Person Exists)
         // ---------------------------------------------------------
-        public static bool IsPersonExist(int personID)
+        public async Task<bool> IsPersonExist(int personID)
         {
             bool isFound = false;
 
@@ -315,8 +316,8 @@ namespace DVLD__Data_Tier.Repositories
 
                     try
                     {
-                        conn.Open();
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        await conn.OpenAsync();
+                        using (SqlDataReader reader =await cmd.ExecuteReaderAsync())
                         {
                             isFound = reader.HasRows;
                         }
@@ -330,7 +331,7 @@ namespace DVLD__Data_Tier.Repositories
             return isFound;
         }
 
-        public static bool IsPersonExist(string NationalNo)
+        public async Task<bool> IsPersonExist(string NationalNo)
         {
             bool isFound = false;
 
@@ -344,8 +345,8 @@ namespace DVLD__Data_Tier.Repositories
 
                     try
                     {
-                        conn.Open();
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        await conn.OpenAsync();
+                        using (SqlDataReader reader =await cmd.ExecuteReaderAsync())
                         {
                             isFound = reader.HasRows;
                         }

@@ -16,6 +16,7 @@ namespace DVLD__Presentation_Tier.Controls
     public partial class ctrlPersonInformationWithFilter : UserControl
     {
         private Person PersonInfo { get; set; }
+        private PersonService _personService;
 
         //Event to return the person ID on find Peron
         public delegate void ReturnPersonIDEvent(int PersonID);
@@ -28,15 +29,16 @@ namespace DVLD__Presentation_Tier.Controls
         public ctrlPersonInformationWithFilter()
         {
             InitializeComponent();
+            _personService = new PersonService();
         }
 
         private void ctrlPersonInformationWithFilter_Load(object sender, EventArgs e)
         {
             _loadComboBox();
         }
-        private void btnSerach_Click(object sender, EventArgs e)
+        private async void btnSerach_Click(object sender, EventArgs e)
         {            
-            PersonInfo = RetrivePersonInfoOnSelectedFilter();
+            PersonInfo =await RetrivePersonInfoOnSelectedFilter();
 
             if (PersonInfo == null)
             {                
@@ -67,7 +69,7 @@ namespace DVLD__Presentation_Tier.Controls
             _restartFilterArea();
         }
 
-        private Person RetrivePersonInfoOnSelectedFilter()
+        private async Task<Person> RetrivePersonInfoOnSelectedFilter()
         {
             Person person = null;
             try
@@ -75,13 +77,13 @@ namespace DVLD__Presentation_Tier.Controls
                 if (cbFilterOn.SelectedItem.ToString() == "Person ID")
                 {
                     int personID = int.Parse(tbFilterInput.Text);
-                    person = PersonService.Find(personID);
+                    person =await _personService.Find(personID);
                 }
 
                 if (cbFilterOn.SelectedItem.ToString() == "National NO")
                 {
                     string nationalNO = tbFilterInput.Text;
-                    person = PersonService.Find(nationalNO.ToUpper());
+                    person =await _personService.Find(nationalNO.ToUpper());
                 }
             }
             catch (Exception ex)

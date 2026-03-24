@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DVLD__Business_Tier.Services;
@@ -18,12 +12,13 @@ namespace DVLD__Presentation_Tier.Controls.UserControls
         private User UserInfo { get; set; }
 
         private UserService _userService;
-
+        private PersonService _personService;
         private int _userId;
         public ctrlUserInfo()
         {
             InitializeComponent();
             _userService = new UserService();
+            _personService = new PersonService();
             _userId = -1;
         }
 
@@ -31,6 +26,7 @@ namespace DVLD__Presentation_Tier.Controls.UserControls
         {
             InitializeComponent();
             _userService = new UserService();
+            _personService = new PersonService();
             _userId = UserId;
         }
         private async void ctrlUserInfo_Load(object sender, EventArgs e)
@@ -43,12 +39,12 @@ namespace DVLD__Presentation_Tier.Controls.UserControls
             {
                 UserInfo = await _getUserInfo(_userId);
             }
-            
+
             if (UserInfo == null)
             {
                 return;
             }
-            _loadUserInforamtionInForm(UserInfo);
+            await _loadUserInforamtionInForm(UserInfo);
         }
         private async Task<User> _getUserInfo(int userId)
         {
@@ -68,36 +64,36 @@ namespace DVLD__Presentation_Tier.Controls.UserControls
             }
             return userInfo;
         }
-        private void _loadUserInforamtionInForm(User user)
+        private async Task _loadUserInforamtionInForm(User user)
         {
             if (user == null)
             {
                 return;
             }
 
-            Person person = _loadPersonInformation(user.Person_ID);
+            Person person = await _loadPersonInformation(user.Person_ID);
             if (person == null)
-            { 
+            {
                 return;
             }
             ctrlPersonInformation1.UpdatePersonInfoANDRefreshUI(person);
             lblUserID.Text = user.UserID.ToString();
             lblUsername.Text = user.Username;
-            lblIsActive.Text = (user.isActive) ? "Active" : "InActive";  
+            lblIsActive.Text = (user.isActive) ? "Active" : "InActive";
         }
-        private Person _loadPersonInformation(int personID)
+        private async Task<Person> _loadPersonInformation(int personID)
         {
             Person person = null;
             try
             {
-                person = PersonService.Find(personID);
+                person = await _personService.Find(personID);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            return person;           
+            return person;
         }
-        
+
     }
 }

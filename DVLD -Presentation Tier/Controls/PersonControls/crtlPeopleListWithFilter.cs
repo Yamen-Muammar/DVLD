@@ -16,13 +16,15 @@ namespace DVLD__Presentation_Tier
     public partial class crtlPeopleListWithFilter : UserControl
     {        
         private List<clsPersonView> people { get; set; }
+        private PersonService _personService;
         public crtlPeopleListWithFilter()
         {
-            InitializeComponent();           
+            InitializeComponent(); 
+            _personService = new PersonService();
         }
-        private void crtlPeopleListWithFilter_Load(object sender, EventArgs e)
+        private async void crtlPeopleListWithFilter_Load(object sender, EventArgs e)
         {            
-            _RefreshData();
+            await _RefreshData();
             _loadFilterComboBoxItems();
         }
 
@@ -31,26 +33,26 @@ namespace DVLD__Presentation_Tier
         {
             RaiseCloseClickedEvent();
         }
-        private void btnAddPerson_Click(object sender, EventArgs e)
+        private async void btnAddPerson_Click(object sender, EventArgs e)
         {
             frmAddOrUpdatePersonInfo frmAddOrUpdatePersonInfo = new frmAddOrUpdatePersonInfo();
             frmAddOrUpdatePersonInfo.ShowDialog();
-            _RefreshData();
+            await _RefreshData();
         }
-        private void addNewPersonToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void addNewPersonToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAddOrUpdatePersonInfo frmAddOrUpdatePersonInfo = new frmAddOrUpdatePersonInfo();
             frmAddOrUpdatePersonInfo.ShowDialog();
-            _RefreshData();
+            await _RefreshData();
         }
-        private void editeToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void editeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int PersonId = (int)dgvPeopleList.CurrentRow.Cells[0].Value;
             frmAddOrUpdatePersonInfo frmAddOrUpdatePersonInfo = new frmAddOrUpdatePersonInfo(PersonId);
             frmAddOrUpdatePersonInfo.ShowDialog();
-            _RefreshData();
+            await _RefreshData();
         }
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {            
             if (MessageBox.Show("Are You Sure ?","Confirmation",MessageBoxButtons.YesNo,MessageBoxIcon.Question) != DialogResult.Yes)
             {
@@ -60,10 +62,10 @@ namespace DVLD__Presentation_Tier
             int PersonId = (int)dgvPeopleList.CurrentRow.Cells[0].Value;
             try
             {
-                if (PersonService.Delete(PersonId))
+                if (await _personService.Delete(PersonId))
                 {
                     MessageBox.Show("Person Deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    _RefreshData();
+                    await _RefreshData();
                 }
             }
             catch (Exception ex)
@@ -72,12 +74,12 @@ namespace DVLD__Presentation_Tier
             }
            
         }
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private async void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             int PersonId = (int)dgvPeopleList.CurrentRow.Cells[0].Value;
             frmPersonInformation frmPersonInformation = new frmPersonInformation(PersonId);
             frmPersonInformation.ShowDialog();
-            _RefreshData();
+            await _RefreshData();
         }
         private void sendEmailToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -162,11 +164,11 @@ namespace DVLD__Presentation_Tier
         }
 
         // Helper Methods
-        private void _RefreshData()
+        private async Task _RefreshData()
         {
             try
             {
-                people = PersonService.GetAll();
+                people = await _personService.GetAll();
             }
             catch (Exception ex)
             {

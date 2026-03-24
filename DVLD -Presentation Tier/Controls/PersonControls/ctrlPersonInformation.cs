@@ -28,39 +28,50 @@ namespace DVLD__Presentation_Tier
 
         //for send the id to the AddOrUpdate form.
         private int _personId;
+        private int _passedPersonId;
         private CountryService _countryService;
         private Person PersonInfo { get; set; }
+        private PersonService _personService;
+
+        enum enPassedMode
+        {
+            passed= 1 , notPassed = 2
+        }
+        private enPassedMode _mode;
+
         public ctrlPersonInformation()
         {
             InitializeComponent();
             _countryService = new CountryService();
+            _personService = new PersonService();
+            _mode = enPassedMode.notPassed;
         }
 
         public ctrlPersonInformation(int personId)
         {
             InitializeComponent();
             _countryService = new CountryService();
-            SetPersonInfo(personId);
+            _personService = new PersonService();
+            _passedPersonId = personId;
+            _mode = enPassedMode.passed;
+        }
+
+        private async void ctrlPersonInformation_Load(object sender, EventArgs e)
+        {
+            if (_mode == enPassedMode.notPassed)  { return; }
+            await SetPersonInfo(_passedPersonId);
             if (PersonInfo == null)
             {
                 return;
             }
             _personId = PersonInfo.PersonID;
-        }
-
-        private async void ctrlPersonInformation_Load(object sender, EventArgs e)
-        {
-            if (PersonInfo == null)
-            {
-                return;
-            }
             await _loadDataInForm();
         }
 
-        private Person _getPerson(int personId)
+        private async Task<Person> _getPerson(int personId)
         {
             Person personInfo = null;
-            personInfo = PersonService.Find(personId);
+            personInfo =await _personService.Find(personId);
             return personInfo;
         }
 
@@ -137,11 +148,11 @@ namespace DVLD__Presentation_Tier
             
             return countryName;
         }
-        private void SetPersonInfo(int PersonID)
+        private async Task SetPersonInfo(int PersonID)
         {
             try
             {
-                PersonInfo = _getPerson(PersonID);                
+                PersonInfo =await _getPerson(PersonID);                
             }
             catch (Exception ex)
             {

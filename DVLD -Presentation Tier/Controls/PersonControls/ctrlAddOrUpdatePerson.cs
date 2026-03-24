@@ -44,10 +44,13 @@ namespace DVLD__Presentation_Tier
         private Person PersonInfo { get; set; }
 
         private CountryService _countryService;
+        private PersonService _personService;
         public ctrlAddOrUpdatePerson()
         {
             InitializeComponent();
             _countryService = new CountryService();
+            _personService = new PersonService();
+
             FormPersonId = -1;
 
             Mode = enMode.eAdd;
@@ -59,19 +62,21 @@ namespace DVLD__Presentation_Tier
         {
             InitializeComponent();
             _countryService = new CountryService();
+            _personService = new PersonService();   
+
             FormPersonId = id;
 
             Mode = (FormPersonId == -1) ? enMode.eAdd :enMode.eUpdate;            
         }
 
-        private void ctrlAddOrUpdatePerson_Load(object sender, EventArgs e)
+        private async void ctrlAddOrUpdatePerson_Load(object sender, EventArgs e)
         {
             if (Mode == enMode.eUpdate)
             {
                 lblTitle.Text = "Update Person";
                 try
                 {
-                    PersonInfo = _getPerson(FormPersonId);
+                    PersonInfo =await _getPerson(FormPersonId);
                     if (PersonInfo == null) 
                     { 
                         MessageBox.Show("Person Not Found", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -105,7 +110,7 @@ namespace DVLD__Presentation_Tier
             {
                 try
                 {
-                    int InsertedPersonId = PersonService.AddPerson(PersonInfo);
+                    int InsertedPersonId = await _personService.AddPerson(PersonInfo);
                     if (InsertedPersonId == -1)
                     {
                         MessageBox.Show("Failed in Save Person Information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -114,7 +119,7 @@ namespace DVLD__Presentation_Tier
                     {
                         Mode = enMode.eUpdate;
                         MessageBox.Show("Person information Saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);                        
-                        PersonInfo = _getPerson(InsertedPersonId);
+                        PersonInfo =await _getPerson(InsertedPersonId);
                         if (PersonInfo == null)
                         { 
                             MessageBox.Show("Person Not Found after Insert", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -136,8 +141,10 @@ namespace DVLD__Presentation_Tier
             {
                 try
                 {
-                    PersonService.Update(PersonInfo);
-                    MessageBox.Show("Person information updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if(await _personService.Update(PersonInfo))
+                    {
+                        MessageBox.Show("Person information updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -225,7 +232,7 @@ namespace DVLD__Presentation_Tier
         }
         private async Task<bool> _loadDataInPersonInfoObject()
         {
-            if (!_validateUIPersonInfo())
+            if (!await _validateUIPersonInfo())
             {
                 return false;
             }
@@ -317,10 +324,10 @@ namespace DVLD__Presentation_Tier
             return countriesList;
         }
 
-        private Person _getPerson(int personId)
+        private async Task<Person> _getPerson(int personId)
         {
             Person personInfo = null;
-            personInfo = PersonService.Find(personId);
+            personInfo = await _personService.Find(personId);
             return personInfo;
         }
 
@@ -354,7 +361,7 @@ namespace DVLD__Presentation_Tier
         }
 
         // UI Validation Event Handlers
-        private void tbNationalNo_Leave(object sender, EventArgs e)
+        private async void tbNationalNo_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(tbNationalNo.Text))
             {
@@ -365,7 +372,7 @@ namespace DVLD__Presentation_Tier
             {
                 try
                 {
-                    if (PersonService.IsPersonExist(tbNationalNo.Text))
+                    if (await _personService.IsPersonExist(tbNationalNo.Text))
                     {
                         EPNationalNO.SetError(tbNationalNo, "This National Number already exists");
                         tbNationalNo.Focus();
@@ -383,7 +390,7 @@ namespace DVLD__Presentation_Tier
             }
             
         }
-        private bool _validateUIPersonInfo()
+        private async Task<bool> _validateUIPersonInfo()
         {
 
             if (string.IsNullOrEmpty(tbFirstName.Text) || string.IsNullOrEmpty(tbSecondName.Text)
@@ -401,7 +408,7 @@ namespace DVLD__Presentation_Tier
 
             try
             {
-                if (Mode == enMode.eAdd && PersonService.IsPersonExist(tbNationalNo.Text))
+                if (Mode == enMode.eAdd &&await _personService.IsPersonExist(tbNationalNo.Text))
                 {
                     return false;
                 }
