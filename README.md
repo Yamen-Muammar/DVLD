@@ -18,18 +18,31 @@ A comprehensive desktop application designed to streamline the processes of the 
 🚀 Key Features
 1. Application Management
 • New Local Driving Licenses: Full workflow for first-time applicants.
+
 • International Licenses: Issuance of international permits based on valid local licenses.
+
 • Renewals & Replacements: Handle license expirations and replacements for lost or damaged cards.
+
 • Detain & Release: Manage the detention and release of licenses with associated fine tracking.
-2. People & User Management
+
+3. People & User Management
+   
 • Global People Registry: Centralized management of personal details (National ID, contact info, etc.) linked across the system.
+
 • Role-Based Access: Secure user management with specific permissions for different administrative levels.
+
 • Account Controls: Enable/disable user access and manage login credentials.
-3. Examination & Testing
+
+4. Examination & Testing
+   
 • Three-Stage Testing: Integration of Vision, Written, and Practical Street tests.
+
 • Test Appointments: Schedule and manage re-takes for failed attempts.
+
 • Result Tracking: Historical logging of all test attempts and outcomes.
-4. License Classes
+
+5. License Classes
+   
 • Support for multiple license categories (e.g., Small Motorcycles, Regular Driving, Commercial, Heavy Vehicles) with distinct requirements for age and fees.
 
 
