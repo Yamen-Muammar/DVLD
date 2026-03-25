@@ -10,13 +10,14 @@ namespace DVLD__Data_Tier.Repositories
 {
     public class LicenseClassRepository
     {
+        private readonly string _connectionString = DataBaseSettings.DataBaseConnectionString; 
         public  async Task<List<LicenseClass>> GetAllLicenseClasses()
         {         
             List<LicenseClass> classesList = new List<LicenseClass>();
           
             string query = "SELECT * FROM LicenseClasses ORDER BY LicenseClassID ASC";
 
-            using (SqlConnection connection = new SqlConnection(DataBaseSettings.DataBaseConnectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
             {
                 try
@@ -47,5 +48,47 @@ namespace DVLD__Data_Tier.Repositories
             }           
             return classesList;
         }         
+
+        public async Task<LicenseClass> GetLicenseClassByLDLApp_IdAsync(int ldlAppid)
+        {
+            LicenseClass licenseClass = null;
+            string query = @"select LicenseClasses.LicenseClassID ,LicenseClasses.ClassName,LicenseClasses.ClassDescription,
+                            LicenseClasses.MinimumAllowedAge,LicenseClasses.DefaultValidityLength,
+                            LicenseClasses.ClassFees
+                            from LocalDrivingLicenseApplications 
+                            inner join LicenseClasses on LocalDrivingLicenseApplications.LicenseClass_ID = LicenseClasses.LicenseClassID
+                            where LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = @ldlAppID";
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@ldlAppID", ldlAppid);
+
+                try
+                {
+                    await conn.OpenAsync();
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            licenseClass.LicenseClassID = (int)reader["LicenseClassID"];
+                            licenseClass.ClassName = reader["ClassName"].ToString();
+                            licenseClass.ClassDescription = reader["ClassDescription"].ToString();
+                            licenseClass.MinimumAllowedAge = (int)reader["MinimumAllowedAge"];
+                            licenseClass.DefaultValidityLength = (int)reader["DefaultValidityLength"];
+                            licenseClass.ClassFees = (decimal)reader["ClassFees"];
+
+                        }
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                return licenseClass;
+            }
+        }
     }
 }

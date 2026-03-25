@@ -99,7 +99,11 @@ namespace DVLD__Business_Tier.Services
                     throw new ArgumentException();
             }
         }
-
+        public async Task<DVLD__Core.Models.Application> GetApplicationOnLDLA_ID(int localDrivingLicenseApplicationID)
+        {
+            DVLD__Core.Models.Application application = await _appRepo.GetApplicationByLDL_ID(localDrivingLicenseApplicationID);
+            return application;
+        }
 
 
         // For Local driving license applications only!!
@@ -131,7 +135,7 @@ namespace DVLD__Business_Tier.Services
         }
         public async Task<bool> UpdateLDLApplicationStatus(int localDrivingLicenseApplicationID , enStatus status)
         {
-            DVLD__Core.Models.Application selectedApplication = await _getApplicationOnLDLA_ID(localDrivingLicenseApplicationID);
+            DVLD__Core.Models.Application selectedApplication = await GetApplicationOnLDLA_ID(localDrivingLicenseApplicationID);
 
             if (selectedApplication == null)
             {
@@ -149,12 +153,7 @@ namespace DVLD__Business_Tier.Services
             await _appRepo.UpdateApplication(selectedApplication);
 
             return true;
-        }
-        private async Task<DVLD__Core.Models.Application> _getApplicationOnLDLA_ID(int localDrivingLicenseApplicationID)
-        {
-            DVLD__Core.Models.Application application = await _appRepo.GetApplicationByLDL_ID(localDrivingLicenseApplicationID);
-            return application;
-        }      
+        }     
         public async  Task<List<clsLocalDrivingLicesnseApplicationView>> GetAllLDLApplications()
         {       
               return await _appRepo.GetAll_L_D_L_Applications();          
@@ -174,7 +173,6 @@ namespace DVLD__Business_Tier.Services
 
             return true;
         }
-
         public async Task<bool> DeleteLDLApplicationAsync(int lDLappID) 
         {
             if (lDLappID < 0)

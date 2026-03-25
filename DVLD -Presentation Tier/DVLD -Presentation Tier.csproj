@@ -108,6 +108,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\LocalDLApplicationsControls\ctrlLDLAwithApplicationInformation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\LocalDLApplicationsControls\ctrlLDLAwithApplicationInformation.Designer.cs">
+      <DependentUpon>ctrlLDLAwithApplicationInformation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PersonControls\crtlPeopleListWithFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -242,6 +248,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\LocalDLApplicationsControls\ctrlLDLAwithApplicationInformation.resx">
+      <DependentUpon>ctrlLDLAwithApplicationInformation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\PersonControls\crtlPeopleListWithFilter.resx">
       <DependentUpon>crtlPeopleListWithFilter.cs</DependentUpon>
     </EmbeddedResource>
