@@ -16,8 +16,8 @@ namespace DVLD__Presentation_Tier.Controls.LocalDLApplicationsControls
     public partial class ctrlLDLAwithApplicationInformation : UserControl
     {
         private int _lDLAppID;
-        private int _passedTestCount = -1;
-        private int _personId = -1;
+        private int _passedTestCount;
+        private int _personId;
 
 
         private TestService _testService;
@@ -29,9 +29,17 @@ namespace DVLD__Presentation_Tier.Controls.LocalDLApplicationsControls
         private DVLD__Core.Models.Application _application;
         private UserService _userService;
 
+
+        //to ignore complier creation Exceptions
+        private enum enPassedID
+        {
+            Passed = 1 , NotPassed = 2
+        }
+        private enPassedID _mode;
         public ctrlLDLAwithApplicationInformation()
         {
             InitializeComponent();
+            _mode = enPassedID.NotPassed;
         }
         public ctrlLDLAwithApplicationInformation(int LDLAppID)
         {
@@ -44,18 +52,23 @@ namespace DVLD__Presentation_Tier.Controls.LocalDLApplicationsControls
             _userService = new UserService();
 
             _lDLAppID = LDLAppID;
-
+            _mode = enPassedID.Passed;
         }
         private async void ctrlLDLAwithApplicationInformation_Load(object sender, EventArgs e)
         {
-            _application = await _appService.GetApplicationByID(this._lDLAppID);
+            if (_mode == enPassedID.NotPassed)
+            {
+                return;
+            }
+
+            _application = await _getApplicationInfo(this._lDLAppID);
             if (_application == null)
             {
                 return;
             }
             _personId = _application.Person_ID;
 
-            _licenseClass = await _licenseClassService.GetLicenseClassByLDLAppIDAsync(this._lDLAppID);
+            _licenseClass = await _getLicenseClassbyLDLAppID(this._lDLAppID);
             if (_licenseClass == null)
             {
                 return;
@@ -67,7 +80,7 @@ namespace DVLD__Presentation_Tier.Controls.LocalDLApplicationsControls
                 return;
             }
 
-            _fillGroupBoxLDLApplicationDataFields(this._lDLAppID,_licenseClass.ClassName,_passedTestCount);
+            _fillGroupBoxLDLApplicationDataFields(this._lDLAppID, _licenseClass.ClassName, _passedTestCount);
             await _fillGroupBoxApplicationDataFields(_application);
         }
         private void btnPersonInfo_Click(object sender, EventArgs e)
@@ -122,12 +135,11 @@ namespace DVLD__Presentation_Tier.Controls.LocalDLApplicationsControls
             }
             return licenseClass;
         }  
-
         private void _fillGroupBoxLDLApplicationDataFields(int LDLAppID,string licenseClassName,int passedTestCount)
         {
             lblLDLAppID.Text = LDLAppID.ToString();
             lblLicenseClassName.Text = licenseClassName;
-            lblPassedTestsCount.Text = passedTestCount.ToString(); 
+            lblPassedTestsCount.Text = $"{passedTestCount.ToString()}/3"; 
         }
         private async Task _fillGroupBoxApplicationDataFields(DVLD__Core.Models.Application application)
         {
@@ -137,7 +149,7 @@ namespace DVLD__Presentation_Tier.Controls.LocalDLApplicationsControls
             lblType.Text= (await _applicationsTypeService.GetApplicationTypeByID(application.ApplicationType_ID)).ApplicationTypeTitle.ToString();
             lblApplicant.Text = (await _personService.Find(application.Person_ID)).FullName();
             lblDate.Text = application.ApplicationDate.ToString("d");
-            lblLastStatusDate.Text = application.LastStatusDate?.ToString("d");
+            lblLastStatusDate.Text = (application.LastStatusDate == null ) ?application.ApplicationDate.ToString("d") :application.LastStatusDate?.ToString("d");
             lblCreatedBy.Text =(await _userService.GetUserByIdAsync(application.CreatedByUser_ID)).Username.ToString();
         }
     }

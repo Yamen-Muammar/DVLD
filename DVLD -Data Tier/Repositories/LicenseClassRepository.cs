@@ -71,13 +71,15 @@ namespace DVLD__Data_Tier.Repositories
                     {
                         if (await reader.ReadAsync())
                         {
-                            licenseClass.LicenseClassID = (int)reader["LicenseClassID"];
-                            licenseClass.ClassName = reader["ClassName"].ToString();
-                            licenseClass.ClassDescription = reader["ClassDescription"].ToString();
-                            licenseClass.MinimumAllowedAge = (int)reader["MinimumAllowedAge"];
-                            licenseClass.DefaultValidityLength = (int)reader["DefaultValidityLength"];
-                            licenseClass.ClassFees = (decimal)reader["ClassFees"];
-
+                            licenseClass = new LicenseClass
+                            {
+                                LicenseClassID = (int)reader["LicenseClassID"],
+                                ClassName = reader["ClassName"].ToString(),
+                                ClassDescription = reader["ClassDescription"].ToString(),
+                                MinimumAllowedAge = (int)reader["MinimumAllowedAge"],
+                                DefaultValidityLength = (int)reader["DefaultValidityLength"],
+                                ClassFees = (decimal)reader["ClassFees"],
+                            };
                         }
                     }
 

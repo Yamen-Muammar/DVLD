@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DVLD__Business_Tier.Services;
 using DVLD__Core.Models;
 using DVLD__Core.View_Models;
+using DVLD__Presentation_Tier.Forms.TestsAppointment;
 
 namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
 {
@@ -20,10 +21,12 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
         private List<clsLocalDrivingLicesnseApplicationView> _list { get; set; }
 
         private  List<clsLocalDrivingLicesnseApplicationView> _dataBaseSource { get; set; }
+        private TestService _testService;
         public frmLocalDrivingLicenseApplication()
         {
             InitializeComponent();    
             _applicationService = new ApplicationService();
+            _testService = new TestService();
         }
        
         private async void frmLocalDrivingLicenseApplication_Load(object sender, EventArgs e)
@@ -33,9 +36,26 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
         }
         private async void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            TestService testService = new TestService(); 
-            string nationalNo = _getSelectedNationalNo();
-            int CountOfPassedTest= await testService.PassedTestCount(nationalNo);
+            string selecedItemStatus = _getSelectedItemStatus();
+            if (selecedItemStatus == "Canceled")
+            {
+                sechduleTestsToolStripMenuItem.Enabled = false;
+                showApplicationDetailsToolStripMenuItem.Enabled = false;
+                cancelApplicationToolStripMenuItem.Enabled = false;
+                SetVisibleMenuItems(false, false, false, false, false);
+                showPersonLicenseHistoryToolStripMenuItem.Enabled = false;
+                return;
+            }
+
+            if (selecedItemStatus == "New")
+            {
+                sechduleTestsToolStripMenuItem.Enabled = true;
+                showApplicationDetailsToolStripMenuItem.Enabled = true;
+                cancelApplicationToolStripMenuItem.Enabled = true;
+                showPersonLicenseHistoryToolStripMenuItem.Enabled = true;   
+            }
+            string nationalNo = _getSelectedItemNationalNo();
+            int CountOfPassedTest= await _testService.PassedTestCount(nationalNo);
             _visbleComboItemsOnPassedTests(CountOfPassedTest);
         }
 
@@ -140,9 +160,14 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
         {
             return (int)dgvApplicationsList.CurrentRow.Cells[0].Value;
         }
-        private string _getSelectedNationalNo()
+        private string _getSelectedItemNationalNo()
         {
             return (string)dgvApplicationsList.CurrentRow.Cells["NationalNo"].Value;
+        }
+        private string _getSelectedItemStatus()
+        {
+
+            return (string)dgvApplicationsList.CurrentRow.Cells["Status"].Value;
         }
         private async Task _loadDataAsync()
         {
@@ -237,13 +262,13 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             switch (PassedTestsCount)
             {
                 case 0:
-                    SetVisibleMenuItems(true, false, false, true, false);
+                    SetVisibleMenuItems(true, false, false, false, false);
                     break;
                 case 1:
-                    SetVisibleMenuItems(false, true, false, true, false);
+                    SetVisibleMenuItems(false, true, false, false, false);
                     break;
                 case 2:
-                    SetVisibleMenuItems(false, false, true, true, false);
+                    SetVisibleMenuItems(false, false, true, false, false);
                     break;
                 case 3:
                     SetVisibleMenuItems(false, false, false, true, false);
@@ -255,7 +280,7 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
         }
 
         private void SetVisibleMenuItems(bool VisionTest,bool WrittenTest,bool StreetTest,bool issueDrivingLicense, bool showLicense)
-        {
+        { 
             issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = issueDrivingLicense;
             // TODO : if he has license you can show this( create it when we make the license service class).
             showLicenseToolStripMenuItem.Enabled = showLicense;
@@ -274,9 +299,12 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             throw new NotImplementedException();
         }
 
-        private void sechduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void sechduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            int lDLAppID = _getSelectedLDLApplicationID();
+            frmVisionTestAppointment frmVisionTestAppointment = new frmVisionTestAppointment(lDLAppID);
+            frmVisionTestAppointment.ShowDialog();
+            await _refreshUIDataHoldersAsync(_dataBaseSource);
         }
 
         private void sechduleWrittenTestToolStripMenuItem_Click(object sender, EventArgs e)

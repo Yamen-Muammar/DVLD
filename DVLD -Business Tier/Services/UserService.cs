@@ -32,6 +32,7 @@ namespace DVLD__Business_Tier.Services
             }
 
             user = await _userRepository.GetUserByUsername(username);
+
             if (user == null)
             {
                 throw new Exception("Invalid username or password. Please try again.");

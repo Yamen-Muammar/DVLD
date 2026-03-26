@@ -42,8 +42,9 @@ namespace DVLD__Presentation_Tier.Forms
 
         private async void btnLogin_Click(object sender, EventArgs e)
         {
-            btnLogin.Enabled = false;
             btnLogin.Text = "Wating...";
+            btnLogin.Enabled = false;
+            
 
             if (!_validationInput())
             {
@@ -58,7 +59,7 @@ namespace DVLD__Presentation_Tier.Forms
 
             try
             { 
-                isLoginSuccessful =await _userService.Login(username, password, isRememberMeChecked);
+                isLoginSuccessful = await _userService.Login(username, password, isRememberMeChecked);
             }
             catch (Exception ex)
             {
