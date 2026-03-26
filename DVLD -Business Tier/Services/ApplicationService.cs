@@ -107,6 +107,11 @@ namespace DVLD__Business_Tier.Services
 
 
         // For Local driving license applications only!!
+
+        public async Task<LocalDrivingLicenseApplication> GetLocalDrivingLicenseApplicationByIDAsync(int ldlAppID)
+        {
+            return await _appRepo.GetLocalDrivingLicenseApplicationByIDAsync(ldlAppID);
+        }
         public async Task<bool> SaveLocalDrivingLicenseApplication(Application application,int licenseClassID)
         {
             int newId = -1;

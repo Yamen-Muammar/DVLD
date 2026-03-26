@@ -218,6 +218,41 @@ namespace DVLD__Data_Tier.Repositories
             return application;
         }
         
+        public async Task<DVLD__Core.Models.LocalDrivingLicenseApplication> GetLocalDrivingLicenseApplicationByIDAsync(int localDrivingLicenseApplicationID)
+        {
+            LocalDrivingLicenseApplication LDLApplication = null;
+            string query = "SELECT LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID, LocalDrivingLicenseApplications.Application_ID, LocalDrivingLicenseApplications.LicenseClass_ID" +
+                " FROM LocalDrivingLicenseApplications " +
+                "where LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = @LDLApplicationId;";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@LDLApplicationId", localDrivingLicenseApplicationID);
+
+                try
+                {
+                    await connection.OpenAsync();
+                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            LDLApplication = new LocalDrivingLicenseApplication
+                            {
+                                LocalDrivingLicenseApplicationID = (int)reader["LocalDrivingLicenseApplicationID"],
+                                Application_ID = (int)reader["ApplicationID"],
+                                LicenseClass_ID = (int)reader["LicenseClass_ID"]
+                            };
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                } 
+            }
+            return LDLApplication;
+        }
         public async Task<int> doesHasAnActiveLocalDrivingLicenseApplication(int personID,int licenseClassID)
         {
             int foundApplicationID = -1;
