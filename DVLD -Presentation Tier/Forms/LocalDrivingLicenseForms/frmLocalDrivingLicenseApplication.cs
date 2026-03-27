@@ -39,17 +39,15 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             string selecedItemStatus = _getSelectedItemStatus();
             if (selecedItemStatus == "Canceled")
             {
-                sechduleTestsToolStripMenuItem.Enabled = false;
                 showApplicationDetailsToolStripMenuItem.Enabled = false;
                 cancelApplicationToolStripMenuItem.Enabled = false;
-                SetVisibleMenuItems(false, false, false, false, false);
+                SetVisibleMenuItems(false,false, false, false, false, false);
                 showPersonLicenseHistoryToolStripMenuItem.Enabled = false;
                 return;
             }
 
             if (selecedItemStatus == "New")
             {
-                sechduleTestsToolStripMenuItem.Enabled = true;
                 showApplicationDetailsToolStripMenuItem.Enabled = true;
                 cancelApplicationToolStripMenuItem.Enabled = true;
                 showPersonLicenseHistoryToolStripMenuItem.Enabled = true;   
@@ -262,26 +260,27 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             switch (PassedTestsCount)
             {
                 case 0:
-                    SetVisibleMenuItems(true, false, false, false, false);
+                    SetVisibleMenuItems(true,true, false, false, false, false);
                     break;
                 case 1:
-                    SetVisibleMenuItems(false, true, false, false, false);
+                    SetVisibleMenuItems(true, false, true, false, false, false);
                     break;
                 case 2:
-                    SetVisibleMenuItems(false, false, true, false, false);
+                    SetVisibleMenuItems(true, false, false, true, false, false);
                     break;
                 case 3:
-                    SetVisibleMenuItems(false, false, false, true, false);
+                    SetVisibleMenuItems(false,false, false, false, true, false);
                     break;
                 default:
-                    SetVisibleMenuItems(false, false, false, false, false);
+                    SetVisibleMenuItems(false,false, false, false, false, false);
                     break;
             }
         }
 
-        private void SetVisibleMenuItems(bool VisionTest,bool WrittenTest,bool StreetTest,bool issueDrivingLicense, bool showLicense)
+        private void SetVisibleMenuItems(bool sechduleTests,bool VisionTest,bool WrittenTest,bool StreetTest,bool issueDrivingLicense, bool showLicense)
         { 
             issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = issueDrivingLicense;
+            sechduleTestsToolStripMenuItem.Enabled = sechduleTests;
             // TODO : if he has license you can show this( create it when we make the license service class).
             showLicenseToolStripMenuItem.Enabled = showLicense;
             sechduleStreetTestToolStripMenuItem.Enabled = StreetTest;
@@ -291,12 +290,27 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
 
         private void showApplicationDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void editeApplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+          
         }
 
         private async void sechduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
@@ -309,27 +323,62 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
 
         private void sechduleWrittenTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void sechduleStreetTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void issueDrivingLicenseFirstTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void showLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }
