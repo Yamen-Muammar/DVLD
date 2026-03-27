@@ -40,10 +40,9 @@ namespace DVLD__Presentation_Tier.Forms.TestsAppointment
 
         private void btnAddAppointment_Click(object sender, EventArgs e)
         {
-            frmSechduleTest frmSechduleTest = new frmSechduleTest();
+            frmSechduleTest frmSechduleTest = new frmSechduleTest(this.ctrlLDLAwithApplicationInformation1.ApplicatFullName,_LDLApplicationID,_testTeypID);
             frmSechduleTest.ShowDialog();
         }
-
         private async void frmVisionTestAppointment_Load(object sender, EventArgs e)
         {
             await _refreshDataInDGV();
@@ -71,6 +70,8 @@ namespace DVLD__Presentation_Tier.Forms.TestsAppointment
              await _loadDataIntoTheList();
             _refreshDGV(_appointmentsViewsList);
              
-        } 
+        }
+
+        
     }
 }

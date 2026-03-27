@@ -51,7 +51,7 @@ namespace DVLD__Presentation_Tier.Forms.Test_Types_Forms
         {
             try
             {
-                return await _testTypeService.GetAllTestTypes();
+                return await _testTypeService.GetAllTestTypesAsync();
             }
             catch (Exception ex)
             {

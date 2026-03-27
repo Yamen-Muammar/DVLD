@@ -16,9 +16,24 @@ namespace DVLD__Presentation_Tier.Forms.TestsAppointment
         {
             InitializeComponent();
         }
-        public frmSechduleTest(int LDLAppID , int testTypeID)
+        public frmSechduleTest(string applicantFullName,int LDLAppID , int _testTypeID)
         {
-            InitializeComponent();
+            if (_testTypeID == 1)
+            {
+                InitializeComponent(LDLAppID,applicantFullName);
+            }
+            else if (_testTypeID == 2)
+            {
+                InitializeComponent();
+            }
+            else if (_testTypeID == 3)
+            {
+                InitializeComponent();
+            }
+            else
+            {
+                InitializeComponent();
+            }
         }
     }
 }

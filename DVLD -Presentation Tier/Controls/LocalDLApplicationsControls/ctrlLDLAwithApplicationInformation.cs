@@ -18,6 +18,8 @@ namespace DVLD__Presentation_Tier.Controls.LocalDLApplicationsControls
         private int _lDLAppID;
         private int _passedTestCount;
         private int _personId;
+        public string ApplicatFullName { get; set; }
+
         public DVLD__Core.Models.Application application;
         public LicenseClass licenseClass;
 
@@ -85,7 +87,6 @@ namespace DVLD__Presentation_Tier.Controls.LocalDLApplicationsControls
         private void btnPersonInfo_Click(object sender, EventArgs e)
         {
             frmPersonInformation frmPersonInformation1 = new frmPersonInformation(_personId);
-            Person person = new Person();
             frmPersonInformation1.ctrlPersonInformation1.ReturnPersonObject_OnUpdate += UpdateApplicantName;
             frmPersonInformation1.ShowDialog();
         }
@@ -149,6 +150,7 @@ namespace DVLD__Presentation_Tier.Controls.LocalDLApplicationsControls
             lblFees.Text= application.PaidFees.ToString();
             lblType.Text= (await _applicationsTypeService.GetApplicationTypeByID(application.ApplicationType_ID)).ApplicationTypeTitle.ToString();
             lblApplicant.Text = (await _personService.Find(application.Person_ID)).FullName();
+            ApplicatFullName = lblApplicant.Text;
             lblDate.Text = application.ApplicationDate.ToString("d");
             lblLastStatusDate.Text = (application.LastStatusDate == null ) ?application.ApplicationDate.ToString("d") :application.LastStatusDate?.ToString("d");
             lblCreatedBy.Text =(await _userService.GetUserByIdAsync(application.CreatedByUser_ID)).Username.ToString();

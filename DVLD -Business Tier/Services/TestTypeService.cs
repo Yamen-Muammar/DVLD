@@ -16,13 +16,13 @@ namespace DVLD__Business_Tier.Services
         {
             _repository = new TestTypesRepository();
         }
-        public  async Task<TestType> Find(int id)
+        public  async Task<TestType> FindAsync(int id)
         {
             TestType testType = await _repository.GetTestTypeByID(id);
             
             return testType;
         }
-        public  async Task<bool> UpdateTestType(TestType testType)
+        public  async Task<bool> UpdateTestTypeAsync(TestType testType)
         {
             if (!_validateTestType(testType))
             {
@@ -35,7 +35,7 @@ namespace DVLD__Business_Tier.Services
             }
             return true;
         }
-        public  async Task<List<TestType>> GetAllTestTypes()
+        public  async Task<List<TestType>> GetAllTestTypesAsync()
         {
             List<TestType> testTypes; 
 

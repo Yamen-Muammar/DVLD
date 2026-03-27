@@ -16,7 +16,7 @@ namespace DVLD__Data_Tier.Repositories
         public async Task<int> AddNewTestAppoitmentAsync(TestAppointment appointment) 
         {
             int newAppointmentID = -1;
-            string query = @"INSERT INTO [dbo].[TestAppointments]
+            string query = @"INSERT INTO TestAppointments
            (
             TestType_ID
            ,LocalDrivingLicenseApplication_ID
@@ -28,7 +28,7 @@ namespace DVLD__Data_Tier.Repositories
             VALUES
            (
            @TestType_ID,
-           @LocalDrivingLicenseApplication_ID
+           @LocalDrivingLicenseApplication_ID,
            @AppointmentDate,
            @PaidFees,
            @CreatedByUser_ID,
@@ -56,6 +56,7 @@ namespace DVLD__Data_Tier.Repositories
 
                 try
                 {
+                    await conn.OpenAsync();
                     object applicationReturnedID = await command.ExecuteScalarAsync();
                     int.TryParse(applicationReturnedID.ToString(), out newAppointmentID);
 
@@ -101,16 +102,18 @@ namespace DVLD__Data_Tier.Repositories
             return foundedAppointmentID;
         }
 
-        public async Task<List<clsAppointmentsView>> GetAllAppointmentsAsync(int LDLApp , int tsetTypeID)
+        public async Task<List<clsAppointmentsView>> GetAllAppointmentsAsync(int LDLApp , int testTypeID)
         {
             List<clsAppointmentsView> appsList = new List<clsAppointmentsView>();
-            string query = "SELECT TestAppointmentID,AppointmentDate,PaidFees,isLocked" +
+            string query = "SELECT TestAppointmentID , AppointmentDate ,PaidFees,isLocked" +
                 " FROM AppointmentsView " +
-                "ORDER BY TestAppointmentID DESC";
+                "where LocalDrivingLicenseApplication_ID= @lDLAppID  AND TestType_ID = @testType ORDER BY TestAppointmentID DESC";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
             {
+                command.Parameters.AddWithValue("@lDLAppID",LDLApp);
+                command.Parameters.AddWithValue("@testType", testTypeID);
                 try
                 {
                     await connection.OpenAsync();
@@ -124,7 +127,8 @@ namespace DVLD__Data_Tier.Repositories
                                 TestAppointmentID = (int)reader["TestAppointmentID"],
                                 AppointmentDate = (DateTime)reader["AppointmentDate"],
                                 PaidFees = (decimal)reader["PaidFees"],
-                                isLocked = (bool)reader["isLocked"]
+                                isLocked = Convert.ToBoolean(reader["isLocked"])
+                                
                             });
                         }
                     }

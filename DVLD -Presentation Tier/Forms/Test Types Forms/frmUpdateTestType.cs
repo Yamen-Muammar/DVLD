@@ -44,7 +44,7 @@ namespace DVLD__Presentation_Tier.Forms.Test_Types_Forms
         {
             try
             {
-                TestType =await _testTypeService.Find(id);
+                TestType =await _testTypeService.FindAsync(id);
                 return true;
             }
             catch (Exception ex)
@@ -70,7 +70,7 @@ namespace DVLD__Presentation_Tier.Forms.Test_Types_Forms
 
             try
             {
-                if (await _testTypeService.UpdateTestType(TestType))
+                if (await _testTypeService.UpdateTestTypeAsync(TestType))
                 {
                     MessageBox.Show("Test Type updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
