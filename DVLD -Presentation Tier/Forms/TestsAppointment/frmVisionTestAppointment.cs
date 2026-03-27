@@ -12,6 +12,7 @@ namespace DVLD__Presentation_Tier.Forms.TestsAppointment
 {
     public partial class frmVisionTestAppointment : Form
     {
+        private 
         public frmVisionTestAppointment()
         {
             InitializeComponent();
