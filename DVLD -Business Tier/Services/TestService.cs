@@ -34,6 +34,11 @@ namespace DVLD__Business_Tier.Services
             return returnedPassedCount;
         }
 
-   
+        public async Task<bool> isAppointmentHasFailTestResultAsync(int appointmentId)
+        {
+            return await _testRepo.isAppointmentHasFailTestResultAsync(appointmentId);
+        }
+
+
     }
 }

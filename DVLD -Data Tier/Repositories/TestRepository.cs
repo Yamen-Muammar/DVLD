@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -49,6 +50,34 @@ namespace DVLD__Data_Tier.Repositories
             }
             return passedTestsCount;
         }
-        
+
+        public async Task<bool> isAppointmentHasFailTestResultAsync(int appointmentID)
+        {
+            bool isFail = false;
+            string query = @"select faild = 1 from Tests t
+                             inner join TestAppointments ta on t.TestAppointment_ID = ta.TestAppointmentID
+                             where t.TestResult = 0 and ta.TestAppointmentID = @appID;";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@appID", appointmentID);
+                try
+                {
+                    await connection.OpenAsync();
+
+                    object result = await command.ExecuteScalarAsync();
+                     if (result != null && int.TryParse(result.ToString(),out int resultValue))
+                     {
+                        isFail = (resultValue == 1);
+                     }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            return isFail;
+        }
     }
 }

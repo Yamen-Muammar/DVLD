@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DVLD__Presentation_Tier.Controls.SechduleTestsControls;
 
 namespace DVLD__Presentation_Tier.Forms.TestsAppointment
 {
@@ -16,11 +17,11 @@ namespace DVLD__Presentation_Tier.Forms.TestsAppointment
         {
             InitializeComponent();
         }
-        public frmSechduleTest(string applicantFullName,int LDLAppID , int _testTypeID)
+        public frmSechduleTest(int? appointmentID, ctrlSechduleVisionTest.enMode mode,string applicantFullName,int LDLAppID , int _testTypeID)
         {
             if (_testTypeID == 1)
             {
-                InitializeComponent(LDLAppID,applicantFullName);
+                InitializeComponent(appointmentID,mode,LDLAppID,applicantFullName);
             }
             else if (_testTypeID == 2)
             {

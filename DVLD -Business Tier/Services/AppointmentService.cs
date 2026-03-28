@@ -26,7 +26,7 @@ namespace DVLD__Business_Tier.Services
                 return -1;
             }
 
-            int doesHasAppointment = await _doesApplicantHasAnActiveAppointmentAsync(testAppointment);
+            int doesHasAppointment = await DoesApplicantHasAnActiveAppointmentAsync(testAppointment.LocalDrivingLicenseApplication_ID,testAppointment.TestType_ID);
 
             if (doesHasAppointment != -1)
             {
@@ -43,8 +43,16 @@ namespace DVLD__Business_Tier.Services
             {
                 throw new ArgumentNullException("appointment has no data");
             }
+            if (appointment.TestAppointmentID <= 0)
+            {
+                throw new ArgumentException("invalid ID");
+            }
+            if (DateTime.Compare(appointment.AppointmentDate, DateTime.Now) <= 0)
+            {
+                throw new Exception("Select Futuer Date");
+            }
 
-            if(appointment.PaidFees < 0)
+            if (appointment.PaidFees < 0)
             {
                 throw new ArgumentException("inValid PaidFess");
             }
@@ -52,9 +60,9 @@ namespace DVLD__Business_Tier.Services
             return true;
         }
 
-        private async Task<int> _doesApplicantHasAnActiveAppointmentAsync(TestAppointment appointment)
+        public async Task<int> DoesApplicantHasAnActiveAppointmentAsync(int LDLAppID, int testType)
         {
-            return await _repository.DoesApplicationHasActiveAppointmentAsync(appointment);
+            return await _repository.DoesApplicationHasActiveAppointmentAsync(LDLAppID,testType);
         }
 
         public async Task<List<clsAppointmentsView>> GetAllAppointmentsAsync(int lDLAppID , int testType)
@@ -62,5 +70,25 @@ namespace DVLD__Business_Tier.Services
             return await _repository.GetAllAppointmentsAsync(lDLAppID, testType);
         }
 
+        public async Task<bool> UpdateAppointmentDateTimeAsync(int testAppointmentID, DateTime date)
+        {
+            if (!_validateAppointment(new TestAppointment { PaidFees = 1 , AppointmentDate = date , TestAppointmentID = testAppointmentID}))
+            {
+                return false;
+            }
+            return await _repository.UpdateAppointmentDateAsync(testAppointmentID, date);
+        }
+
+        public async Task<TestAppointment> GetAppointmentAsync(int testAppointmentID) { 
+            TestAppointment appointment = await _repository.GetAppointmentByIDAsync(testAppointmentID);
+
+            if (appointment == null)
+            {
+                throw new ArgumentNullException("Appointment Not Found");
+            }
+
+            return appointment;
+            
+        }
     }
 }

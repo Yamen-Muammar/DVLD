@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DVLD__Business_Tier.Services;
 using DVLD__Core.View_Models;
+using DVLD__Presentation_Tier.Controls.SechduleTestsControls;
 
 namespace DVLD__Presentation_Tier.Forms.TestsAppointment
 {
@@ -18,9 +19,8 @@ namespace DVLD__Presentation_Tier.Forms.TestsAppointment
         private int _testTeypID;
         private List<clsAppointmentsView> _appointmentsViewsList;
 
-
         private AppointmentService _appointmentService;
-        
+        private TestService _testService;
         public frmVisionTestAppointment()
         {
             InitializeComponent();
@@ -32,19 +32,40 @@ namespace DVLD__Presentation_Tier.Forms.TestsAppointment
             _LDLApplicationID = LDLAppId;
             _testTeypID = 1;
             _appointmentService = new AppointmentService();
+            _testService = new TestService();
         }
         private void btnClosefrm_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void btnAddAppointment_Click(object sender, EventArgs e)
+        private async void frmVisionTestAppointment_Load_1(object sender, EventArgs e)
         {
-            frmSechduleTest frmSechduleTest = new frmSechduleTest(this.ctrlLDLAwithApplicationInformation1.ApplicatFullName,_LDLApplicationID,_testTeypID);
-            frmSechduleTest.ShowDialog();
+            await _refreshDataInDGV();
         }
-        private async void frmVisionTestAppointment_Load(object sender, EventArgs e)
+
+        private async void btnAddAppointment_Click(object sender, EventArgs e)
         {
+            bool isHas =((await _appointmentService.DoesApplicantHasAnActiveAppointmentAsync(_LDLApplicationID,_testTeypID)) > 0);
+            if (isHas)
+            {
+                MessageBox.Show($"Applicant already has an Active appointment","Alert",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                return;
+            }
+
+            int appointmentID = (int)dgvAppointments.CurrentRow.Cells["TestAppointmentID"].Value;
+
+            if (await _testService.isAppointmentHasFailTestResultAsync(appointmentID))
+            {
+                frmSechduleTest frmSechduleTest = new frmSechduleTest(null,ctrlSechduleVisionTest.enMode.Retake, this.ctrlLDLAwithApplicationInformation1.ApplicatFullName, _LDLApplicationID, _testTeypID);
+                frmSechduleTest.ShowDialog();
+            }
+            else
+            {
+                frmSechduleTest frmSechduleTest = new frmSechduleTest(null,ctrlSechduleVisionTest.enMode.New,this.ctrlLDLAwithApplicationInformation1.ApplicatFullName, _LDLApplicationID, _testTeypID);
+                frmSechduleTest.ShowDialog();
+            }
+            
             await _refreshDataInDGV();
         }
         private async Task _loadDataIntoTheList()
@@ -72,6 +93,26 @@ namespace DVLD__Presentation_Tier.Forms.TestsAppointment
              
         }
 
-        
+        private void takeTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private async void editeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int appointmentID = (int)dgvAppointments.CurrentRow.Cells["TestAppointmentID"].Value;
+            frmSechduleTest frmSechduleTest = new frmSechduleTest(appointmentID, ctrlSechduleVisionTest.enMode.New, this.ctrlLDLAwithApplicationInformation1.ApplicatFullName, _LDLApplicationID, _testTeypID);
+            frmSechduleTest.ShowDialog();
+            await _refreshDataInDGV();
+        }
+
+       
     }
 }

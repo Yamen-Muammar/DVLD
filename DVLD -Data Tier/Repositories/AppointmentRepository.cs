@@ -70,8 +70,7 @@ namespace DVLD__Data_Tier.Repositories
             }
             return newAppointmentID;
         }
-
-        public async Task<int> DoesApplicationHasActiveAppointmentAsync(TestAppointment appointment)
+        public async Task<int> DoesApplicationHasActiveAppointmentAsync(int LDLAppID , int testType)
         {
             int foundedAppointmentID = -1;
             string query = @"select TestAppointments.TestAppointmentID from TestAppointments
@@ -80,8 +79,8 @@ namespace DVLD__Data_Tier.Repositories
             using (SqlConnection connection = new SqlConnection(_connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
             {
-                command.Parameters.AddWithValue("@LDLAppID", appointment.LocalDrivingLicenseApplication_ID);
-                command.Parameters.AddWithValue("@testTypeID", appointment.TestType_ID);
+                command.Parameters.AddWithValue("@LDLAppID", LDLAppID);
+                command.Parameters.AddWithValue("@testTypeID", testType);
                 try
                 {
                     await connection.OpenAsync();
@@ -101,7 +100,6 @@ namespace DVLD__Data_Tier.Repositories
             }
             return foundedAppointmentID;
         }
-
         public async Task<List<clsAppointmentsView>> GetAllAppointmentsAsync(int LDLApp , int testTypeID)
         {
             List<clsAppointmentsView> appsList = new List<clsAppointmentsView>();
@@ -139,6 +137,89 @@ namespace DVLD__Data_Tier.Repositories
                 }
             }
             return appsList;
+        }
+
+        public async Task<TestAppointment> GetAppointmentByIDAsync(int appointmentID)
+        {
+            TestAppointment appointment = null;
+
+            string query = @"SELECT [TestAppointmentID]
+                              ,[TestType_ID]
+                              ,[LocalDrivingLicenseApplication_ID]
+                              ,[AppointmentDate]
+                              ,[PaidFees]
+                              ,[CreatedByUser_ID]
+                              ,[isLocked]
+                              ,[RetakeTestApplication_ID]
+                        FROM [dbo].[TestAppointments]
+                        WHERE TestAppointmentID = @taID ; 
+                        ";
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@taID", appointmentID);
+                try
+                {
+                    await conn.OpenAsync();
+
+                    using(SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            appointment = new TestAppointment
+                            {
+                                TestAppointmentID = (int)reader["TestAppointmentID"],
+                                TestType_ID = (int)reader["TestType_ID"],
+                                LocalDrivingLicenseApplication_ID = (int)reader["LocalDrivingLicenseApplication_ID"],
+                                AppointmentDate = (DateTime)reader["AppointmentDate"],
+                                PaidFees = (decimal)reader["PaidFees"],
+                                CreatedByUser_ID = (int)reader["CreatedByUser_ID"],
+                                isLocked = (bool)reader["isLocked"],
+                                RetakeTestApplication_ID =(int) reader["RetakeTestApplication_ID"],
+                            };
+
+                            if (reader["RetakeTestApplication_ID"] == DBNull.Value)
+                            {
+                                appointment.RetakeTestApplication_ID = null;
+                            }
+                            else
+                            {
+                                appointment. RetakeTestApplication_ID = (int)reader["RetakeTestApplication_ID"];
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            return appointment;
+        }
+        public async Task<bool> UpdateAppointmentDateAsync(int testAppointmentID,DateTime newDate)
+        {
+            bool isUpdated = false;
+            string query = @"Update TestAppointments Set AppointmentDate = @AD where TestAppointmentID = @ta;";
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            using (SqlCommand command = new SqlCommand(query, conn))
+            {
+                command.Parameters.AddWithValue("@AD", newDate);
+                command.Parameters.AddWithValue("@ta", testAppointmentID);
+                try
+                {
+                    await conn.OpenAsync();
+                    isUpdated = await command.ExecuteNonQueryAsync() > 0;
+
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+            }
+            return isUpdated;
         }
     }
 }
