@@ -276,6 +276,7 @@
             this.Name = "frmVisionTestAppointment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmVisionTestAppointment";
+            this.Load += new System.EventHandler(this.frmVisionTestAppointment_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.contextMenuStrip2.ResumeLayout(false);
