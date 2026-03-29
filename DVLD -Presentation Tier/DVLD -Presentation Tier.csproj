@@ -158,6 +158,12 @@
     <Compile Include="Controls\SechduleTestsControls\ctrlSechduleVisionTest.Designer.cs">
       <DependentUpon>ctrlSechduleVisionTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SechduleTestsControls\ctrlSechduleVisionTestInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SechduleTestsControls\ctrlSechduleVisionTestInfo.Designer.cs">
+      <DependentUpon>ctrlSechduleVisionTestInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SechduleTestsControls\ctrlSechduleWrittenTest.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -223,6 +229,12 @@
     </Compile>
     <Compile Include="Forms\TestsAppointment\frmVisionTestAppointment.Designer.cs">
       <DependentUpon>frmVisionTestAppointment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TestsForms\frmTakeTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TestsForms\frmTakeTest.Designer.cs">
+      <DependentUpon>frmTakeTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\UserForms\frmAddNewUser.cs">
       <SubType>Form</SubType>
@@ -307,6 +319,9 @@
     <EmbeddedResource Include="Controls\SechduleTestsControls\ctrlSechduleVisionTest.resx">
       <DependentUpon>ctrlSechduleVisionTest.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SechduleTestsControls\ctrlSechduleVisionTestInfo.resx">
+      <DependentUpon>ctrlSechduleVisionTestInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\UserControls\ctrlUserInfo.resx">
       <DependentUpon>ctrlUserInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -336,6 +351,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TestsAppointment\frmVisionTestAppointment.resx">
       <DependentUpon>frmVisionTestAppointment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TestsForms\frmTakeTest.resx">
+      <DependentUpon>frmTakeTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserForms\frmAddNewUser.resx">
       <DependentUpon>frmAddNewUser.cs</DependentUpon>

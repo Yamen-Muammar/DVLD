@@ -37,7 +37,7 @@ namespace DVLD__Presentation_Tier.Forms.TestsAppointment
             // 
             this.ctrlSechduleVisionTest1.Location = new System.Drawing.Point(12, 3);
             this.ctrlSechduleVisionTest1.Name = "ctrlSechduleVisionTest1";
-            this.ctrlSechduleVisionTest1.Size = new System.Drawing.Size(609, 810);
+            this.ctrlSechduleVisionTest1.Size = new System.Drawing.Size(609, 855);
             this.ctrlSechduleVisionTest1.TabIndex = 0;
             // 
             // frmSechduleTest
@@ -59,14 +59,14 @@ namespace DVLD__Presentation_Tier.Forms.TestsAppointment
 
         private void InitializeComponent(int? appointmentID,ctrlSechduleVisionTest.enMode mode,int ldlAppId,string applicantName)
         {
-            this.ctrlSechduleVisionTest1 = new DVLD__Presentation_Tier.Controls.SechduleTestsControls.ctrlSechduleVisionTest(appointmentID, mode,applicantName,ldlAppId);
+            this.ctrlSechduleVisionTest1 = new DVLD__Presentation_Tier.Controls.SechduleTestsControls.ctrlSechduleVisionTest(null,mode,applicantName,ldlAppId);
             this.SuspendLayout();
             // 
             // ctrlSechduleVisionTest1
             // 
             this.ctrlSechduleVisionTest1.Location = new System.Drawing.Point(12, 3);
             this.ctrlSechduleVisionTest1.Name = "ctrlSechduleVisionTest1";
-            this.ctrlSechduleVisionTest1.Size = new System.Drawing.Size(609, 864);
+            this.ctrlSechduleVisionTest1.Size = new System.Drawing.Size(609, 855);
             this.ctrlSechduleVisionTest1.TabIndex = 0;
             // 
             // frmSechduleTest
@@ -75,7 +75,7 @@ namespace DVLD__Presentation_Tier.Forms.TestsAppointment
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(631, 905);
+            this.ClientSize = new System.Drawing.Size(631, 858);
             this.Controls.Add(this.ctrlSechduleVisionTest1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -87,7 +87,6 @@ namespace DVLD__Presentation_Tier.Forms.TestsAppointment
         }
 
         #endregion
-
         private Controls.SechduleTestsControls.ctrlSechduleVisionTest ctrlSechduleVisionTest1;
     }
 }

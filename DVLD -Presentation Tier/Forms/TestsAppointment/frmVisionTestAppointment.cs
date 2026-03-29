@@ -45,7 +45,7 @@ namespace DVLD__Presentation_Tier.Forms.TestsAppointment
             bool isHas =((await _appointmentService.DoesApplicantHasAnActiveAppointmentAsync(_LDLApplicationID,_testTeypID)) > 0);
             if (isHas)
             {
-                MessageBox.Show($"Applicant already has an Active appointment","Alert",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show($"Applicant already has an Active appointment","Not Allowed",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return;
             }
 
