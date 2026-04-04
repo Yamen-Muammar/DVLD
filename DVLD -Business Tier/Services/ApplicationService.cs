@@ -47,7 +47,6 @@ namespace DVLD__Business_Tier.Services
                
                 if (newId == -1)
                 {
-                    return false;
                     throw new Exception("Can't Create New Application");
                 }
                 else

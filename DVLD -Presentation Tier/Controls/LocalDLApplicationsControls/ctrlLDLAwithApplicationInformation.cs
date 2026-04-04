@@ -115,10 +115,11 @@ namespace DVLD__Presentation_Tier.Controls.LocalDLApplicationsControls
 
             try
             {
+                
                 personNationalNo = (await _personService.Find(personID)).NationalNO;
                 if (personNationalNo == string.Empty) { throw new ArgumentNullException("National No is null"); }
 
-                passedTestCount = await _testService.PassedTestCount(personNationalNo, className);
+                passedTestCount = await _testService.PassedTestCount(_lDLAppID, personNationalNo, className);
             }
             catch (Exception ex)
             {

@@ -13,7 +13,7 @@ namespace DVLD__Data_Tier.Repositories
     public class TestRepository
     {
         private string _connectionString = DataBaseSettings.DataBaseConnectionString;
-        public async Task<int> GetPassedTestsAsync(string nationalNo,string className)
+        public async Task<int> GetPassedTestsAsync(int ldlAppID,string nationalNo,string className)
         {
             int passedTestsCount = -1;
 
@@ -30,7 +30,7 @@ namespace DVLD__Data_Tier.Repositories
                             inner join LicenseClasses
                             on LocalDrivingLicenseApplications.LicenseClass_ID = LicenseClasses.LicenseClassID
 
-                            where Tests.TestResult = 1 and Persons.NationalNO = @nationalNo and LicenseClasses.ClassName = @className;
+                            where Tests.TestResult = 1 and Persons.NationalNO = @nationalNo and LicenseClasses.ClassName = @className and LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = @ldlAppID;
 ";
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
@@ -38,6 +38,7 @@ namespace DVLD__Data_Tier.Repositories
             {
                 cmd.Parameters.AddWithValue("@nationalNo", nationalNo);
                 cmd.Parameters.AddWithValue("@className", className);
+                cmd.Parameters.AddWithValue("@ldlAppID", ldlAppID);
                 try
                 {
                     await conn.OpenAsync();

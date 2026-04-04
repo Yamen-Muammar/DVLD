@@ -87,6 +87,7 @@ namespace DVLD__Presentation_Tier.Controls.SechduleTestsControls
             if (_mode == enMode.Retake)
             {
                 await _loadDataInCtrl();
+                this.ctrlSechduleRetakeTest1.UpdateTestTypeFees(_testType.TestTypeFees);
                 return;
             }
         }
@@ -205,7 +206,6 @@ namespace DVLD__Presentation_Tier.Controls.SechduleTestsControls
             if (_mode == enMode.Retake)
             {
                 lblTitle.Text = "Retake Vision Test";
-                this.ctrlSechduleRetakeTest1.UpdateTestTypeFees(_testType.TestTypeFees);
                 ctrlSechduleRetakeTest1.Enabled = true;
                 return;
             }

@@ -55,7 +55,8 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
                 showPersonLicenseHistoryToolStripMenuItem.Enabled = true;   
             }
             string nationalNo = _getSelectedItemNationalNo();
-            int CountOfPassedTest= await _testService.PassedTestCount(nationalNo, selectedItemClassName);
+            // int CountOfPassedTest= await _testService.PassedTestCount(nationalNo, selectedItemClassName);
+            int CountOfPassedTest = (int)dgvApplicationsList.CurrentRow.Cells["PassedTests"].Value;
             _visbleComboItemsOnPassedTests(CountOfPassedTest);
         }
         private async void deleteApplicationToolStripMenuItem_Click(object sender, EventArgs e)
