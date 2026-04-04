@@ -40,7 +40,7 @@ namespace DVLD__Presentation_Tier.Forms.UserForms
             }
 
             string CurrentPassword = tbCurrentPassword.Text;    
-            bool isCurrentPasswordVerified = await _clsPasswordHasher.VerifyPassword(CurrentPassword,Global.User.HashedPassword);
+            bool isCurrentPasswordVerified = _clsPasswordHasher.VerifyPassword(CurrentPassword, Global.User.HashedPassword);
 
             if (!isCurrentPasswordVerified)
             {
@@ -48,7 +48,7 @@ namespace DVLD__Presentation_Tier.Forms.UserForms
                 return;
             }
 
-            string hashedNewPassword = await _clsPasswordHasher.HashPassword(tbNewPassword.Text);
+            string hashedNewPassword = _clsPasswordHasher.HashPassword(tbNewPassword.Text);
 
             try
             {

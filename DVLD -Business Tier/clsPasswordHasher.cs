@@ -20,7 +20,7 @@ namespace DVLD__Business_Tier
         /// Hashes a password and returns a single Base64 string containing both the salt and the hash.
         /// Save this string directly to your database.
         /// </summary>
-        public async Task<string> HashPassword(string password)
+        public string HashPassword(string password)
         {
             // 1. Generate a random "Salt"
             byte[] salt = new byte[SaltSize];
@@ -47,7 +47,7 @@ namespace DVLD__Business_Tier
         /// <summary>
         /// Compares a plain-text password typed by the user with the hashed string from the database.
         /// </summary>
-        public async Task<bool> VerifyPassword(string passwordEntered, string savedHash)
+        public bool VerifyPassword(string passwordEntered, string savedHash)
         {
             try
             {

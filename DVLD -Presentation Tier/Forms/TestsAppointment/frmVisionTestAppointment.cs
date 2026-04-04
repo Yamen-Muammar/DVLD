@@ -60,6 +60,10 @@ namespace DVLD__Presentation_Tier.Forms.TestsAppointment
                     frmSechduleTest frmSechduleTest = new frmSechduleTest(appointmentID, ctrlSechduleVisionTest.enMode.Retake, this.ctrlLDLAwithApplicationInformation1.ApplicatFullName, _LDLApplicationID, _testTeypID, this.ctrlLDLAwithApplicationInformation1.licenseClassName);
                     frmSechduleTest.ShowDialog();
                 }
+                else
+                {
+                    MessageBox.Show($"Applicant already Passed The Test", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {

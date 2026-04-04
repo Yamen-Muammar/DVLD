@@ -115,6 +115,7 @@ namespace DVLD__Presentation_Tier.Controls.SechduleTestsControls
         private async Task _addNewAppointment()
         {
             TestAppointment appointment = CreateTestAppointmentObj();
+            if (appointment == null) { return; }
             try
             {
                 appointment.TestAppointmentID = await _appointmentService.AddTestAppointmentAsync(appointment);
@@ -161,6 +162,7 @@ namespace DVLD__Presentation_Tier.Controls.SechduleTestsControls
             try
             {
                 TestAppointment testAppointment = CreateTestAppointmentObj();
+                if (testAppointment == null) { return; }
                 testAppointment.TestAppointmentID = await _appointmentService.AddRetakeTestAppointmentAsync(testAppointment);
 
                 if (testAppointment.TestAppointmentID == -1)
@@ -220,13 +222,13 @@ namespace DVLD__Presentation_Tier.Controls.SechduleTestsControls
         private TestAppointment CreateTestAppointmentObj()
         {
             TestAppointment testAppointment = null;
-            if (!_infoValidation())
-            {
-                return testAppointment;
-            }
-
             try
             {
+            
+                if (!_infoValidation())
+                {
+                    return testAppointment;
+                }
                 testAppointment = new TestAppointment();
                 testAppointment.LocalDrivingLicenseApplication_ID = _lDLAppID;
                 testAppointment.RetakeTestApplication_ID = null;
