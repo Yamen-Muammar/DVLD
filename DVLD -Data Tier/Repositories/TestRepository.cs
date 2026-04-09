@@ -13,31 +13,18 @@ namespace DVLD__Data_Tier.Repositories
     public class TestRepository
     {
         private string _connectionString = DataBaseSettings.DataBaseConnectionString;
-        public async Task<int> GetPassedTestsAsync(int ldlAppID,string nationalNo,string className)
+        public async Task<int> GetPassedTestsAsync(int ldlAppID)
         {
             int passedTestsCount = -1;
-
-            string query = @"
-                            select count(TestID)
-                            from Tests
-                            inner join TestAppointments
-                            on Tests.TestAppointment_ID = TestAppointments.TestAppointmentID
-                            inner join LocalDrivingLicenseApplications
-                            on TestAppointments.LocalDrivingLicenseApplication_ID = LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID
-                            INNER JOIN Applications
-                            on LocalDrivingLicenseApplications.Application_ID  = Applications.ApplicationID
-                            inner join Persons on Persons.PersonID = Applications.Person_ID
-                            inner join LicenseClasses
-                            on LocalDrivingLicenseApplications.LicenseClass_ID = LicenseClasses.LicenseClassID
-
-                            where Tests.TestResult = 1 and Persons.NationalNO = @nationalNo and LicenseClasses.ClassName = @className and LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = @ldlAppID;
-";
+            string query = @"SELECT COUNT(Tests.TestID)
+                             FROM Tests 
+                             INNER JOIN TestAppointments ON Tests.TestAppointment_ID = TestAppointments.TestAppointmentID
+                             WHERE Tests.TestResult = 1 
+                             AND TestAppointments.LocalDrivingLicenseApplication_ID = @ldlAppID;";
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                cmd.Parameters.AddWithValue("@nationalNo", nationalNo);
-                cmd.Parameters.AddWithValue("@className", className);
                 cmd.Parameters.AddWithValue("@ldlAppID", ldlAppID);
                 try
                 {

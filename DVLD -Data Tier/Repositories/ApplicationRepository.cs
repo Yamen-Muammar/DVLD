@@ -335,11 +335,29 @@ namespace DVLD__Data_Tier.Repositories
             return appsList;
         }
         public  async Task<List<clsLocalDrivingLicesnseApplicationView>> GetAll_L_D_L_Applications()
-        {
-            TestRepository testRepository = new TestRepository();
+        {        
             List<clsLocalDrivingLicesnseApplicationView> appsList = new List<clsLocalDrivingLicesnseApplicationView>();
-            string query = "SELECT LocalDrivingLicenseApplicationID,ClassName,NationalNO,FullName,ApplicationDate,ApplicationStatus" +
-                " FROM LocalDrivingLicenseApplicationsView ORDER BY ApplicationDate DESC";
+          
+            string query = @"SELECT 
+                            Main.LocalDrivingLicenseApplicationID, 
+                            Main.ClassName, 
+                            Main.NationalNO, 
+                            Main.FullName, 
+                            Main.ApplicationDate, 
+                            Main.ApplicationStatus,
+                            ISNULL(TestCounts.PassedTests, 0) AS PassedTestsCount
+                            FROM 
+                            LocalDrivingLicenseApplicationsView AS Main
+                            LEFT JOIN 
+                            (
+                            SELECT TestAppointments.LocalDrivingLicenseApplication_ID, COUNT(Tests.TestID) AS PassedTests
+                            FROM Tests
+                            INNER JOIN TestAppointments ON Tests.TestAppointment_ID = TestAppointments.TestAppointmentID
+                            WHERE Tests.TestResult = 1
+                            GROUP BY TestAppointments.LocalDrivingLicenseApplication_ID
+                            ) AS TestCounts 
+                            ON Main.LocalDrivingLicenseApplicationID = TestCounts.LocalDrivingLicenseApplication_ID
+                            order by Main.LocalDrivingLicenseApplicationID DESC;";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
@@ -360,7 +378,7 @@ namespace DVLD__Data_Tier.Repositories
                                 FullName = reader["FullName"].ToString(),
                                 ApplicationDate = (DateTime)reader["ApplicationDate"],
                                 Status = reader["ApplicationStatus"].ToString(),
-                                PassedTests = await testRepository.GetPassedTestsAsync((int)reader["LocalDrivingLicenseApplicationID"], reader["NationalNO"].ToString(), reader["ClassName"].ToString())
+                                PassedTests = (int)reader["PassedTestsCount"]                              
                             });                            
                         }
                     }

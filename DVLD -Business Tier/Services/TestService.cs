@@ -24,10 +24,10 @@ namespace DVLD__Business_Tier.Services
         {
             throw new NotImplementedException();
         }
-        public async Task<int> PassedTestCount(int ldlAppID,string personNationalNo,string className)
+        public async Task<int> PassedTestCount(int ldlAppID)
         {
             
-            int returnedPassedCount = await _testRepo.GetPassedTestsAsync(ldlAppID,personNationalNo, className);
+            int returnedPassedCount = await _testRepo.GetPassedTestsAsync(ldlAppID);
 
             if (returnedPassedCount > 4 || returnedPassedCount < 0)
             {
