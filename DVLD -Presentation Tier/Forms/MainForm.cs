@@ -13,6 +13,7 @@ using DVLD__Core;
 using DVLD__Presentation_Tier.Forms.Application_Types_Forms;
 using DVLD__Presentation_Tier.Forms.Test_Types_Forms;
 using DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms;
+using DVLD__Presentation_Tier.Forms.DriversForms;
 namespace DVLD__Presentation_Tier
 {
     public partial class MainForm : Form
@@ -84,6 +85,12 @@ namespace DVLD__Presentation_Tier
         private void internationalDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void driversToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageDrivers frmManage = new frmManageDrivers();
+            frmManage.ShowDialog();
         }
     }
 }

@@ -200,6 +200,12 @@
     <Compile Include="Forms\Application Types Forms\frmUpdateApplicationTypeInfo.Designer.cs">
       <DependentUpon>frmUpdateApplicationTypeInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DriversForms\frmManageDrivers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DriversForms\frmManageDrivers.Designer.cs">
+      <DependentUpon>frmManageDrivers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\License Forms\frmIssueDrivingLicense.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -390,6 +396,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Application Types Forms\frmUpdateApplicationTypeInfo.resx">
       <DependentUpon>frmUpdateApplicationTypeInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DriversForms\frmManageDrivers.resx">
+      <DependentUpon>frmManageDrivers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\License Forms\frmIssueDrivingLicense.resx">
       <DependentUpon>frmIssueDrivingLicense.cs</DependentUpon>
