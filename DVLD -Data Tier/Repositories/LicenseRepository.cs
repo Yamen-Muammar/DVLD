@@ -360,7 +360,7 @@ namespace DVLD__Data_Tier.Repositories
         {
             List<clsLicenseHistoryView> licenseHistoryList = new List<clsLicenseHistoryView>();
             string query = @"
-               select Licenses.LocalDrivingLicenseApplication_ID,Licenses.Application_ID,LicenseClasses.ClassName,Licenses.IssueDate,Licenses.ExpirationDate,Licenses.isActive
+               select Licenses.LicenseID,Licenses.Application_ID,LicenseClasses.ClassName,Licenses.IssueDate,Licenses.ExpirationDate,Licenses.isActive
                from Licenses
                inner join LicenseClasses on Licenses.LicenseClass_ID = LicenseClasses.LicenseClassID
                inner join Applications on Licenses.Application_ID = Applications.ApplicationID
@@ -380,7 +380,7 @@ namespace DVLD__Data_Tier.Repositories
                         while (await reader.ReadAsync())
                         {
                              licenseHistoryList.Add(new clsLicenseHistoryView {
-                                 LocalDrivingLicenseApplicationID = (reader["LocalDrivingLicenseApplication_ID"] == DBNull.Value)? -1:(int)reader["LocalDrivingLicenseApplication_ID"],
+                                 LicenseID = (int)reader["LicenseID"],
                                  Application_ID = (int)reader["Application_ID"],
                                  ClassName = (string)reader["ClassName"],
                                  IssueDate = (DateTime)reader["IssueDate"],

@@ -28,13 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblRecordsCount = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvDriversList = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.personLicenseHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDriversList)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label3
@@ -84,6 +88,7 @@
             this.dgvDriversList.AllowUserToDeleteRows = false;
             this.dgvDriversList.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvDriversList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDriversList.ContextMenuStrip = this.contextMenuStrip1;
             this.dgvDriversList.Location = new System.Drawing.Point(12, 365);
             this.dgvDriversList.Name = "dgvDriversList";
             this.dgvDriversList.ReadOnly = true;
@@ -91,6 +96,22 @@
             this.dgvDriversList.RowTemplate.Height = 28;
             this.dgvDriversList.Size = new System.Drawing.Size(1102, 465);
             this.dgvDriversList.TabIndex = 5;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.personLicenseHistoryToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(269, 69);
+            // 
+            // personLicenseHistoryToolStripMenuItem
+            // 
+            this.personLicenseHistoryToolStripMenuItem.Image = global::DVLD__Presentation_Tier.Properties.Resources.PersonLicenseHistory32;
+            this.personLicenseHistoryToolStripMenuItem.Name = "personLicenseHistoryToolStripMenuItem";
+            this.personLicenseHistoryToolStripMenuItem.Size = new System.Drawing.Size(268, 32);
+            this.personLicenseHistoryToolStripMenuItem.Text = "Person License History";
+            this.personLicenseHistoryToolStripMenuItem.Click += new System.EventHandler(this.personLicenseHistoryToolStripMenuItem_Click);
             // 
             // frmManageDrivers
             // 
@@ -112,6 +133,7 @@
             this.Load += new System.EventHandler(this.frmManageDrivers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDriversList)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -124,5 +146,7 @@
         private System.Windows.Forms.Label lblRecordsCount;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvDriversList;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem personLicenseHistoryToolStripMenuItem;
     }
 }

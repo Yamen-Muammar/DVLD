@@ -31,14 +31,14 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpLocal = new System.Windows.Forms.TabPage();
-            this.tbInternational = new System.Windows.Forms.TabPage();
             this.dgvLocalLicense = new System.Windows.Forms.DataGridView();
+            this.tbInternational = new System.Windows.Forms.TabPage();
             this.dgvInternationalLicenses = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tpLocal.SuspendLayout();
-            this.tbInternational.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLocalLicense)).BeginInit();
+            this.tbInternational.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInternationalLicenses)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,6 +74,19 @@
             this.tpLocal.Text = "Local";
             this.tpLocal.UseVisualStyleBackColor = true;
             // 
+            // dgvLocalLicense
+            // 
+            this.dgvLocalLicense.AllowUserToAddRows = false;
+            this.dgvLocalLicense.AllowUserToDeleteRows = false;
+            this.dgvLocalLicense.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLocalLicense.Location = new System.Drawing.Point(11, 14);
+            this.dgvLocalLicense.Name = "dgvLocalLicense";
+            this.dgvLocalLicense.ReadOnly = true;
+            this.dgvLocalLicense.RowHeadersWidth = 62;
+            this.dgvLocalLicense.RowTemplate.Height = 28;
+            this.dgvLocalLicense.Size = new System.Drawing.Size(927, 174);
+            this.dgvLocalLicense.TabIndex = 0;
+            // 
             // tbInternational
             // 
             this.tbInternational.Controls.Add(this.dgvInternationalLicenses);
@@ -85,21 +98,14 @@
             this.tbInternational.Text = "International";
             this.tbInternational.UseVisualStyleBackColor = true;
             // 
-            // dgvLocalLicense
-            // 
-            this.dgvLocalLicense.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLocalLicense.Location = new System.Drawing.Point(11, 14);
-            this.dgvLocalLicense.Name = "dgvLocalLicense";
-            this.dgvLocalLicense.RowHeadersWidth = 62;
-            this.dgvLocalLicense.RowTemplate.Height = 28;
-            this.dgvLocalLicense.Size = new System.Drawing.Size(927, 174);
-            this.dgvLocalLicense.TabIndex = 0;
-            // 
             // dgvInternationalLicenses
             // 
+            this.dgvInternationalLicenses.AllowUserToAddRows = false;
+            this.dgvInternationalLicenses.AllowUserToDeleteRows = false;
             this.dgvInternationalLicenses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInternationalLicenses.Location = new System.Drawing.Point(9, 10);
             this.dgvInternationalLicenses.Name = "dgvInternationalLicenses";
+            this.dgvInternationalLicenses.ReadOnly = true;
             this.dgvInternationalLicenses.RowHeadersWidth = 62;
             this.dgvInternationalLicenses.Size = new System.Drawing.Size(927, 174);
             this.dgvInternationalLicenses.TabIndex = 1;
@@ -115,8 +121,8 @@
             this.groupBox1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tpLocal.ResumeLayout(false);
-            this.tbInternational.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLocalLicense)).EndInit();
+            this.tbInternational.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvInternationalLicenses)).EndInit();
             this.ResumeLayout(false);
 

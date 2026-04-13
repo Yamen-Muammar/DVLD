@@ -12,6 +12,7 @@ using System.Web.UI.Design.WebControls;
 using System.Windows.Forms;
 using DVLD__Business_Tier.Services;
 using DVLD__Core.View_Models;
+using DVLD__Presentation_Tier.Forms.License_Forms;
 
 namespace DVLD__Presentation_Tier.Forms.DriversForms
 {
@@ -58,6 +59,14 @@ namespace DVLD__Presentation_Tier.Forms.DriversForms
         private void UpdateListCounter()
         {
             lblRecordsCount.Text = _driversList.Count.ToString();
+        }
+
+        private void personLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string noationalID = (string)dgvDriversList.CurrentRow.Cells["NationalNO"].Value;
+            frmLicenseHistory frmLicense = new frmLicenseHistory(noationalID);
+            frmLicense.ShowDialog();
+
         }
     }
 }
