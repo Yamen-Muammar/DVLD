@@ -91,6 +91,23 @@ namespace DVLD__Business_Tier.Services
             return await _licenseRepo.RenewLocalLicense(existingLicense.LicenseID, application, newlicense);
         }
 
+        public async Task<int> ReplaceLicenseAsync(DVLD__Core.Models.Application application, DVLD__Core.Models.License PreviousLicense, DVLD__Core.Models.License newlicense)
+        {
+           
+            DVLD__Core.Models.License existingLicense = await _licenseRepo.GetLicenseByIDAsync(PreviousLicense.LicenseID);
+            if (existingLicense == null)
+            {
+                throw new Exception("License not found.");
+            }
+            if (_isLicenseExpire(existingLicense.ExpirationDate))
+            {
+                throw new Exception("Cannot Replace an Expire license.");
+            }
+
+
+            return await _licenseRepo.ReplaceLocalLicense(existingLicense.LicenseID, application, newlicense);
+        }
+
         // get 
         public async Task<DVLD__Core.Models.License > GetLicenseByLDLAppID(int ldlAppid)
         {

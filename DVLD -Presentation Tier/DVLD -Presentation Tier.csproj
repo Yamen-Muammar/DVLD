@@ -224,6 +224,12 @@
     <Compile Include="Forms\frmRenewLicenseApplication.Designer.cs">
       <DependentUpon>frmRenewLicenseApplication.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmReplaceLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmReplaceLicense.Designer.cs">
+      <DependentUpon>frmReplaceLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InternationalLicenseForms\frmManageInternationalLicense.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -438,6 +444,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmRenewLicenseApplication.resx">
       <DependentUpon>frmRenewLicenseApplication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmReplaceLicense.resx">
+      <DependentUpon>frmReplaceLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InternationalLicenseForms\frmManageInternationalLicense.resx">
       <DependentUpon>frmManageInternationalLicense.cs</DependentUpon>

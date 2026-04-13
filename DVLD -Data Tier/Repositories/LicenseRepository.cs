@@ -207,6 +207,47 @@ namespace DVLD__Data_Tier.Repositories
             return InsertedLicenseID;
         }
 
+        public async Task<int> ReplaceLocalLicense(int previouslicenseID, DVLD__Core.Models.Application application, DVLD__Core.Models.License newLicense)
+        {
+            int InsertedLicenseID = -1;
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                using (SqlTransaction transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        // insert application
+                        application.ApplicationID = await _insertNewApplicationAsync(application, transaction, connection);
+                        if (application.ApplicationID <= 0)
+                        {
+                            throw new ArgumentException("Error While Inserting Application");
+                        }
+
+                        newLicense.Application_ID = application.ApplicationID;
+
+                        // insert license 
+
+                        InsertedLicenseID = await _insertRenewLicenseForTransactionalAsync(newLicense, transaction, connection);
+                        if (InsertedLicenseID <= 0)
+                        {
+                            throw new ArgumentException("Error While Inserting International License");
+                        }
+
+                        // update previous License to inactive
+                        bool isPreLicenseInActive = await _deactivateLicenseForTransactionalAsync(previouslicenseID, transaction, connection);
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+
+                }
+            }
+            return InsertedLicenseID;
+        }
 
 
         // GET
@@ -365,7 +406,7 @@ namespace DVLD__Data_Tier.Repositories
                inner join LicenseClasses on Licenses.LicenseClass_ID = LicenseClasses.LicenseClassID
                inner join Applications on Licenses.Application_ID = Applications.ApplicationID
                WHERE Applications.Person_ID = @personID
-               Order by IssueDate Desc;";
+               Order by Application_ID Desc;";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
