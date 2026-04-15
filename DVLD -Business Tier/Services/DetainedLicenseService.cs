@@ -44,5 +44,10 @@ namespace DVLD__Business_Tier.Services
             }
             return true;
         }
+
+        public async Task<List<DetainedLicense>> GetAllDetainedLicenses()
+        {
+            return await _repo.GetAllDetainedLicensesAsync();
+        }
     }
 }

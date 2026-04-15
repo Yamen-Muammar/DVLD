@@ -20,10 +20,11 @@ namespace DVLD__Presentation_Tier
         public crtlPeopleListWithFilter()
         {
             InitializeComponent(); 
-            _personService = new PersonService();
+           
         }
         private async void crtlPeopleListWithFilter_Load(object sender, EventArgs e)
-        {            
+        {
+            _personService = new PersonService();
             await _RefreshData();
             _loadFilterComboBoxItems();
         }

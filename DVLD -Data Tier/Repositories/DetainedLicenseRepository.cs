@@ -23,7 +23,7 @@ namespace DVLD__Data_Tier.Repositories
             string query = @"
                                 select 1 as Founded from DetainedLicenses
                                 where DetainedLicenses.license_ID = @licenseID;";
-            using(SqlConnection conn = new SqlConnection(_connectionString))
+            using (SqlConnection conn = new SqlConnection(_connectionString))
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
                 cmd.Parameters.AddWithValue("@licenseID", licenseID);
@@ -74,7 +74,7 @@ namespace DVLD__Data_Tier.Repositories
             using (SqlConnection connection = new SqlConnection(_connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
             {
-           
+
                 command.Parameters.AddWithValue("@LicenseID", detainedLicense.License_ID);
                 command.Parameters.AddWithValue("@DetainDate", detainedLicense.DetainDate);
                 command.Parameters.AddWithValue("@FineFees", detainedLicense.FineFees);
@@ -108,12 +108,53 @@ namespace DVLD__Data_Tier.Repositories
                     }
                 }
                 catch (Exception)
-                {  
+                {
                     throw;
                 }
             }
 
             return insertedDetainID;
+        }
+
+        public async Task<List<DetainedLicense>> GetAllDetainedLicensesAsync()
+        {
+            List<DetainedLicense> detainedLicenses = new List<DetainedLicense>();
+            string query = @"
+                SELECT DetainID, license_ID, DetainDate, FineFees, CreatedByUser_ID, isReleased, ReleaseDate, ReleaseByUser_ID, ReleaseApplication_ID
+                FROM DetainedLicenses
+                ORDER BY DetainDate DESC;";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                try
+                {
+                    await connection.OpenAsync();
+                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            DetainedLicense detainedLicense = new DetainedLicense
+                            {
+                                DetainID = reader.GetInt32(reader.GetOrdinal("DetainID")),
+                                License_ID = reader.GetInt32(reader.GetOrdinal("license_ID")),
+                                DetainDate = reader.GetDateTime(reader.GetOrdinal("DetainDate")),
+                                FineFees = reader.GetDecimal(reader.GetOrdinal("FineFees")),
+                                CreatedByUser_ID = reader.GetInt32(reader.GetOrdinal("CreatedByUser_ID")),
+                                isReleased = reader.GetBoolean(reader.GetOrdinal("isReleased")),
+                                ReleaseDate = reader.IsDBNull(reader.GetOrdinal("ReleaseDate")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("ReleaseDate")),
+                                ReleaseByUser_ID = reader.IsDBNull(reader.GetOrdinal("ReleaseByUser_ID")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("ReleaseByUser_ID")),
+                                ReleaseApplication_ID = reader.IsDBNull(reader.GetOrdinal("ReleaseApplication_ID")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("ReleaseApplication_ID"))
+                            };
+                            detainedLicenses.Add(detainedLicense);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            return detainedLicenses;
         }
     }
 }

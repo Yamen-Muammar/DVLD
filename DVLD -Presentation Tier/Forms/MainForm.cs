@@ -122,7 +122,8 @@ namespace DVLD__Presentation_Tier
 
         private void manageDetainedLicensesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmManageDeainedLicense frm = new frmManageDeainedLicense();
+            frm.ShowDialog();
         }
 
         private void releaseDetainedDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
