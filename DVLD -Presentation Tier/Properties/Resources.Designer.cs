@@ -253,6 +253,16 @@ namespace DVLD__Presentation_Tier.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Gemini_Generated_Image_i55v35i55v35i55v {
+            get {
+                object obj = ResourceManager.GetObject("Gemini_Generated_Image_i55v35i55v35i55v", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap International32 {
             get {
                 object obj = ResourceManager.GetObject("International32", resourceCulture);
@@ -356,6 +366,16 @@ namespace DVLD__Presentation_Tier.Properties {
         internal static System.Drawing.Bitmap Password {
             get {
                 object obj = ResourceManager.GetObject("Password", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Person32 {
+            get {
+                object obj = ResourceManager.GetObject("Person32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

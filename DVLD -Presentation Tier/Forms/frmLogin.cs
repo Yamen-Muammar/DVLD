@@ -42,23 +42,22 @@ namespace DVLD__Presentation_Tier.Forms
 
         private async void btnLogin_Click(object sender, EventArgs e)
         {
-            btnLogin.Text = "Wating...";
+            _startLoading(true);
             btnLogin.Enabled = false;
+            btnLogin.Visible = false;
             
-
-            if (!_validationInput())
-            {
-                MessageBox.Show("Please Fill All Fields With Right Inforamtion","Alert",MessageBoxButtons.OK,MessageBoxIcon.Warning);
-                return;
-            }
-            
-            string username = tbUsername.Text;
-            string password = tbPassword.Text;
-            bool isRememberMeChecked = cbRemaindme.Checked;
             bool isLoginSuccessful = false;
 
             try
-            { 
+            {
+                if (!_validationInput())
+                {
+                    throw new Exception("Please Fill All Fields With Right Inforamtion");
+                }
+                string username = tbUsername.Text;
+                string password = tbPassword.Text;
+                bool isRememberMeChecked = cbRemaindme.Checked;
+   
                 isLoginSuccessful = await _userService.Login(username, password, isRememberMeChecked);
             }
             catch (Exception ex)
@@ -67,8 +66,9 @@ namespace DVLD__Presentation_Tier.Forms
             }
             finally
             {
+                _startLoading(false);
+                btnLogin.Visible = true;
                 btnLogin.Enabled = true;
-                btnLogin.Text = "Login";
             }
             
 
@@ -102,6 +102,21 @@ namespace DVLD__Presentation_Tier.Forms
             catch (Exception)
             {
                 return;
+            }
+        }
+
+        private void _startLoading(bool enable)
+        {
+           
+            guna2ProgressIndicator1.Visible = enable;
+            guna2ProgressIndicator1.Enabled = enable;
+            if (enable)
+            {
+                guna2ProgressIndicator1.Start();
+            }
+            else
+            {
+                guna2ProgressIndicator1.Stop();
             }
         }
     }

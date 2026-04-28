@@ -43,7 +43,7 @@ namespace DVLD__Business_Tier.Services
                 throw new Exception("User Is Not Active.");
             }
 
-            if (! _clsPasswordHasher.VerifyPassword(password, user.HashedPassword))
+            if (! await Task.Run(() => _clsPasswordHasher.VerifyPassword(password, user.HashedPassword)))
             {
                 throw new Exception("Invalid username or password. Please try again.");
             }
