@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DVLD__Business_Tier.Services;
+using DVLD__Core.Models;
 using DVLD__Core.View_Models;
 using DVLD__Presentation_Tier.Forms.License_Forms;
 
@@ -25,6 +26,7 @@ namespace DVLD__Presentation_Tier.Forms.InternationalLicenseForms
         }
         private async void frmManageInternationalLicense_Load(object sender, EventArgs e)
         {
+            _loadComboBox();
             _licenseService = new LicenseService();
             await _refreshDataGridView();
         }
@@ -133,5 +135,45 @@ namespace DVLD__Presentation_Tier.Forms.InternationalLicenseForms
             _internatioanlLicenseList = await _getInternatioanlLicenseList();
             _setDataGridView(_internatioanlLicenseList); 
         }
+
+        private void _loadComboBox()
+        {
+            List<string> filterOptions = new List<string>()
+            {
+                "License ID",
+            };
+            cbFilterOn.DataSource = filterOptions;
+        }
+
+        private void tbFilterInput_TextChanged(object sender, EventArgs e)
+        {
+            if (_internatioanlLicenseList == null)
+            {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(tbFilterInput.Text) || string.IsNullOrWhiteSpace(tbFilterInput.Text))
+            {
+                _bindDataToDGV(_internatioanlLicenseList);
+                return;
+            }
+            int searchTerm = -1;
+
+            if (int.TryParse(tbFilterInput.Text.ToString(), out searchTerm) && searchTerm != -1)
+            {
+                List<clsInternationalLicenseHistory> filteredList = _internatioanlLicenseList.Where(dl =>
+                dl.LocalLicense_ID.Equals(searchTerm)).ToList();
+
+                _bindDataToDGV(filteredList);
+            }
+        }
+
+       private void _bindDataToDGV(List<clsInternationalLicenseHistory> source)
+       {
+       this.dgvInternationalLicenseList.DataSource = null;
+       this.dgvInternationalLicenseList.DataSource = source;
+       this.lblRecordsCount.Text = source.Count.ToString();
+       }
     }
+    
 }

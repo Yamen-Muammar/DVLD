@@ -92,11 +92,19 @@ namespace DVLD__Presentation_Tier
         }
         private void sendEmailToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This feature is not implemented yet.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            string email = (string)dgvPeopleList.CurrentRow.Cells["Email"].Value;
+            string FirstName = (string)dgvPeopleList.CurrentRow.Cells["FirstName"].Value;
+            string LastName = (string)dgvPeopleList.CurrentRow.Cells["LastName"].Value;
+            string FullName = FirstName + " " + LastName;
+            MessageBox.Show($"{FullName} email is [{email}]", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-        private void phoneCallToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void phoneCallToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This feature is not implemented yet.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            string phone = (string)dgvPeopleList.CurrentRow.Cells["Phone"].Value;
+            string FirstName = (string)dgvPeopleList.CurrentRow.Cells["FirstName"].Value;
+            string LastName = (string)dgvPeopleList.CurrentRow.Cells["LastName"].Value;
+            string FullName = FirstName + " " + LastName;
+            MessageBox.Show($"{FullName} Phone Number is [{phone}]", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // Events

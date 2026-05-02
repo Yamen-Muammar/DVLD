@@ -179,6 +179,7 @@
             this.tbFilterInput.SelectedText = "";
             this.tbFilterInput.Size = new System.Drawing.Size(356, 55);
             this.tbFilterInput.TabIndex = 21;
+            this.tbFilterInput.TextChanged += new System.EventHandler(this.tbFilterInput_TextChanged);
             // 
             // btnAddNewLDApplication
             // 
