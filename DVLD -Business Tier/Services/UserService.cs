@@ -14,6 +14,7 @@ namespace DVLD__Business_Tier.Services
 {
     public class UserService
     {
+        private string _remaindMeFilePath = AppSettings.RememberMeFilePath;
         private UserRepository _userRepository;
         private clsPasswordHasher _clsPasswordHasher;
     
@@ -68,7 +69,7 @@ namespace DVLD__Business_Tier.Services
             string seperator = "|||";
             string line = username + seperator + password;
 
-            string filePath = @"F:\yamen - 2024\C#\Course\projects\remaindInfo.txt";
+            string filePath = _remaindMeFilePath;
 
             try
             {
@@ -85,7 +86,7 @@ namespace DVLD__Business_Tier.Services
 
         private bool RemoveDataInRemaindMeFile()
         {
-            string filePath = @"F:\yamen - 2024\C#\Course\projects\remaindInfo.txt";
+            string filePath = _remaindMeFilePath;
 
             try
             {
@@ -102,7 +103,7 @@ namespace DVLD__Business_Tier.Services
         {
             List<string> list = new List<string>();
 
-            string filePath = @"F:\yamen - 2024\C#\Course\projects\remaindInfo.txt";
+            string filePath = _remaindMeFilePath;
             try
             {
                 if (!File.Exists(filePath))
