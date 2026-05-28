@@ -98,7 +98,7 @@
             this.ctrlPersonInformationWithFilter1.Name = "ctrlPersonInformationWithFilter1";
             this.ctrlPersonInformationWithFilter1.Size = new System.Drawing.Size(944, 449);
             this.ctrlPersonInformationWithFilter1.TabIndex = 0;
-            this.ctrlPersonInformationWithFilter1.ReturnPersonID_OnFindPerson += new DVLD__Presentation_Tier.Controls.ctrlPersonInformationWithFilter.ReturnPersonIDEvent(this.ctrlPersonInformationWithFilter1_ReturnPersonID_OnFindPerson);
+            this.ctrlPersonInformationWithFilter1.ReturnPersonID_OnFindPerson += this.ctrlPersonInformationWithFilter1_ReturnPersonID_OnFindPerson;
             // 
             // LoginInfo
             // 

@@ -243,7 +243,7 @@ namespace DVLD__Business_Tier.Services
 
         private bool _isPicINFolder(string picName)
         {
-            string ImageDestinationPath = _imagesFilePath + picName;
+            string ImageDestinationPath = _imagesFilePath+ "\\" + picName;
             try
             {
                 if (File.Exists(ImageDestinationPath))

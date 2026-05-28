@@ -15,11 +15,11 @@ namespace DVLD__Presentation_Tier.Forms.TestsForms
 {
     public partial class frmTakeTest : Form
     {
-        public event Action OnTestPass;
+        public event EventHandler<int> OnTestPass;
         
-        protected void TriggerOnTestPass()
+        protected void TriggerOnTestPass(int passedTestID)
         {
-            OnTestPass?.Invoke();
+            OnTestPass?.Invoke(this,passedTestID);
         }
         
 
@@ -61,7 +61,7 @@ namespace DVLD__Presentation_Tier.Forms.TestsForms
                     lblTestID.Text = _test.TestID.ToString();
                     if (_test.TestResult)
                     {
-                        TriggerOnTestPass();
+                        TriggerOnTestPass(_test.TestID);
                     }
                 
                 }

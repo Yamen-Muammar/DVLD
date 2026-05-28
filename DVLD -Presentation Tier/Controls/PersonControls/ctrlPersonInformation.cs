@@ -186,7 +186,7 @@ namespace DVLD__Presentation_Tier
             _personId = PersonInfo.PersonID;
              await _loadDataInForm();
         }
-        public async void OnRetrundDataEvent(Person person)
+        public async void OnRetrundDataEvent(object sender,Person person)
         {
             if (person == null)
             {

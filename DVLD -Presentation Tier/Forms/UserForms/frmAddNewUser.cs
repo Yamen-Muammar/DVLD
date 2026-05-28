@@ -98,7 +98,7 @@ namespace DVLD__Presentation_Tier.Forms.UserForms
             }
         }
 
-        private void OnReturnPersonID_OnFindPerson(int PersonID)
+        private void OnReturnPersonID_OnFindPerson(object sender,int PersonID)
         {
             _personID = PersonID;
         }
@@ -144,7 +144,7 @@ namespace DVLD__Presentation_Tier.Forms.UserForms
             return new User { Username=username,HashedPassword=HashedPassword,isActive=isActive,Person_ID =personID, Role = new Role { RoleId = (int)Enum.Parse(typeof(Role.enRoles), cbRoles.SelectedItem.ToString())}};
         }
 
-        private void ctrlPersonInformationWithFilter1_ReturnPersonID_OnFindPerson(int PersonID)
+        private void ctrlPersonInformationWithFilter1_ReturnPersonID_OnFindPerson(object sender,int PersonID)
         {
             _personID = PersonID;
         }

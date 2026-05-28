@@ -158,7 +158,7 @@ namespace DVLD__Presentation_Tier.Controls.LocalDLApplicationsControls
         {
             lblApplicant.Text = person.FullName().ToString();
         }
-        public void UpdatePassedTestCount()
+        public void UpdatePassedTestCount(object sender , int PassedTestID)
         {
             if (_passedTestCount == 3)
             {

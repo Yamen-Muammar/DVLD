@@ -91,7 +91,7 @@ namespace DVLD__Presentation_Tier.Forms.LocalDrivingLicenseForms
             this.Close();
         }
 
-        private void ctrlPersonInformationWithFilter1_ReturnPersonID_OnFindPerson(int PersonID)
+        private void ctrlPersonInformationWithFilter1_ReturnPersonID_OnFindPerson(object sender,int PersonID)
         {
             _personID = PersonID;
         }

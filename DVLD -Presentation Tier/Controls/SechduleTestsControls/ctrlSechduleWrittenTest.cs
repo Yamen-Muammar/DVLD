@@ -15,11 +15,11 @@ namespace DVLD__Presentation_Tier.Controls.SechduleTestsControls
 {
     public partial class ctrlSechduleWrittenTest : UserControl
     {
-        public delegate void ReturnAddedRetakeApplicationID(int addedID);
-        public event ReturnAddedRetakeApplicationID OnAddedRetakeApplicationID;
+
+        public event EventHandler<int> OnAddedRetakeApplicationID;
         protected void TriggerEvent(int addedID)
         {
-            OnAddedRetakeApplicationID?.Invoke(addedID);
+            OnAddedRetakeApplicationID?.Invoke(this, addedID);
         }
 
         private int _lDLAppID;

@@ -13,6 +13,7 @@ using DVLD__Business_Tier.Services;
 using DVLD__Core;
 using DVLD__Core.Models;
 using Ookii.Dialogs.WinForms;
+using static DVLD__Presentation_Tier.ctrlPersonInformation;
 namespace DVLD__Presentation_Tier
 {
     public partial class ctrlAddOrUpdatePerson : UserControl
@@ -30,11 +31,12 @@ namespace DVLD__Presentation_Tier
         }
 
         // Event for Send Person Object to the Subs.
-        public delegate void ReturnPersonObject(Person person);
-        public event ReturnPersonObject ReturnPersonObject_OnClose;
+        //public delegate void ReturnPersonObject(Person person);
+        //public event ReturnPersonObject ReturnPersonObject_OnClose;
+        public event EventHandler<Person> ReturnPersonObject_OnClose;
         private void TriggerReturnPersonEvent(Person person)
         {
-            ReturnPersonObject_OnClose?.Invoke(person);
+            ReturnPersonObject_OnClose?.Invoke(this,person);
         }
 
         private enum enMode

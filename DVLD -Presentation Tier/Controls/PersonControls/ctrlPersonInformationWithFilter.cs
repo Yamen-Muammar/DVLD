@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,11 +21,11 @@ namespace DVLD__Presentation_Tier.Controls
         private PersonService _personService;
 
         //Event to return the person ID on find Peron
-        public delegate void ReturnPersonIDEvent(int PersonID);
-        public event ReturnPersonIDEvent ReturnPersonID_OnFindPerson;
+        
+        public event EventHandler<int> ReturnPersonID_OnFindPerson;
         protected virtual void OnReturnPersonID_OnFindPerson(int PersonID)
         {
-            ReturnPersonID_OnFindPerson?.Invoke(PersonID);
+            ReturnPersonID_OnFindPerson?.Invoke(this,PersonID);
         }
 
         public ctrlPersonInformationWithFilter()
@@ -57,7 +58,7 @@ namespace DVLD__Presentation_Tier.Controls
             frmAddOrUpdatePersonInfoObj.ShowDialog();
         }
 
-        private void OnRetrundDataEvent(Person person)
+        private void OnRetrundDataEvent(object sender,Person person)
         {
             UpdatePersonInfoANDRefreshUI(person);
             OnReturnPersonID_OnFindPerson(person.PersonID);

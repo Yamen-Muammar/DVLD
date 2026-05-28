@@ -21,7 +21,7 @@ namespace DVLD__Presentation_Tier.Forms.License_Forms
             this.ctrlPersonInformationWithFilter1.ReturnPersonID_OnFindPerson += OnReturnPersonID_OnFindPerson;
 
         }
-        private void OnReturnPersonID_OnFindPerson(int PersonID)
+        private void OnReturnPersonID_OnFindPerson(object sender,int PersonID)
         {
             personID= PersonID;
         }
