@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<startup>
+		<supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.1" />
+	</startup>
+	<connectionStrings>
+		<add name="DefaultConnection" connectionString="Enter the ConnectionString"
+           providerName=".NET Framework Data Provider for SQL Server" />
+	</connectionStrings>
+	<appSettings>
+		<add key="PersonImagesPath" value="Enter the Path" />
+		<add key="RememberMeFilePath" value="Enter the Path"/>
+	</appSettings>
+</configuration>
