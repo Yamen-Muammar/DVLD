@@ -11,4 +11,7 @@
 		<add key="PersonImagesPath" value="Enter the Path" />
 		<add key="RememberMeFilePath" value="Enter the Path"/>
 	</appSettings>
+	<System.Windows.Forms.ApplicationConfigurationSection>
+		<add key="DpiAwareness" value="PerMonitorV2" />
+	</System.Windows.Forms.ApplicationConfigurationSection>
 </configuration>
