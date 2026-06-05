@@ -33,15 +33,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvPermissions = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPermissionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssign = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
             this.guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.cbRoles = new Guna.UI2.WinForms.Guna2ComboBox();
             this.mgAccessDenied = new Guna.UI2.WinForms.Guna2MessageDialog();
+            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPermissionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssign = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPermissions)).BeginInit();
             this.guna2GradientPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -57,6 +57,7 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.dgvPermissions.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvPermissions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvPermissions.BackgroundColor = System.Drawing.Color.Silver;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(192)))));
@@ -120,47 +121,6 @@
             this.dgvPermissions.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvPermissions.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.dgvPermissions.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPermissions_CellContentClick);
-            // 
-            // colNumber
-            // 
-            this.colNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colNumber.Frozen = true;
-            this.colNumber.HeaderText = "No.";
-            this.colNumber.MinimumWidth = 8;
-            this.colNumber.Name = "colNumber";
-            this.colNumber.Width = 150;
-            // 
-            // colPermissionName
-            // 
-            this.colPermissionName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colPermissionName.Frozen = true;
-            this.colPermissionName.HeaderText = "PermissionName";
-            this.colPermissionName.MinimumWidth = 8;
-            this.colPermissionName.Name = "colPermissionName";
-            this.colPermissionName.Width = 300;
-            // 
-            // colAssign
-            // 
-            this.colAssign.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colAssign.DataPropertyName = "Boolean";
-            this.colAssign.FalseValue = "false";
-            this.colAssign.Frozen = true;
-            this.colAssign.HeaderText = "Assign";
-            this.colAssign.MinimumWidth = 8;
-            this.colAssign.Name = "colAssign";
-            this.colAssign.TrueValue = "true";
-            this.colAssign.Width = 250;
-            // 
-            // colCode
-            // 
-            this.colCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colCode.HeaderText = "code";
-            this.colCode.MinimumWidth = 8;
-            this.colCode.Name = "colCode";
-            this.colCode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colCode.Visible = false;
-            this.colCode.Width = 300;
             // 
             // guna2CircleButton1
             // 
@@ -230,6 +190,48 @@
             this.mgAccessDenied.Style = Guna.UI2.WinForms.MessageDialogStyle.Default;
             this.mgAccessDenied.Text = "Access Denied";
             // 
+            // colNumber
+            // 
+            this.colNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colNumber.Frozen = true;
+            this.colNumber.HeaderText = "No.";
+            this.colNumber.MinimumWidth = 8;
+            this.colNumber.Name = "colNumber";
+            this.colNumber.Width = 250;
+            // 
+            // colPermissionName
+            // 
+            this.colPermissionName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colPermissionName.FillWeight = 500F;
+            this.colPermissionName.Frozen = true;
+            this.colPermissionName.HeaderText = "PermissionName";
+            this.colPermissionName.MinimumWidth = 8;
+            this.colPermissionName.Name = "colPermissionName";
+            this.colPermissionName.Width = 700;
+            // 
+            // colAssign
+            // 
+            this.colAssign.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colAssign.DataPropertyName = "Boolean";
+            this.colAssign.FalseValue = "false";
+            this.colAssign.Frozen = true;
+            this.colAssign.HeaderText = "Assign";
+            this.colAssign.MinimumWidth = 8;
+            this.colAssign.Name = "colAssign";
+            this.colAssign.TrueValue = "true";
+            this.colAssign.Width = 350;
+            // 
+            // colCode
+            // 
+            this.colCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colCode.HeaderText = "code";
+            this.colCode.MinimumWidth = 8;
+            this.colCode.Name = "colCode";
+            this.colCode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colCode.Visible = false;
+            this.colCode.Width = 300;
+            // 
             // frmManagePermissions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -258,10 +260,10 @@
         private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel1;
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2ComboBox cbRoles;
+        private Guna.UI2.WinForms.Guna2MessageDialog mgAccessDenied;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPermissionName;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colAssign;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCode;
-        private Guna.UI2.WinForms.Guna2MessageDialog mgAccessDenied;
     }
 }
