@@ -309,7 +309,7 @@ DVLD/
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/YOUR_USERNAME/DVLD.git
+   git clone https://github.com/Yamen-Muammar/DVLD.git
    cd DVLD
    ```
 
@@ -409,33 +409,6 @@ Suggested screenshots:
 8. Detained Licenses Management
 9. Permission Management Grid
 -->
-
----
-
-## 🗺️ Roadmap
-
-- [ ] **Repository Interfaces** — introduce `IPersonRepository`, `ILicenseRepository`, etc. for dependency inversion
-- [ ] **Dependency Injection** — replace direct `new` instantiation in services with constructor injection
-- [ ] **Unit Tests** — add xUnit/NUnit test coverage for the Business Tier
-- [ ] **Structured Logging** — integrate Serilog for centralized, searchable logs
-- [ ] **Cross-Platform Support** — abstract platform-specific concerns (file I/O, auth persistence) to enable web and mobile frontends
-- [ ] **Async Everywhere** — ensure all data access is fully async/await
-- [ ] **Caching & Pagination** — improve performance for large datasets
-- [ ] **Azure Blob Storage** — optional cloud storage for person images
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! If you'd like to contribute:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/your-feature`)
-3. Commit your changes (`git commit -m 'Add your feature'`)
-4. Push to the branch (`git push origin feature/your-feature`)
-5. Open a Pull Request
-
-Please follow the existing code style and architecture patterns (layered approach, async/await, parameterized queries).
 
 ---
 
