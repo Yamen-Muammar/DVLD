@@ -405,17 +405,16 @@ At each step, the system checks: does the user have permission? Has the applican
 ---
 
 ## Screenshots
-
-> Add screenshots here. Recommended captures:
-> 1. Login form
-> 2. Main menu (MDI parent)
-> 3. New Local Driving License Application
-> 4. Test scheduling and results
-> 5. License information card
-> 6. Renew / Replace license form
-> 7. Detained licenses management
-> 8. Permission management grid
-
+<img width="1358" height="850" alt="Login Form" src="https://github.com/user-attachments/assets/fdd312d4-ef0b-46bc-a5d7-21f0c71d2828" />
+<img width="1919" height="1163" alt="Manage People Form" src="https://github.com/user-attachments/assets/9b324460-284f-4ac7-8041-2f1ee82f0781" />
+<img width="1919" height="1161" alt="Main Form" src="https://github.com/user-attachments/assets/832a0842-8c5a-4d0e-b046-0c1747603a41" />
+<img width="1017" height="805" alt="Create Local License Application" src="https://github.com/user-attachments/assets/f7a480e6-0ef6-411c-b412-f87afb87627b" />
+<img width="1013" height="801" alt="Create Local License Application tab2" src="https://github.com/user-attachments/assets/5307f745-131d-4f2f-a2a5-605aaf48d321" />
+<img width="1575" height="963" alt="Manage Local License Application Form" src="https://github.com/user-attachments/assets/97b2eca4-5ff6-4785-99d9-c6fab53379c3" />
+<img width="840" height="1152" alt="Written test Create Appointment Form" src="https://github.com/user-attachments/assets/bbdfe9ed-44f7-4915-8acb-f240f592134f" />
+<img width="895" height="1030" alt="Replace Damege or Lost License Form" src="https://github.com/user-attachments/assets/772a4798-1a91-4bdc-adbb-e61fe61065db" />
+<img width="1216" height="875" alt="License History For Person" src="https://github.com/user-attachments/assets/445459e7-60ef-466d-95e7-0a9aefd5560e" />
+<img width="1263" height="894" alt="Edite Permissions Form" src="https://github.com/user-attachments/assets/b93f03a6-2b0c-482b-8d80-357b76ad2d6c" />
 ---
 
 ## Planned Improvements
