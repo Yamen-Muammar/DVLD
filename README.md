@@ -353,10 +353,12 @@ Countries — nationality reference table
 ```bash
 git clone https://github.com/Yamen-Muammar/DVLD.git
 ```
+2. **Set up the database**
 
-**2. Database**
-
-Create a database named `DVLD` in SQL Server and run the schema creation script.
+   - Open SQL Server Management Studio (SSMS)
+   - Create a new empty database named `DVLD`
+   - Open `DVLD_Database.sql`
+   - Execute it (`F5`) — this creates all tables and inserts seed data
 
 **3. Configure**
 
